@@ -1,5 +1,5 @@
 import React, {Component} from 'react'
-import {View, TouchableOpacity, Text, Image} from 'react-native'
+import {View, Text, Image} from 'react-native'
 import {connect} from 'react-redux'
 // Add Actions - replace 'Your' with whatever your reducer is called :)
 // import YourActions from '../Redux/YourRedux'
@@ -10,8 +10,44 @@ import Icon from 'react-native-vector-icons/MaterialCommunityIcons'
 import MenuLink from '../Components/MenuLink'
 
 import {Images} from '../Themes'
-
+import AsyncStorage from '@react-native-community/async-storage'
 class ProfileScreen extends Component {
+  constructor (props) {
+    super(props)
+    this.state = {
+      email: 'emishow@gmail.com',
+      first_name: 'Eflatun',
+      id: '024c8d63-83d7-4abe-ac4f-0c23fb8d8f26',
+      last_name: 'Amishov',
+      phone_number: '+994501234567',
+      username: 'emishow'
+    }
+  }
+  componentDidMount () {
+    const getProfileData = async (token) => {
+      const data = await fetch('https://2022aae2.ngrok.io/driver/api/drivers' + this.state.id, {
+        headers: {
+          'Content-type': 'application/json; charset=UTF-8',
+          'Access-Control-Allow-Origin': '*',
+          'Authorization': 'Bearer ' + token
+        }
+      })
+        .then((response) => response.json())
+        .then((data) => {
+          this.setState(data)
+          console.log(data)
+        })
+        .catch((error) => {
+          console.log(error)
+        })
+      return data
+    }
+    AsyncStorage.getItem('@token')
+      .then((token) => {
+        getProfileData(token)
+      })
+      .catch((error) => console.log(error))
+  }
   render () {
     console.log(this.props.navigation)
     return (
@@ -21,7 +57,7 @@ class ProfileScreen extends Component {
             <Image style={styles.newsImage} source={Images.profilImg} />
           </View>
           <View style={styles.profileHeaderBody}>
-            <Text style={styles.profileHeaderBodyText}>ALİ HASANLİ</Text>
+            <Text style={styles.profileHeaderBodyText}>{this.state.first_name}</Text>
             <Text style={styles.profileHeaderBodyTextY}>Balans: 30.00 AZN</Text>
           </View>
         </View>
@@ -85,7 +121,9 @@ class ProfileScreen extends Component {
 }
 
 const mapStateToProps = (state) => {
-  return {}
+  return {
+    verification_id: state.register.verification_id
+  }
 }
 
 const mapDispatchToProps = (dispatch) => {

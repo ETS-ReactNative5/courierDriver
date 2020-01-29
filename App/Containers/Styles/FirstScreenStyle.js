@@ -16,7 +16,7 @@ export default StyleSheet.create({
     alignItems: 'center'
   },
   image: {
-
+    width:200,
     top: height / 2 - height * 0.20
 
   },

@@ -4,122 +4,121 @@ import {connect} from 'react-redux'
 
 // Add Actions - replace 'Your' with whatever your reducer is called :)
 import RegisterAction from '../Redux/RegisterRedux'
-import I18n from '../I18n';
+import I18n from '../I18n'
 import PhoneInput from 'react-native-phone-input'
-import MyInput from '../Components/MyInput';
-import MyButton from '../Components/MyButton';
-import {driverRegistration, toUrl} from '../Config/API'
-import Spinner from 'react-native-loading-spinner-overlay';
+import MyButton from '../Components/MyButton'
+import {driverRegistration} from '../Config/API'
+import Spinner from 'react-native-loading-spinner-overlay'
 
 // Styles
 import styles from './Styles/RegisterScreenStyle'
 
-
-const {width} = Dimensions.get('window');
+const {width} = Dimensions.get('window')
 
 class PhoneValidateInputScreen extends Component {
-
   state = {
     country_code: '',
     number: '',
     step: 'phone_number',
     spinner: false
-
   }
 
   onPhoneNumberChange = () => {
     this.setState({
       country_code: this.phone.getCountryCode(),
-      number: this.phone.getValue(),
-    });
+      number: this.phone.getValue()
+    })
     // const {mobile, password} = this.state
     // this.props.attemptLogin(mobile, password)
-
   };
 
   onPressLogin = () => {
-
-    console.log(this.props.fetching);
-    let number = this.state.number;
-    let country_code = '+' + this.state.country_code;
-    let num = number.replace(country_code, '');
+    console.log(this.props.fetching)
+    let number = this.state.number
+    let country_code = '+' + this.state.country_code
+    let num = number.replace(country_code, '')
     let body = {
       country_code: country_code,
       number: num,
-      step: "phone_number"
+      step: 'phone_number'
     }
-
     // this.setState({loading: true})
     const self = this
-
+    console.log(body)
     // console.log(body, login)
-    fetch(driverRegistration, {
-      body: JSON.stringify(body),
-      method: 'POST',
+    let url = 'https://2022aae2.ngrok.io/driver/api/drivers?country_code=' + encodeURIComponent(country_code) + '&phone_number=' + num
+    fetch(url, {
+      method: 'HEAD',
       headers: {
         'Content-type': 'application/json; charset=UTF-8'
-      },
-
+      }
     })
-      .then(json)
-      .then(status)
-      .then(function (data) {
-        console.log('Request succeeded with JSON response', data);
-
-        const {number} = self.state;
-        const verification_id = data.id
-
-        console.log(data.id);
-        self.props.attemptRegister(number, verification_id)
-        console.log(number);
-        if (data.status === 'approved')
-          self.props.navigation.navigate('RegisterScreen')
-        else if (data.status === 'pending')
-          self.props.navigation.navigate('PhoneValidateScreen')
-
-
-      })
-      .catch(function (error) {
-        console.log(error);
-        console.log('err');
-      });
-
-    function status(response) {
+      .then(check)
+      .catch(error => console.error(error))
+    function status (response) {
       console.log(response)
-      console.log('status');
+      console.log('status')
       self.setState({loading: false})
-      if (response.status === "pending" || response.status === "approved") {
+      if (response.status === 'pending' || response.status === 'approved') {
         return Promise.resolve(response)
       } else {
         return Promise.reject(response)
-
         // return Promise.reject(new Error(response.statusText))
       }
     }
-
-    function json(response) {
-      console.log(response);
-      console.log('json');
+    function json (response) {
+      console.log(response)
+      console.log('json')
       return response.json()
     }
-
-
+    function check (response) {
+      console.log('head status')
+      console.log(response.status)
+      if (response.status === 404) {
+        console.log(body)
+        fetch(driverRegistration, {
+          body: JSON.stringify(body),
+          method: 'POST',
+          headers: {
+            'Content-type': 'application/json; charset=UTF-8'
+          }
+        })
+          .then(json)
+          .then(status)
+          .then(function (data) {
+            console.log('Request succeeded with JSON response', data)
+            const {number} = self.state
+            const verification_id = data.id
+            console.log(data.id)
+            self.props.attemptRegister(number, verification_id)
+            console.log(number)
+            if (data.status === 'approved') { self.props.navigation.navigate('RegisterScreen') } else if (data.status === 'pending') {
+              console.log('PhoneValidateScreen')
+              self.props.navigation.navigate('PhoneValidateScreen')
+            }
+          })
+          .catch(function (error) {
+            console.log(error)
+            console.log('err')
+          })
+      } else {
+        self.props.navigation.navigate('LoginScreen')
+      }
+    }
   }
 
-
-  render() {
-    const {number} = this.state;
-    console.log(this.props);
+  render () {
+    const {number} = this.state
+    console.log(this.props)
     return (
       <View style={styles.container}>
 
-        {/*<Spinner*/}
-        {/*  visible={this.props.fetching}*/}
-        {/*  textContent={'Loading...'}*/}
-        {/*  textStyle={styles.spinnerTextStyle}*/}
-        {/*/>*/}
+        {/* <Spinner */}
+        {/*  visible={this.props.fetching} */}
+        {/*  textContent={'Loading...'} */}
+        {/*  textStyle={styles.spinnerTextStyle} */}
+        {/* /> */}
         <View>
-
 
           <View>
             <Text style={{
@@ -131,14 +130,14 @@ class PhoneValidateInputScreen extends Component {
               onChangePhoneNumber={this.onPhoneNumberChange}
               initialCountry='az'
               value={number} style={{
-              fontSize: width * 0.037,
-              borderBottomWidth: 1,
-              borderColor: '#353535',
-              width: '100%',
-              marginBottom: width * 0.1296
-            }} ref={ref => {
-              this.phone = ref;
-            }}/>
+                fontSize: width * 0.037,
+                borderBottomWidth: 1,
+                borderColor: '#353535',
+                width: '100%',
+                marginBottom: width * 0.1296
+              }} ref={ref => {
+                this.phone = ref
+              }} />
           </View>
 
         </View>

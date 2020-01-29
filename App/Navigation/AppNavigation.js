@@ -21,12 +21,30 @@ import AddCrediCardScreen from '../Containers/AddCrediCardScreen'
 import NotificationsScreen from '../Containers/NotificationsScreen'
 import SupportScreen from '../Containers/SupportScreen'
 import ReplenishMethodScreen from '../Containers/ReplenishMethodScreen'
+import DriverNewOrderScreen from '../Containers/DriverNewOrderScreen'
+import DriverRadiusScreen from '../Containers/DriverRadiusScreen'
 
 import I18n from '../I18n'
 import styles from './Styles/NavigationStyles'
 
 // Manifest of possible screens
 const PrimaryNav = createStackNavigator({
+  DriverRadiusScreen: {
+    screen: DriverRadiusScreen,
+    navigationOptions: {
+      header: null
+    }
+  },
+  DriverNewOrderScreen: {
+    screen: DriverNewOrderScreen,
+    navigationOptions: {
+      title: I18n.t('ReplenishMethodScreen'),
+      headerTintColor: '#000',
+      headerStyle: {
+        backgroundColor: '#fff'
+      }
+    }
+  },
   ReplenishMethodScreen: {
     screen: ReplenishMethodScreen,
     navigationOptions: {

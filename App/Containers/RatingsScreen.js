@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { FlatList, Image, ScrollView, TouchableOpacity, View } from 'react-native'
+import { FlatList, View } from 'react-native'
 import { connect } from 'react-redux'
 
 import { Rating } from 'react-native-ratings'

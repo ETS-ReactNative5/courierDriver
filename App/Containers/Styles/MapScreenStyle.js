@@ -4,9 +4,11 @@ const {height} = Dimensions.get('window')
 
 export default StyleSheet.create({
   ...ApplicationStyles.screen,
+  container: {
+    flex: 1
+  },
   map: {
-    ...StyleSheet.absoluteFillObject,
-
+    flex: 1
   },
   buttonContainer: {
     width: '100%',

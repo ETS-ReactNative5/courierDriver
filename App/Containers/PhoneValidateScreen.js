@@ -1,9 +1,9 @@
 import React, {Component} from 'react'
-import {View, Text, KeyboardAvoidingView,Alert} from 'react-native'
+import {View, Text, KeyboardAvoidingView, Alert} from 'react-native'
 import {connect} from 'react-redux'
 import CodeInput from 'react-native-code-input'
 import MyButton from '../Components/MyButton'
-import _ from 'lodash';
+import _ from 'lodash'
 // Add Actions - replace 'Your' with whatever your reducer is called :)
 // import YourActions from '../Redux/YourRedux'
 
@@ -11,13 +11,12 @@ import _ from 'lodash';
 
 // Styles
 import styles from './Styles/PhoneValidateScreenStyle'
-import {driverRegistration} from "../Config/API";
+import {driverRegistration} from '../Config/API'
 
 class PhoneValidateScreen extends Component {
-
   state = {
     code: '',
-    verification_id: '',
+    verification_id: ''
 
   }
   _alert = message => Alert.alert(
@@ -27,21 +26,20 @@ class PhoneValidateScreen extends Component {
     {cancelable: false}
   )
 
-  componentDidMount() {
+  componentDidMount () {
     this.setState({
-      verification_id: this.props.verification_id,
+      verification_id: this.props.verification_id
 
-    });
-
+    })
   }
 
-  _onFulfill1 = (code)  => {
-    let {verification_id} = this.state;
+  _onFulfill1 = (code) => {
+    let {verification_id} = this.state
 
     let body = {
       verification_id: verification_id,
       sms_code: code,
-      step: "code"
+      step: 'code'
     }
 
     // this.setState({loading: true})
@@ -53,32 +51,29 @@ class PhoneValidateScreen extends Component {
       method: 'POST',
       headers: {
         'Content-type': 'application/json; charset=UTF-8'
-      },
+      }
 
     })
       .then(json)
       .then(status)
       .then(function (data) {
-        console.log('Request succeeded with JSON response', data);
+        console.log('Request succeeded with JSON response', data)
 
-
-        console.log(data);
+        console.log(data)
         // self.props.attemptRegister(number, verification_id)
         // console.log(number);
         self.props.navigation.navigate('RegisterScreen')
-
-
       })
       .catch(function (error) {
-        console.log(error);
-        console.log('err');
-      });
+        console.log(error)
+        console.log('err')
+      })
 
-    function status(response) {
+    function status (response) {
       console.log(response)
-      console.log('status');
+      console.log('status')
       self.setState({loading: false})
-      if (response.status === "approved") {
+      if (response.status === 'approved') {
         return Promise.resolve(response)
       } else {
         return Promise.reject(response)
@@ -87,31 +82,26 @@ class PhoneValidateScreen extends Component {
       }
     }
 
-    function json(response) {
-      console.log(response);
-      console.log('json');
+    function json (response) {
+      console.log(response)
+      console.log('json')
       return response.json()
     }
 
     useResponse = async (data) => {
-
-      const {number} = this.state;
+      const {number} = this.state
       const verification_id = data.id
       this.props.attemptRegister(number, verification_id)
-      console.log(number);
+      console.log(number)
       this.props.navigation.navigate('PhoneValidateScreen')
-
     }
-
   }
 
-
-
-  render() {
-    const {verification_id} = this.props;
-    console.log('redux');
-    console.log(verification_id);
-    console.log('redux');
+  render () {
+    const {verification_id} = this.props
+    console.log('redux')
+    console.log(verification_id)
+    console.log('redux')
     return (
       <View style={styles.container}>
 
@@ -120,7 +110,7 @@ class PhoneValidateScreen extends Component {
             kodunu daxil edin</Text>
           <KeyboardAvoidingView behavior='position' style={{borderBottomWidth: 1}}>
             <CodeInput
-              ref="codeInputRef2"
+              ref='codeInputRef2'
               secureTextEntry
               borderType='circle'
               activeColor='#7C7C7C'
@@ -136,13 +126,6 @@ class PhoneValidateScreen extends Component {
             />
           </KeyboardAvoidingView>
 
-        </View>
-        <View style={styles.btnBox}>
-          <MyButton
-            onPress={() => this.props.navigation.navigate('RegisterScreen')}
-            text="OK"
-            color="#fff"
-            backgroundColor="#451E5D"/>
         </View>
 
       </View>

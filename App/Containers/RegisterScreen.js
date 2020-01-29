@@ -1,17 +1,17 @@
 import React, {Component} from 'react'
-import {View, Dimensions} from 'react-native'
+import {View, Dimensions, KeyboardAvoidingView, ScrollView} from 'react-native'
 import {connect} from 'react-redux'
 
 // Add Actions - replace 'Your' with whatever your reducer is called :)
 // import YourActions from '../Redux/YourRedux'
 import I18n from '../I18n'
-import PhoneInput from 'react-native-phone-input'
+
 import MyInput from '../Components/MyInput'
 import MyButton from '../Components/MyButton'
-
 // Styles
 import styles from './Styles/RegisterScreenStyle'
 import {driverRegistration} from '../Config/API'
+import AsyncStorage from '@react-native-community/async-storage'
 
 const {width} = Dimensions.get('window')
 
@@ -24,11 +24,11 @@ class RegisterScreen extends Component {
     email: ''
 
   }
+  useResponse: RegisterScreen.useResponse
 
   componentDidMount () {
     this.setState({
       verification_id: this.props.verification_id
-
     })
   }
 
@@ -48,6 +48,8 @@ class RegisterScreen extends Component {
     const self = this
 
     // console.log(body, login)
+    console.log(body)
+    console.log(driverRegistration)
     fetch(driverRegistration, {
       body: JSON.stringify(body),
       method: 'POST',
@@ -60,8 +62,9 @@ class RegisterScreen extends Component {
       .then(status)
       .then(function (data) {
         console.log('Request succeeded with JSON response', data)
-        console.log(data)
-        self.props.navigation.navigate('TabScreen')
+        console.log(data.access_token)
+        AsyncStorage.setItem('@token', data.access_token)
+        self.props.navigation.navigate('DriverRadiusScreen')
       })
       .catch(function (error) {
         console.log(error)
@@ -69,10 +72,8 @@ class RegisterScreen extends Component {
       })
 
     function status (response) {
-      console.log(response)
-      console.log('status')
       self.setState({loading: false})
-      if (response.status === 200) {
+      if (response.access_token != null) {
         return Promise.resolve(response)
       } else {
         return Promise.reject(response)
@@ -87,60 +88,64 @@ class RegisterScreen extends Component {
       return response.json()
     }
 
-    useResponse = async (data) => {
-      const {number} = this.state
-      const verification_id = data.id
-      this.props.attemptRegister(number, verification_id)
-      console.log(number)
-      this.props.navigation.navigate('PhoneValidateScreen')
+    this.useResponse = async (data) => {
+      try {
+        // const is_company = data.data.is_company||0
+        await AsyncStorage.setItem('@token', data.data.token)
+
+        this.props.navigation.navigate('PhoneValidateScreen')
+      } catch (e) {
+        Alert.alert('Error: ' + e.message)
+      }
     }
   }
 
   render () {
     return (
-      <View style={styles.container}>
-        <View>
-          <MyInput onChangeText={(text) => {
-            this.setState({
-              first_name: text
-            })
-          }} text={I18n.t('name').toUpperCase()} />
-          <MyInput
-            onChangeText={(text) => {
+      <ScrollView>
+
+        <KeyboardAvoidingView behavior='position' style={styles.container}>
+          <View>
+            <MyInput onChangeText={(text) => {
               this.setState({
-                last_name: text
+                first_name: text
               })
-            }}
-            text={I18n.t('surname')} />
+            }} text={I18n.t('name').toUpperCase()} />
+            <MyInput
+              onChangeText={(text) => {
+                this.setState({
+                  last_name: text
+                })
+              }}
+              text={I18n.t('surname')} />
 
-          <MyInput
-            onChangeText={(text) => {
-              this.setState({
-                email: text
-              })
-            }}
-            text={I18n.t('email')} />
-          <MyInput
-            onChangeText={(text) => {
-              this.setState({
-                password: text
-              })
-            }}
-            secureTextEntry text={I18n.t('password')} />
+            <MyInput
+              onChangeText={(text) => {
+                this.setState({
+                  email: text
+                })
+              }}
+              text={I18n.t('email')} />
+            <MyInput
+              onChangeText={(text) => {
+                this.setState({
+                  password: text
+                })
+              }}
+              secureTextEntry text={I18n.t('password')} />
 
-        </View>
-        <View style={styles.buttonContainer}>
-          <MyButton onPress={this.onPressRegister}
-            // onPress={() => this.props.navigation.navigate('TabScreen')}
-            backgroundColor='#451E5D'
-            color='#fff'
-            borderColor='451E5D'
-            text={I18n.t('next')}
-          />
-
-        </View>
-
-      </View>
+          </View>
+          <View style={styles.buttonContainer}>
+            <MyButton onPress={this.onPressRegister}
+              // onPress={() => this.props.navigation.navigate('TabScreen')}
+              backgroundColor='#451E5D'
+              color='#fff'
+              borderColor='451E5D'
+              text={I18n.t('next')}
+            />
+          </View>
+        </KeyboardAvoidingView>
+      </ScrollView>
     )
   }
 }
@@ -148,7 +153,6 @@ class RegisterScreen extends Component {
 const mapStateToProps = (state) => {
   return {
     verification_id: state.register.verification_id
-
   }
 }
 

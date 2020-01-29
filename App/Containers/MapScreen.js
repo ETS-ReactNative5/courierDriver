@@ -1,5 +1,5 @@
 import React, {Component} from 'react'
-import {View, TouchableOpacity, Text, KeyboardAvoidingView} from 'react-native'
+import {View, TouchableOpacity} from 'react-native'
 import {connect} from 'react-redux'
 import MapView, {Marker} from 'react-native-maps'
 import I18n from '../I18n'
@@ -7,7 +7,9 @@ import MyButton from '../Components/MyButton'
 // Add Actions - replace 'Your' with whatever your reducer is called :)
 // import YourActions from '../Redux/YourRedux'
 import NewOrderModal from '../Components/NewOrderModal'
-
+import SlidingPanel from 'react-native-sliding-up-down-panels'
+import DriverNewOrderTop from '../Components/DriverNewOrderTop'
+import DriverNewOrderBody from '../Components/DriverNewOrderBody'
 // Styles
 import styles from './Styles/MapScreenStyle'
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons'
@@ -47,13 +49,20 @@ class MapScreen extends Component {
           }}
 
          />
-        <View style={styles.buttonContainer} />
-        <View style={[styles.gumburger, ]}>
+        <View hide={true}>
+          <SlidingPanel
+            // onDrag={this.ondraq}
+            headerLayoutHeight={260}
+            headerLayout={() => <DriverNewOrderTop />}
+            slidingPanelLayout={() => <DriverNewOrderBody />}
+          />
+        </View>
+        <View style={[styles.gumburger]}>
           <TouchableOpacity onPress={this.props.open}>
             <Icon style={styles.nameBoxIcon} size={30} name='menu' />
           </TouchableOpacity>
         </View>
-        {/* <NewOrderModal /> */}
+         {/*<NewOrderModal />*/}
       </View>
     )
   }
