@@ -11,11 +11,11 @@ export default StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'flex-start',
     flexDirection: 'row',
-    paddingHorizontal: 15,
+    paddingHorizontal: 12,
     borderBottomWidth: 1,
     borderBottomColor: '#ddd',
     paddingBottom: 20,
-    paddingTop: 50
+    paddingTop: 40
   },
   profileHeaderRight: {
     flexDirection: 'row',
@@ -30,7 +30,7 @@ export default StyleSheet.create({
     paddingVertical: 4
   },
   profileHeaderBodyText: {
-    fontSize: 18,
+    fontSize: 16,
     color: '#000',
     textTransform: 'uppercase',
     fontWeight: 'bold'

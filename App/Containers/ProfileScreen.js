@@ -8,24 +8,27 @@ import {connect} from 'react-redux'
 import styles from './Styles/ProfileScreenStyle'
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons'
 import MenuLink from '../Components/MenuLink'
-
+import {userRegistration} from '../Config/API'
 import {Images} from '../Themes'
 import AsyncStorage from '@react-native-community/async-storage'
+import {driverRegistration} from '../Config/API'
+import { remove } from 'ramda'
 class ProfileScreen extends Component {
   constructor (props) {
     super(props)
     this.state = {
       email: 'emishow@gmail.com',
-      first_name: 'Eflatun',
+      first_name: '',
       id: '024c8d63-83d7-4abe-ac4f-0c23fb8d8f26',
-      last_name: 'Amishov',
+      last_name: '',
       phone_number: '+994501234567',
       username: 'emishow'
     }
   }
   componentDidMount () {
+
     const getProfileData = async (token) => {
-      const data = await fetch('https://2022aae2.ngrok.io/driver/api/drivers' + this.state.id, {
+      const data = await fetch('driverRegistration', {
         headers: {
           'Content-type': 'application/json; charset=UTF-8',
           'Access-Control-Allow-Origin': '*',
@@ -57,7 +60,7 @@ class ProfileScreen extends Component {
             <Image style={styles.newsImage} source={Images.profilImg} />
           </View>
           <View style={styles.profileHeaderBody}>
-            <Text style={styles.profileHeaderBodyText}>{this.state.first_name}</Text>
+            <Text style={styles.profileHeaderBodyText}>{this.state.first_name} {this.state.last_name}</Text>
             <Text style={styles.profileHeaderBodyTextY}>Balans: 30.00 AZN</Text>
           </View>
         </View>

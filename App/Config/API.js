@@ -1,4 +1,4 @@
-const mainUrl = 'https://2022aae2.ngrok.io/'
+const mainUrl = 'https://7685b162.ngrok.io/'
 export const driverRegistration = mainUrl + 'driver/api/drivers'
 export const driverLogin = mainUrl + 'driver/api/drivers/token'
 

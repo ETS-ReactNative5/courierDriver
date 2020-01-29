@@ -1,5 +1,5 @@
 import React, {Component} from 'react'
-import {View, TouchableOpacity} from 'react-native'
+import {View, TouchableOpacity, BackHandler} from 'react-native'
 import {connect} from 'react-redux'
 import MapView, {Marker} from 'react-native-maps'
 import I18n from '../I18n'
@@ -33,6 +33,9 @@ class MapScreen extends Component {
       {enableHighAccuracy: true, timeout: 20000}
     )
   }
+  componentWillUnmount() {
+    this.backHandler.remove();
+  }
 
   render () {
     return (
@@ -49,20 +52,20 @@ class MapScreen extends Component {
           }}
 
          />
-        <View hide={true}>
+         <View hide={true}>
           <SlidingPanel
             // onDrag={this.ondraq}
             headerLayoutHeight={260}
             headerLayout={() => <DriverNewOrderTop />}
             slidingPanelLayout={() => <DriverNewOrderBody />}
           />
-        </View>
+         </View>
         <View style={[styles.gumburger]}>
           <TouchableOpacity onPress={this.props.open}>
             <Icon style={styles.nameBoxIcon} size={30} name='menu' />
           </TouchableOpacity>
         </View>
-         {/*<NewOrderModal />*/}
+        {/* <NewOrderModal /> */}
       </View>
     )
   }

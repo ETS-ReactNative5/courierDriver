@@ -1,5 +1,5 @@
-import React, {Component, PropTypes} from 'react'
-import {ScrollView, Text, KeyboardAvoidingView, Dimensions, View, TouchableOpacity} from 'react-native'
+import React, {Component} from 'react'
+import {Text, Dimensions, View, TouchableOpacity} from 'react-native'
 import {connect} from 'react-redux'
 // Add Actions - replace 'Your' with whatever your reducer is called :)
 // import YourActions from '../Redux/YourRedux'
@@ -7,7 +7,7 @@ import LoginActions from '../Redux/LoginRedux'
 import PhoneInput from 'react-native-phone-input'
 import MyInput from '../Components/MyInput'
 import MyButton from '../Components/MyButton'
-import {driverLogin, mainUrl, driverRegistration} from '../Config/API'
+import {driverLogin} from '../Config/API'
 // Styles
 import styles from './Styles/LoginScreenStyle'
 import AsyncStorage from '@react-native-community/async-storage'
