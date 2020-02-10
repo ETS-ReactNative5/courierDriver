@@ -34,9 +34,9 @@ export default StyleSheet.create({
     flexDirection: 'row',
     flex: 1,
     alignItems: 'flex-end',
-    bottom: height * 0.039,
     justifyContent: 'space-between',
-    marginHorizontal: width * 0.064
+    paddingHorizontal: 10,
+    paddingVertical: 40
   },
   textContainer: {
     position: 'absolute',

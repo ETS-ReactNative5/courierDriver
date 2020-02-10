@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 // import PropTypes from 'prop-types';
-import { View, Animated } from 'react-native'
+import {Animated} from 'react-native'
 import styles from './Styles/AnimatedMarkerStyle'
 
 export default class AnimatedMarker extends Component {
@@ -47,7 +47,7 @@ export default class AnimatedMarker extends Component {
     return (
       <Animated.View style={styles.markerWrap}>
         <Animated.View style={[styles.ring, animatedStyles]} />
-        {/* <Animated.View style={[styles.marker, animatedStyles]} /> */}
+        <Animated.View style={[styles.marker, animatedStyles]} />
       </Animated.View>
     )
   }

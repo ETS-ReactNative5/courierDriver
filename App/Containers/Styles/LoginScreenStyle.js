@@ -13,5 +13,10 @@ export default StyleSheet.create({
     fontSize: width * 0.027,
     marginTop: width * 0.027,
     alignSelf: 'center'
+  },
+  errorMsg: {
+    fontSize: 20,
+    color: 'red',
+    alignSelf: 'center'
   }
 })

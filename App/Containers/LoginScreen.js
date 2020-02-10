@@ -7,16 +7,20 @@ import LoginActions from '../Redux/LoginRedux'
 import PhoneInput from 'react-native-phone-input'
 import MyInput from '../Components/MyInput'
 import MyButton from '../Components/MyButton'
+import Spiner from '../Components/Spiner'
 import {driverLogin} from '../Config/API'
 // Styles
 import styles from './Styles/LoginScreenStyle'
 import AsyncStorage from '@react-native-community/async-storage'
+
 const {width} = Dimensions.get('window')
 class LoginScreen extends Component {
   state = {
     country_code: '',
     mobile: null,
-    password: null
+    password: null,
+    error: '',
+    loading: false
   }
   // onPres = () => {
   //   const {mobile, password} = this.state
@@ -26,6 +30,17 @@ class LoginScreen extends Component {
   //   this.props.navigation.navigate('MapScreen')
   // }
   onPres = () => {
+    this.setState({loading: true})
+    if (this.state.password === null || this.state.mobile === null) {
+      this.setState({
+        error: 'input bos ola bilmez',
+        loading: false
+      })
+    } else {
+      this.onCheckFields()
+    }
+  }
+  onCheckFields = () => {
     console.log(this.props.fetching)
     let number = this.state.mobile
     let country_code = '+' + this.state.country_code
@@ -52,11 +67,17 @@ class LoginScreen extends Component {
         console.log('Request succeeded with JSON response', data)
         console.log(data.access_token)
         AsyncStorage.setItem('@token', data.access_token)
+        AsyncStorage.setItem('@location_tracking', data.channels.location_tracking)
+        AsyncStorage.setItem('@order_notifications', data.channels.order_notifications)
         self.props.navigation.replace('MenuScreen')
       })
       .catch(function (error) {
         console.log(error)
         console.log('err')
+        self.setState({
+          error: error.detail,
+          loading: false
+        })
       })
     function status (response) {
       self.setState({loading: false})
@@ -86,9 +107,22 @@ class LoginScreen extends Component {
     const {mobile, password} = this.state
     this.props.attemptLogin(mobile, password)
   };
+  renderButton = () => {
+    if (!this.state.loading) {
+      return <MyButton onPress={this.onPres}
+        color='#fff'
+        backgroundColor='#7B2BFC'
+        borderColor='#7B2BFC'
+        borderRadius={30}
+        text='Login'
+      />
+    }
+    return <Spiner size='small' />
+  }
   render () {
     console.log(this.props)
-    const {mobile, password} = this.state
+    const {mobile, password, error} = this.state
+    const errorMsg = error ? (<Text style={styles.errorMsg}>{error}</Text>) : null
     return (
       <View style={styles.container}>
         <View>
@@ -108,16 +142,11 @@ class LoginScreen extends Component {
               this.phone = ref
             }} />
           </View>
-          <MyInput value={password} onChangeText={this.onPasswordChange} secureTextEntry
-            text='Password' />
+          <MyInput value={password} onChangeText={this.onPasswordChange} secureTextEntry text='Password' />
+          {errorMsg}
         </View>
         <View style={styles.buttonContainer}>
-          <MyButton onPress={this.onPres}
-            backgroundColor='#451E5D'
-            color='#fff'
-            borderColor='451E5D'
-            text='Login'
-          />
+          {this.renderButton()}
           <TouchableOpacity>
             <Text style={styles.forgotPasswordText}>Forget Password</Text>
           </TouchableOpacity>

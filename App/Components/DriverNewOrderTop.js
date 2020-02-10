@@ -17,6 +17,7 @@ export default class DriverNewOrderTop extends Component {
   // }
 
   render () {
+    const {drop_location, pickup_location} = this.props;
     return (
       <View style={styles.container}>
         <View style={styles.minusBox}>
@@ -32,11 +33,11 @@ export default class DriverNewOrderTop extends Component {
           <View>
             <View style={styles.adressBox}>
               <Text style={styles.adressTitle}>Pickup</Text>
-              <Text style={styles.adressText}>307 portland Ave S,Mineapolis</Text>
+              <Text style={styles.adressText}>{pickup_location}</Text>
             </View>
             <View style={styles.adressBox}>
               <Text style={styles.adressTitle}>Dropoff</Text>
-              <Text style={styles.adressText}>307 portland Ave S,Mineapolis</Text>
+              <Text style={styles.adressText}>{drop_location}</Text>
             </View>
           </View>
         </View>

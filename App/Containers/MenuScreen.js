@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import {View, TouchableOpacity, BackHandler} from 'react-native'
+import {BackHandler} from 'react-native'
 // Add Actions - replace 'Your' with whatever your reducer is called :)
 // import YourActions from '../Redux/YourRedux'
 
@@ -9,25 +9,26 @@ import styles from './Styles/MenuScreenStyle'
 import ProfileScreen from './ProfileScreen'
 import MapScreen from './MapScreen'
 import Drawer from 'react-native-drawer'
+
 class MenuScreen extends Component {
+  state = {
+    orderId: null
+  };
   closeDrawer = () => {
     this._drawer.close()
   };
   openControlPanel = () => {
     this._drawer.open()
   };
-
-
-  componentDidMount() {
+  componentDidMount () {
+    // const that = this
     BackHandler.addEventListener('hardwareBackPress', this.backPress)
   }
-
-  componentWillUnmount() {
+  componentWillUnmount () {
     BackHandler.removeEventListener('hardwareBackPress', this.backPress)
   }
 
   backPress = () => true
-
 
   render () {
     return (

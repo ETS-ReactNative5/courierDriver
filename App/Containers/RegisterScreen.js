@@ -63,7 +63,10 @@ class RegisterScreen extends Component {
       .then(function (data) {
         console.log('Request succeeded with JSON response', data)
         console.log(data.access_token)
+        console.log(data.channels)
         AsyncStorage.setItem('@token', data.access_token)
+        AsyncStorage.setItem('@location_tracking', data.channels.location_tracking)
+        AsyncStorage.setItem('@order_notifications', data.channels.order_notifications)
         self.props.navigation.navigate('DriverRadiusScreen')
       })
       .catch(function (error) {
@@ -92,7 +95,6 @@ class RegisterScreen extends Component {
       try {
         // const is_company = data.data.is_company||0
         await AsyncStorage.setItem('@token', data.data.token)
-
         this.props.navigation.navigate('PhoneValidateScreen')
       } catch (e) {
         Alert.alert('Error: ' + e.message)

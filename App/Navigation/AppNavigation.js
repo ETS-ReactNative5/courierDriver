@@ -23,12 +23,26 @@ import SupportScreen from '../Containers/SupportScreen'
 import ReplenishMethodScreen from '../Containers/ReplenishMethodScreen'
 import DriverNewOrderScreen from '../Containers/DriverNewOrderScreen'
 import DriverRadiusScreen from '../Containers/DriverRadiusScreen'
+import CourierGoToClientScreen from '../Containers/CourierGoToClientScreen'
+import CourierGoToAdressScreen from '../Containers/CourierGoToAdressScreen'
 
 import I18n from '../I18n'
 import styles from './Styles/NavigationStyles'
 
 // Manifest of possible screens
 const PrimaryNav = createStackNavigator({
+  CourierGoToAdressScreen: {
+    screen: CourierGoToAdressScreen,
+    navigationOptions: {
+      header: null
+    }
+  },
+  CourierGoToClientScreen: {
+    screen: CourierGoToClientScreen,
+    navigationOptions: {
+      header: null
+    }
+  },
   DriverRadiusScreen: {
     screen: DriverRadiusScreen,
     navigationOptions: {
@@ -173,7 +187,7 @@ const PrimaryNav = createStackNavigator({
       }
     }},
   FirstScreen: {screen: FirstScreen, navigationOptions: {header: null}},
-  TestScreen: {screen: TestScreen},
+  TestScreen: {screen: TestScreen, navigationOptions: {header: null}},
   LaunchScreen: {screen: LaunchScreen}
 }, {
   // Default config for all screens

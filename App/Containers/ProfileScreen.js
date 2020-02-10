@@ -8,10 +8,9 @@ import {connect} from 'react-redux'
 import styles from './Styles/ProfileScreenStyle'
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons'
 import MenuLink from '../Components/MenuLink'
-import {userRegistration} from '../Config/API'
+import {driverRegistration} from '../Config/API'
 import {Images} from '../Themes'
 import AsyncStorage from '@react-native-community/async-storage'
-import {driverRegistration} from '../Config/API'
 import { remove } from 'ramda'
 class ProfileScreen extends Component {
   constructor (props) {
@@ -26,9 +25,8 @@ class ProfileScreen extends Component {
     }
   }
   componentDidMount () {
-
     const getProfileData = async (token) => {
-      const data = await fetch('driverRegistration', {
+      const data = await fetch(driverRegistration, {
         headers: {
           'Content-type': 'application/json; charset=UTF-8',
           'Access-Control-Allow-Origin': '*',
@@ -37,8 +35,8 @@ class ProfileScreen extends Component {
       })
         .then((response) => response.json())
         .then((data) => {
-          this.setState(data)
           console.log(data)
+          this.setState(data)
         })
         .catch((error) => {
           console.log(error)
@@ -113,6 +111,10 @@ class ProfileScreen extends Component {
             size={25}
             fontSize={20} />
           <MenuLink text='Log out'
+            onPress={() => {
+              AsyncStorage.removeItem('@token')
+              this.props.navigation.navigate('FirstScreen')
+            }}
             icon='exit-to-app'
             color='#606060'
             size={25}

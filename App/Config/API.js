@@ -1,7 +1,7 @@
-const mainUrl = 'https://7685b162.ngrok.io/'
+export const mainUrl = 'http://api.delhero.com/'
 export const driverRegistration = mainUrl + 'driver/api/drivers'
 export const driverLogin = mainUrl + 'driver/api/drivers/token'
-
+export const orders = mainUrl + 'driver/api/orders/'
 export const login = mainUrl + 'auth/send-sms'
 export const verify = mainUrl + 'auth/verify-user'
 // export const login = mainUrl + 'login'

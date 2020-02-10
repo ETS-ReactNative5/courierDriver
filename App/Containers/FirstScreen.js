@@ -10,13 +10,23 @@ import { connect } from 'react-redux'
 // Styles
 import styles from './Styles/FirstScreenStyle'
 import AsyncStorage from '@react-native-community/async-storage'
+
 class FirstScreen extends Component {
+  constructor (props) {
+    super(props)
+    this.state = { visible: true }
+  }
   componentDidMount () {
     // AsyncStorage.removeItem('@token');
     AsyncStorage.getItem('@token')
       .then((token) => {
         console.log(token)
-        if (token) this.props.navigation.navigate('MenuScreen')
+        if (token) {
+          this.setState({
+            visible: !this.state.visible
+          })
+          this.props.navigation.navigate('MenuScreen')
+        }
       })
   }
   render () {
@@ -38,15 +48,17 @@ class FirstScreen extends Component {
         <View style={styles.buttonContainer}>
           <MyButton color='#fff'
             onPress={() => this.props.navigation.navigate('LoginScreen')}
-            backgroundColor='#451E5D'
-            borderColor='#451E5D'
+            backgroundColor='#7B2BFC'
+            borderColor='#7B2BFC'
             text='Login'
+            borderRadius={30}
             width='50%' />
           <MyButton width='50%'
             onPress={() => this.props.navigation.navigate('PhoneValidateInputScreen')}
             backgroundColor='#fff'
-            color='#451E5D'
-            borderColor='#451E5D'
+            color='#7B2BFC'
+            borderColor='#7B2BFC'
+            borderRadius={30}
             text='Register' />
         </View>
       </ImageBackground>

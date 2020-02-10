@@ -17,7 +17,7 @@ class AccountScreen extends Component {
     super(props)
     this.state = {
       email: '',
-      first_name: '',
+      first_name: 'test',
       id: '',
       last_name: '',
       phone_number: '',
@@ -25,6 +25,7 @@ class AccountScreen extends Component {
     }
   }
   componentDidMount () {
+    console.log(driverRegistration)
     const getProfileData = async (token) => {
       const data = await fetch(driverRegistration, {
         headers: {
@@ -46,6 +47,7 @@ class AccountScreen extends Component {
     AsyncStorage.getItem('@token')
       .then((token) => {
         getProfileData(token)
+        console.log(token)
       })
       .catch((error) => console.log(error))
   }
@@ -60,7 +62,7 @@ class AccountScreen extends Component {
     }
     console.log(body)
     const updateProfile = async (token) => {
-      const customerUrl = 'https://f36875f4.ngrok.io/driver/api/drivers/' + this.state.id
+      const customerUrl = driverRegistration + '/' + this.state.id
       await fetch(customerUrl, {
         body: JSON.stringify(body),
         method: 'PUT',
@@ -111,9 +113,8 @@ class AccountScreen extends Component {
               backgroundColor='#7b2bfc'
               color='#fff'
               borderColor='#7b2bfc'
-              text={I18n.t('SUBMIT')}
-            />
-
+              borderRadius={30}
+              text={I18n.t('Save')} />
           </View>
         </KeyboardAvoidingView>
       </ScrollView>

@@ -1,5 +1,5 @@
 import React, {Component} from 'react'
-import {ScrollView, Text, Dimensions, StyleSheet, View} from 'react-native'
+import {ScrollView, Platform, Dimensions, StyleSheet, View} from 'react-native'
 import {connect} from 'react-redux'
 import {Images} from '../Themes'
 
@@ -8,133 +8,138 @@ import {Images} from '../Themes'
 
 // Styles
 import styles from './Styles/TestScreenStyle'
-import MapView from "react-native-maps";
-import MyButton from "../Components/MyButton";
-import I18n from "../I18n";
+import MapView, { Marker, AnimatedRegion } from 'react-native-maps'
+import MyButton from '../Components/MyButton'
+import I18n from '../I18n'
+import MapViewDirections from 'react-native-maps-directions'
 
-
-import MapViewDirections from 'react-native-maps-directions';
-
-const {width, height} = Dimensions.get('window');
-const ASPECT_RATIO = width / height;
-const GOOGLE_MAPS_APIKEY = 'AIzaSyCMfIpRhn8QaGkYQ0I5KPWvFT1kLbA-DAM';
-
+const { width, height } = Dimensions.get('window')
+const ASPECT_RATIO = width / height
+const LATITUDE = 37.78825
+const LONGITUDE = -122.4324
+const LATITUDE_DELTA = 0.0922
+const LONGITUDE_DELTA = LATITUDE_DELTA * ASPECT_RATIO
+const GOOGLE_MAPS_APIKEY = 'AIzaSyCMfIpRhn8QaGkYQ0I5KPWvFT1kLbA-DAM'
 
 class TestScreen extends Component {
+  constructor (props) {
+    super(props)
 
-
-  componentDidMount() {
-
-
-    this.setState({
-      region: {
-        latitude: 37.771707,
-        longitude: -122.4053769,
-        latitudeDelta: 0.0922,
-        longitudeDelta: 0.0922 * ASPECT_RATIO
-      },
-      coordinates: [
-        {
-          latitude: 37.3317876,
-          longitude: -122.0054812,
-        },
-        {
-          latitude: 37.771707,
-          longitude: -122.4053769,
-        },
-      ]
-    });
-
-  }
-
-  constructor(props) {
-    super(props);
-
-    // AirBnB's Office, and Apple Park
     this.state = {
-      coordinates: [
-        {
-          latitude: 37.3317876,
-          longitude: -122.0054812,
-        },
-        {
-          latitude: 37.771707,
-          longitude: -122.4053769,
-        },
-      ],
+      latitude: LATITUDE,
+      longitude: LONGITUDE,
+      coordinate: new AnimatedRegion({
+        latitude: LATITUDE,
+        longitude: LONGITUDE,
+        latitudeDelta: 0,
+        longitudeDelta: 0
+      }),
       region: {
-        latitude: 37.771707,
-        longitude: -122.4053769,
-        latitudeDelta: 0.0922,
-        longitudeDelta: 0.0421
+        latitude: LATITUDE,
+        longitude: LONGITUDE
       }
-    };
-
-    this.mapView = null;
+    }
   }
 
-  onMapPress = (e) => {
-    this.setState({
-      coordinates: [
-        ...this.state.coordinates,
-        e.nativeEvent.coordinate,
-      ],
-    });
+  componentDidMount () {
+    navigator.geolocation.getCurrentPosition(
+      position => {
+        this.setState({
+          region: {
+            latitude: position.coords.latitude,
+            longitude: position.coords.longitude,
+            latitudeDelta: LATITUDE_DELTA,
+            longitudeDelta: LONGITUDE_DELTA,
+            error: null
+          },
+          coordinate: {
+            latitude: position.coords.latitude,
+            longitude: position.coords.longitude,
+          }
+        })
+      },
+      error => this.setState({error: error.message}),
+      {enableHighAccuracy: true, timeout: 20000}
+    )
+    this.watchLocation()
   }
 
+  componentDidUpdate (prevProps, prevState) {
+    if (this.props.latitude !== prevState.latitude) {
+      console.log(this.state.latitude, this.state.longitude)
+    }
+  }
 
-  render() {
+  componentWillUnmount () {
+    navigator.geolocation.clearWatch(this.watchID)
+  }
 
+  watchLocation = () => {
+    const { coordinate } = this.state
+
+    this.watchID = navigator.geolocation.watchPosition(
+      position => {
+        const { latitude, longitude } = position.coords
+
+        const newCoordinate = {
+          latitude,
+          longitude
+        }
+
+        if (Platform.OS === 'android') {
+          if (this.marker) {
+            this.marker._component.animateMarkerToCoordinate(
+              newCoordinate,
+              500 // 500 is the duration to animate the marker
+            )
+          }
+        } else {
+          coordinate.timing(newCoordinate).start()
+        }
+
+        this.setState({
+          latitude,
+          longitude,
+          region: {
+            longitude: this.state.longitude,
+            latitude: this.state.latitude
+          }
+
+        })
+      },
+      error => console.log(error),
+      {
+        enableHighAccuracy: true,
+        timeout: 2000,
+        maximumAge: 1000,
+        distanceFilter: 10
+      }
+    )
+  };
+
+  getMapRegion = () => ({
+    latitude: this.state.region.latitude,
+    longitude: this.state.region.longitude,
+    latitudeDelta: LATITUDE_DELTA,
+    longitudeDelta: LONGITUDE_DELTA
+  });
+
+  render () {
     return (
       <View style={styles.container}>
         <MapView
-          initialRegion={{
-            latitude: this.state.region.latitude,
-            longitude: this.state.region.longitude,
-            latitudeDelta: this.state.region.latitudeDelta,
-            longitudeDelta: this.state.region.latitudeDelta,
-          }}
+          initialRegion={this.getMapRegion()}
           style={StyleSheet.absoluteFill}
           ref={c => this.mapView = c}
           // onPress={this.onMapPress}
         >
-
-          {this.state.coordinates.map((coordinate, index) =>
-            <MapView.Marker key={`coordinate_${index}`} image={Images.marker} coordinate={coordinate}/>
-          )}
-          {(this.state.coordinates.length >= 2) && (
-            <MapViewDirections
-              origin={this.state.coordinates[0]}
-              waypoints={(this.state.coordinates.length > 2) ? this.state.coordinates.slice(1, -1) : null}
-              destination={this.state.coordinates[this.state.coordinates.length - 1]}
-              apikey={GOOGLE_MAPS_APIKEY}
-              strokeWidth={3}
-              strokeColor="#451E5D"
-              optimizeWaypoints={true}
-              onStart={(params) => {
-                console.log(`Started routing between "${params.origin}" and "${params.destination}"`);
-              }}
-              onReady={result => {
-                console.log('Distance: ${result.distance} km')
-                console.log('Duration: ${result.duration} min.')
-
-                this.mapView.fitToCoordinates(result.coordinates, {
-                  edgePadding: {
-                    right: (width / 20),
-                    bottom: (height / 20),
-                    left: (width / 20),
-                    top: (height / 20),
-                  }
-                });
-              }}
-              onError={(errorMessage) => {
-                // console.log('GOT AN ERROR');
-              }}
-            />
-          )}
+          <Marker.Animated
+            ref={marker => {
+              this.marker = marker
+            }}
+            coordinate={this.state.coordinate} />
         </MapView>
         <View style={styles.buttonContainer}>
-
           <MyButton
             onPress={() => this.props.navigation.navigate('OrderScreen')}
             backgroundColor='#451E5D'

@@ -22,7 +22,7 @@ export default class NextButton extends Component {
       <TouchableOpacity
         style={[styles.container, {backgroundColor: backgroundColor, width: width, borderColor: borderColor, borderRadius: borderRadius}]}
         onPress={onPress}>
-        <View style={{flexDirection: 'row',alignItems: 'center'}}>
+        <View style={{flexDirection: 'row', alignItems: 'center'}}>
           <View style={[styles.iconWrapper, {backgroundColor: iconBackground}]}>
             <Icon style={styles.linkIcon} name='accusoft' size={25} color='#000' />
           </View>
