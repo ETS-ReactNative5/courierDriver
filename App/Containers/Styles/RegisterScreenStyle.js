@@ -10,4 +10,9 @@ export default StyleSheet.create({
     flex: 1,
     justifyContent: 'space-between'
   },
+  errorMsg: {
+    fontSize: 20,
+    color: 'red',
+    alignSelf: 'center'
+  }
 })

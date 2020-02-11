@@ -111,7 +111,6 @@ class PhoneValidateScreen extends Component {
           <KeyboardAvoidingView behavior='position' style={{borderBottomWidth: 1}}>
             <CodeInput
               ref='codeInputRef2'
-              secureTextEntry
               borderType='circle'
               activeColor='#7C7C7C'
               inactiveColor='#7C7C7C'

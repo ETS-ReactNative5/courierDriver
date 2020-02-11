@@ -79,6 +79,7 @@ class AccountScreen extends Component {
         updateProfile(token)
       })
       .catch((error) => console.log(error))
+    this.props.navigation.goBack()
   }
 
   handleChange = (name, value) => {
@@ -97,7 +98,7 @@ class AccountScreen extends Component {
               onChangeText={first_name => this.setState({ first_name })}
               value={this.state.first_name} />
             <MyInput
-              text={I18n.t('surname')}
+              text={I18n.t('Lastname')}
               value={this.state.last_name}
               onChangeText={last_name => this.setState({ last_name })}
             />

@@ -225,7 +225,7 @@ class CourierGoToClientScreen extends Component {
             latitudeDelta: this.state.region.latitudeDelta,
             longitudeDelta: this.state.region.latitudeDelta
           }}
-          style={StyleSheet.absoluteFill}
+          style={{flex: 1}}
           ref={c => this.mapView = c}
           // onPress={this.onMapPress}
         >

@@ -96,13 +96,13 @@ class CourierGoToAdressScreen extends Component {
           },
           coordinates: [
             {
+              latitude: Number(this.props.order.drop_ltd),
+              longitude: Number(this.props.order.drop_lng)
+            },
+            {
               latitude: Number(this.props.order.pickup_ltd),
               longitude: Number(this.props.order.pickup_lng)
 
-            },
-            {
-              latitude: Number(this.props.order.drop_ltd),
-              longitude: Number(this.props.order.drop_lng)
             }
           ],
           error: null
@@ -116,7 +116,7 @@ class CourierGoToAdressScreen extends Component {
         this.token = 'Bearer ' + token
         console.log(token)
       })
-    console.log(this.state)
+    console.log(this.state.coordinates)
     // const location_tracking = await AsyncStorage.getItem('@location_tracking')
     //   .then((location_tracking) => {
     //     this.setState({

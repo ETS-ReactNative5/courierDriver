@@ -32,6 +32,7 @@ class AddCrediCardScreen extends Component {
           onChange={this._onChange} />
         <View style={styles.btnBox}>
           <MyButton
+            onPress={() => this.props.navigation.goBack()}
             text='OK'
             color='#fff'
             borderRadius={30}

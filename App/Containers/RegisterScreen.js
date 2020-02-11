@@ -112,14 +112,14 @@ class RegisterScreen extends Component {
               this.setState({
                 first_name: text
               })
-            }} text={I18n.t('name').toUpperCase()} />
+            }} text={I18n.t('Name').toUpperCase()} />
             <MyInput
               onChangeText={(text) => {
                 this.setState({
                   last_name: text
                 })
               }}
-              text={I18n.t('surname')} />
+              text={I18n.t('Surname')} />
 
             <MyInput
               onChangeText={(text) => {
@@ -127,7 +127,7 @@ class RegisterScreen extends Component {
                   email: text
                 })
               }}
-              text={I18n.t('email')} />
+              text={I18n.t('Email')} />
             <MyInput
               onChangeText={(text) => {
                 this.setState({
@@ -140,9 +140,10 @@ class RegisterScreen extends Component {
           <View style={styles.buttonContainer}>
             <MyButton onPress={this.onPressRegister}
               // onPress={() => this.props.navigation.navigate('TabScreen')}
-              backgroundColor='#451E5D'
               color='#fff'
-              borderColor='451E5D'
+              backgroundColor='#7B2BFC'
+              borderColor='#7B2BFC'
+              borderRadius={30}
               text={I18n.t('next')}
             />
           </View>

@@ -7,8 +7,8 @@ import RegisterAction from '../Redux/RegisterRedux'
 import I18n from '../I18n'
 import PhoneInput from 'react-native-phone-input'
 import MyButton from '../Components/MyButton'
-import {driverRegistration} from '../Config/API'
-import Spinner from 'react-native-loading-spinner-overlay'
+import {driverRegistration, mainUrl} from '../Config/API'
+import Spiner from '../Components/Spiner'
 
 // Styles
 import styles from './Styles/RegisterScreenStyle'
@@ -20,9 +20,21 @@ class PhoneValidateInputScreen extends Component {
     country_code: '',
     number: '',
     step: 'phone_number',
-    spinner: false
+    error: '',
+    loading: false
   }
 
+  onPres = () => {
+    this.setState({loading: true})
+    if (this.state.number === '' || this.state.country_code === '') {
+      this.setState({
+        error: 'input bos ola bilmez',
+        loading: false
+      })
+    } else {
+      this.onPressLogin()
+    }
+  }
   onPhoneNumberChange = () => {
     this.setState({
       country_code: this.phone.getCountryCode(),
@@ -46,7 +58,7 @@ class PhoneValidateInputScreen extends Component {
     const self = this
     console.log(body)
     // console.log(body, login)
-    let url = 'https://2022aae2.ngrok.io/driver/api/drivers?country_code=' + encodeURIComponent(country_code) + '&phone_number=' + num
+    let url = mainUrl + 'driver/api/drivers?country_code=' + encodeURIComponent(country_code) + '&phone_number=' + num
     fetch(url, {
       method: 'HEAD',
       headers: {
@@ -106,26 +118,32 @@ class PhoneValidateInputScreen extends Component {
       }
     }
   }
-
+  renderButton = () => {
+    if (!this.state.loading) {
+      return <MyButton
+        onPress={this.onPres}
+        color='#fff'
+        backgroundColor='#7B2BFC'
+        borderColor='#7B2BFC'
+        borderRadius={30}
+        text={I18n.t('next')}
+      />
+    }
+    return <Spiner size='small' />
+  }
   render () {
-    const {number} = this.state
     console.log(this.props)
+    const {number, error} = this.state
+    const errorMsg = error ? (<Text style={styles.errorMsg}>{error}</Text>) : null
     return (
       <View style={styles.container}>
-
-        {/* <Spinner */}
-        {/*  visible={this.props.fetching} */}
-        {/*  textContent={'Loading...'} */}
-        {/*  textStyle={styles.spinnerTextStyle} */}
-        {/* /> */}
         <View>
-
           <View>
             <Text style={{
-              fontSize: width * 0.027,
-              color: '#BCBEC0',
-              marginBottom: width * 0.06
-            }}>Phone Number</Text>
+              fontSize: width * 0.05,
+              color: '#7B2BFC',
+              marginBottom: width * 0.2
+            }}>Enter your phone number</Text>
             <PhoneInput
               onChangePhoneNumber={this.onPhoneNumberChange}
               initialCountry='az'
@@ -134,24 +152,15 @@ class PhoneValidateInputScreen extends Component {
                 borderBottomWidth: 1,
                 borderColor: '#353535',
                 width: '100%',
-                marginBottom: width * 0.1296
+                marginBottom: width * 0.1
               }} ref={ref => {
                 this.phone = ref
               }} />
           </View>
-
+          {errorMsg}
         </View>
         <View style={styles.buttonContainer}>
-          <MyButton
-            //    onPress={() => this.props.navigation.navigate('PhoneValidateScreen')}
-            onPress={this.onPressLogin}
-
-            backgroundColor='#451E5D'
-            color='#fff'
-            borderColor='451E5D'
-            text={I18n.t('next')}
-          />
-
+          {this.renderButton()}
         </View>
 
       </View>

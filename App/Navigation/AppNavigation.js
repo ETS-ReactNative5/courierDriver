@@ -25,12 +25,34 @@ import DriverNewOrderScreen from '../Containers/DriverNewOrderScreen'
 import DriverRadiusScreen from '../Containers/DriverRadiusScreen'
 import CourierGoToClientScreen from '../Containers/CourierGoToClientScreen'
 import CourierGoToAdressScreen from '../Containers/CourierGoToAdressScreen'
+import BalansScreen from '../Containers/BalansScreen'
+import PaymentAmountScreen from '../Containers/PaymentAmountScreen'
 
 import I18n from '../I18n'
 import styles from './Styles/NavigationStyles'
 
 // Manifest of possible screens
 const PrimaryNav = createStackNavigator({
+  PaymentAmountScreen: {
+    screen: PaymentAmountScreen,
+    navigationOptions: {
+      title: I18n.t('Balansi artir'),
+      headerTintColor: '#000',
+      headerStyle: {
+        backgroundColor: '#fff'
+      }
+    }
+  },
+  BalansScreen: {
+    screen: BalansScreen,
+    navigationOptions: {
+      title: I18n.t('Balans'),
+      headerTintColor: '#000',
+      headerStyle: {
+        backgroundColor: '#fff'
+      }
+    }
+  },
   CourierGoToAdressScreen: {
     screen: CourierGoToAdressScreen,
     navigationOptions: {
@@ -92,7 +114,7 @@ const PrimaryNav = createStackNavigator({
   AddCrediCardScreen: {
     screen: AddCrediCardScreen,
     navigationOptions: {
-      title: I18n.t('AddCrediCardScreen'),
+      // title: I18n.t('AddCrediCardScreen'),
       headerTintColor: '#000',
       headerStyle: {
         backgroundColor: '#fff'
@@ -102,7 +124,7 @@ const PrimaryNav = createStackNavigator({
   AccountScreen: {
     screen: AccountScreen,
     navigationOptions: {
-      title: I18n.t('AccountScreen'),
+      title: I18n.t('Profilim'),
       headerTintColor: '#000',
       headerStyle: {
         backgroundColor: '#fff'
@@ -125,14 +147,16 @@ const PrimaryNav = createStackNavigator({
       }
     }
   },
-  PaymentMethodScreen: {screen: PaymentMethodScreen,
+  PaymentMethodScreen: {
+    screen: PaymentMethodScreen,
     navigationOptions: {
-      title: I18n.t('bankHesabı'),
+      // title: I18n.t('Profilim'),
       headerTintColor: '#000',
       headerStyle: {
         backgroundColor: '#fff'
       }
-    }},
+    }
+  },
   AllOrderScreen: {screen: AllOrderScreen,
     navigationOptions: {
       title: I18n.t('sifarişler'),
@@ -148,7 +172,7 @@ const PrimaryNav = createStackNavigator({
   TabScreen: {screen: TabScreen, navigationOptions: {header: null}},
   PhoneValidateScreen: {screen: PhoneValidateScreen,
     navigationOptions: {
-      title: I18n.t('register'),
+      // title: I18n.t('register'),
       headerTintColor: '#000',
       headerStyle: {
         backgroundColor: '#fff'
@@ -156,7 +180,7 @@ const PrimaryNav = createStackNavigator({
     }},
   PhoneValidateInputScreen: {screen: PhoneValidateInputScreen,
     navigationOptions: {
-      title: I18n.t('register'),
+      // title: I18n.t('register'),
       headerTintColor: '#000',
       headerStyle: {
         backgroundColor: '#fff'
@@ -172,7 +196,7 @@ const PrimaryNav = createStackNavigator({
     }},
   RegisterScreen: {screen: RegisterScreen,
     navigationOptions: {
-      title: I18n.t('register'),
+      // title: I18n.t('register'),
       headerTintColor: '#000',
       headerStyle: {
         backgroundColor: '#fff'

@@ -94,6 +94,7 @@ class ProfileScreen extends Component {
             size={25}
             fontSize={20} />
           <MenuLink text='Balans'
+            onPress={() => this.props.navigation.navigate('BalansScreen')}
             icon='notification-clear-all'
             color='#606060'
             size={25}

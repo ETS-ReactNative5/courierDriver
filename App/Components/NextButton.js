@@ -24,7 +24,7 @@ export default class NextButton extends Component {
         onPress={onPress}>
         <View style={{flexDirection: 'row', alignItems: 'center'}}>
           <View style={[styles.iconWrapper, {backgroundColor: iconBackground}]}>
-            <Icon style={styles.linkIcon} name='accusoft' size={25} color='#000' />
+            <Icon style={styles.linkIcon} name='accusoft' size={25} color='#686868' />
           </View>
           <View>
             <Text style={[styles.text, {color: color}]}>{text}</Text>

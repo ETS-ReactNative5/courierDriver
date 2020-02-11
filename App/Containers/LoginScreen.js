@@ -128,8 +128,8 @@ class LoginScreen extends Component {
         <View>
           <View>
             <Text style={{
-              fontSize: width * 0.027,
-              color: '#BCBEC0',
+              fontSize: width * 0.05,
+              color: '#7B2BFC',
               marginBottom: width * 0.06
             }}>Phone Number</Text>
             <PhoneInput onChangePhoneNumber={this.onPhoneNumberChange} initialCountry='az' value={mobile} style={{

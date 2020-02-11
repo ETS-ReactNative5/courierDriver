@@ -15,16 +15,16 @@ export default class MyInput extends Component {
   //   someSetting: false
   // }
 
-  render() {
+  render () {
     const {text, placeholder, value, onChangeText, secureTextEntry} = this.props
     return (
       <View style={styles.container}>
         <Text style={styles.text}>{text}</Text>
         <TextInput style={styles.input}
-                   placeholder={placeholder}
-                   onChangeText={onChangeText}
-                   value={value}
-                   secureTextEntry={secureTextEntry}
+          placeholder={placeholder}
+          onChangeText={onChangeText}
+          value={value}
+          secureTextEntry={secureTextEntry}
         />
       </View>
     )

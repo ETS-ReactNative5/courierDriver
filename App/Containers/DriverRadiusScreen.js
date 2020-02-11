@@ -154,24 +154,25 @@ class DriverRadiusScreen extends Component {
           showsUserLocation
           style={styles.map}
           region={this.state.region} >
-
-          <Marker
-            coordinate={this.state.markers} >
-            <AnimatedMarker />
-          </Marker>
-
+          {/*<Marker*/}
+          {/*  coordinate={this.state.markers} >*/}
+          {/*  <AnimatedMarker />*/}
+          {/*</Marker>*/}
         </MapView>
-        <View style={styles.switchBox}>
-          <ToggleSwitch
-            size='large'
-            onColor='#7B2BFC'
-            offColor='#ecf0f1'
-            isOn={this.state.isOnDefaultToggleSwitch}
-            onToggle={isOnDefaultToggleSwitch => {
-              this.setState({ isOnDefaultToggleSwitch })
-              this.onToggle(isOnDefaultToggleSwitch)
-            }}
-          />
+        {/*<View style={styles.switchBox}>*/}
+        {/*  <ToggleSwitch*/}
+        {/*    size='large'*/}
+        {/*    onColor='#7B2BFC'*/}
+        {/*    offColor='#ecf0f1'*/}
+        {/*    isOn={this.state.isOnDefaultToggleSwitch}*/}
+        {/*    onToggle={isOnDefaultToggleSwitch => {*/}
+        {/*      this.setState({ isOnDefaultToggleSwitch })*/}
+        {/*      this.onToggle(isOnDefaultToggleSwitch)*/}
+        {/*    }}*/}
+        {/*  />*/}
+        {/*</View>*/}
+        <View style={styles.infoBox}>
+          <Text style={styles.infoText}>Sifariş qəbul etmək istədiyiniz radiusu seçin</Text>
         </View>
         <View style={styles.countBox}>
           <InputSpinner
@@ -194,7 +195,6 @@ class DriverRadiusScreen extends Component {
             buttonRightDisabled={this.state.spiner.buttonRightDisabled}
             disabled={this.state.spiner.disabled}
           />
-
         </View>
         <View style={{flex: 1, width: '100%', position: 'absolute', bottom: '10%', alignSelf: 'flex-end' }}>
           <SwipeButton

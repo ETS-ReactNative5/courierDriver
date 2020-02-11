@@ -8,7 +8,8 @@ import { Container, Content, ListItem, Text, Radio, Right, Left, Icon } from 'na
 // Styles
 import styles from './Styles/PaymentMethodScreenStyle'
 import MyButton from '../Components/MyButton'
-import { View } from 'react-native'
+import NextButton from '../Components/NextButton'
+import { KeyboardAvoidingView, View } from 'react-native'
 
 class PaymentMethodScreen extends Component {
   constructor () {
@@ -22,19 +23,6 @@ class PaymentMethodScreen extends Component {
     return (
       <Container>
         <Content>
-          <ListItem style={styles.radioBox} onPress={() => this.setState({ itemSelected: 'itemOne' })} >
-            <Left>
-              <Icon style={styles.ccIcon} name='cash' />
-              <Text>Nəğd</Text>
-            </Left>
-            <Right>
-              <Radio
-
-                selectedColor={'#451E5D'}
-                selected={this.state.itemSelected == 'itemOne'}
-              />
-            </Right>
-          </ListItem>
           <ListItem style={styles.radioBox} onPress={() => this.setState({ itemSelected: 'itemTwo' })}>
             <Left>
               <Icon style={styles.ccIcon} type='FontAwesome' name='cc-visa' />
@@ -61,13 +49,22 @@ class PaymentMethodScreen extends Component {
               />
             </Right>
           </ListItem>
+          <NextButton
+            onPress={() => this.props.navigation.navigate('AddCrediCardScreen')}
+            text='Add new card'
+            color='#000'
+            iconBackground='#FED427'
+            // borderRadius={10}
+            backgroundColor='#fff' />
         </Content>
         <View style={styles.btnBox}>
           <MyButton
-            onPress={() => this.props.navigation.navigate('AddCrediCardScreen')}
-            text='KART ƏLAVƏ ET'
+            onPress={() => this.props.navigation.navigate('PaymentAmountScreen')}
             color='#fff'
-            backgroundColor='#451E5D' />
+            backgroundColor='#7B2BFC'
+            borderColor='#7B2BFC'
+            borderRadius={30}
+            text='Next' />
         </View>
       </Container>
     )

@@ -29,5 +29,21 @@ export default StyleSheet.create({
     fontSize: 25,
     marginRight: 13,
     marginTop: 10
+  },
+  infoBox: {
+    position: 'absolute',
+    top: '10%',
+    alignSelf: 'center',
+    backgroundColor: '#7B2BFC',
+    paddingVertical: 10,
+    paddingHorizontal: 35,
+    borderRadius: 20,
+    alignItems: 'center',
+    marginHorizontal: 20
+  },
+  infoText: {
+    color: '#fff',
+    fontSize: 20,
+    textAlign: 'center'
   }
 })

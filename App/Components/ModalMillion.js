@@ -39,10 +39,10 @@ export default class ModalMillion extends Component {
               swipeableModal: true
             })
           }}
-          text='Milli Ön'
+          text='Million'
           color='#000'
           iconBackground='#FED427'
-          borderRadius={10}
+          // borderRadius={10}
           backgroundColor='#fff' />
         <Modal
           onDismiss={() => {
@@ -63,7 +63,7 @@ export default class ModalMillion extends Component {
           modalAnimation={new SlideAnimation({ slideFrom: 'bottom' })}
           modalTitle={
             <ModalTitle
-              title='Rating'
+              title='Million'
             />
           }
           footer={
@@ -78,7 +78,9 @@ export default class ModalMillion extends Component {
         >
           <ModalContent style={{ backgroundColor: '#fff', paddingTop: 4 }} >
             <View style={{ alignItems: 'center', paddingTop: 8 }}>
-              <Text style={{ fontSize: 18, fontWeight: 'bold' }}>Avishay Ba</Text>
+              <Text style={{ fontSize: 18, fontWeight: 'bold', textAlign: 'center', marginBottom: 20 }}>Zəhmət olmasa, Milli ÖN aparatlarına
+                yaxınlaşaraq, Balansınızı artırın</Text>
+              <Text style={{ fontSize: 18, fontWeight: 'bold', color: '#7B2BFC' }}>12af35ad3</Text>
             </View>
           </ModalContent>
         </Modal>
