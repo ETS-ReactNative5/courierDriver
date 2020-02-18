@@ -10,8 +10,20 @@ import styles from './Styles/OrderScreenStyle'
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons'
 import Dash from 'react-native-dash'
 import MyButton from '../Components/MyButton'
+import ModalRating from '../Components/ModalRating'
 
 class OrderScreen extends Component {
+  state = {
+    scaleAnimationModal: false
+  };
+  onPressOK = async () => {
+    await this.setState({scaleAnimationModal: false})
+    this.props.navigation.replace('MenuScreen')
+  }
+  onPress =() => {
+    this.setState({scaleAnimationModal: true})
+    console.log(this.state.scaleAnimationModal)
+  }
   render () {
     return (
       <View style={styles.container}>
@@ -33,9 +45,9 @@ class OrderScreen extends Component {
         <View style={styles.userLikesContainer}>
           <View style={styles.adressBox}>
             <View style={styles.iconBox}>
-              <Icon name="circle-outline" size={21} color="#27093D" />
+              <Icon name='circle-outline' size={21} color='#27093D' />
               <Dash style={styles.orderDash} />
-              <Icon name="map-marker-outline" size={25} color="#27093D" />
+              <Icon name='map-marker-outline' size={25} color='#27093D' />
             </View>
             <View style={styles.textBox}>
               <Text style={styles.text}>Füzuli küçəsi 14</Text>
@@ -76,12 +88,19 @@ class OrderScreen extends Component {
           </View>
           <View style={styles.btnBox}>
             <MyButton
-              text="SİFARİŞ TAMAMLANDI"
-              color="#fff"
-              backgroundColor="#451E5D"/>
+              onPress={this.onPress}
+              color='#fff'
+              backgroundColor='#7B2BFC'
+              borderColor='#7B2BFC'
+              borderRadius={30}
+              text='OK' />
           </View>
         </View>
 
+        <ModalRating
+          scaleAnimationModal={this.state.scaleAnimationModal}
+          onPressOK={this.onPressOK}
+          navigation={this.props.navigation} />
       </View>
     )
   }

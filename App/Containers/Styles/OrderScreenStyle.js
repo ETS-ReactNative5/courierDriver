@@ -92,6 +92,6 @@ export default StyleSheet.create({
   btnBox: {
     width,
     position: 'absolute',
-    bottom: height * 0.1
+    bottom: height * 0.01
   }
 })

@@ -40,8 +40,6 @@ class PhoneValidateInputScreen extends Component {
       country_code: this.phone.getCountryCode(),
       number: this.phone.getValue()
     })
-    // const {mobile, password} = this.state
-    // this.props.attemptLogin(mobile, password)
   };
 
   onPressLogin = () => {
@@ -54,10 +52,8 @@ class PhoneValidateInputScreen extends Component {
       number: num,
       step: 'phone_number'
     }
-    // this.setState({loading: true})
     const self = this
     console.log(body)
-    // console.log(body, login)
     let url = mainUrl + 'driver/api/drivers?country_code=' + encodeURIComponent(country_code) + '&phone_number=' + num
     fetch(url, {
       method: 'HEAD',
@@ -68,14 +64,12 @@ class PhoneValidateInputScreen extends Component {
       .then(check)
       .catch(error => console.error(error))
     function status (response) {
-      console.log(response)
-      console.log('status')
+      console.log(response, '-status-')
       self.setState({loading: false})
       if (response.status === 'pending' || response.status === 'approved') {
         return Promise.resolve(response)
       } else {
         return Promise.reject(response)
-        // return Promise.reject(new Error(response.statusText))
       }
     }
     function json (response) {
@@ -112,6 +106,10 @@ class PhoneValidateInputScreen extends Component {
           .catch(function (error) {
             console.log(error)
             console.log('err')
+            self.setState({
+              error: error.detail,
+              loading: false
+            })
           })
       } else {
         self.props.navigation.navigate('LoginScreen')

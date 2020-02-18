@@ -22,13 +22,7 @@ class LoginScreen extends Component {
     error: '',
     loading: false
   }
-  // onPres = () => {
-  //   const {mobile, password} = this.state
-  //   this.isAttempting = true
-  //   // attempt a login - a saga is listening to pick it up from here.
-  //   this.props.attemptLogin(mobile, password)
-  //   this.props.navigation.navigate('MapScreen')
-  // }
+
   onPres = () => {
     this.setState({loading: true})
     if (this.state.password === null || this.state.mobile === null) {
@@ -72,8 +66,7 @@ class LoginScreen extends Component {
         self.props.navigation.replace('MenuScreen')
       })
       .catch(function (error) {
-        console.log(error)
-        console.log('err')
+        console.log(error, '-errror-')
         self.setState({
           error: error.detail,
           loading: false
@@ -89,8 +82,7 @@ class LoginScreen extends Component {
       }
     }
     function json (response) {
-      console.log(response)
-      console.log('json')
+      console.log(response, '-json-')
       return response.json()
     }
   }
