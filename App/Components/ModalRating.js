@@ -7,7 +7,7 @@ import Modal, {
   ModalContent,
   ModalFooter,
   ModalButton,
-  SlideAnimation,
+  SlideAnimation, ScaleAnimation,
 } from 'react-native-modals'
 import UserAvatar from 'react-native-user-avatar'
 import { AirbnbRating } from 'react-native-ratings'
@@ -24,60 +24,29 @@ export default class ModalRating extends Component {
   // static defaultProps = {
   //   someSetting: false
   // }
-  state = {
-    customBackgroundModal: false,
-    defaultAnimationModal: false,
-    swipeableModal: false,
-    scaleAnimationModal: false,
-    slideAnimationModal: false,
-    bottomModalAndTitle: false,
-    bottomModal: false
-  };
+
 
   render () {
+    const {scaleAnimationModal} = this.props
     return (
       <View style={{ flex: 1 }}>
-        <View style={styles.container}>
-          <Button
-            title='Show Modal - Swipeable Modal Animation'
-            onPress={() => {
-              this.setState({
-                swipeableModal: true
-              })
-            }}
-          />
-        </View>
-
         <Modal
-          onDismiss={() => {
-            this.setState({ swipeableModal: false })
-          }}
           width={0.9}
           overlayOpacity={1}
-          visible={this.state.swipeableModal}
+          visible={scaleAnimationModal}
           rounded
-          actionsBordered
-          onSwipeOut={() => {
-            this.setState({ swipeableModal: false })
-          }}
-          onTouchOutside={() => {
-            this.setState({ swipeableModal: false })
-          }}
-          swipeDirection={['down', 'up']}
-          modalAnimation={new SlideAnimation({ slideFrom: 'bottom' })}
+          modalAnimation={new ScaleAnimation()}
           modalTitle={
-            <ModalTitle
-              title='Rating'
-            />
+            <ModalTitle title='Rating' />
           }
           footer={
             <ModalFooter style={{ backgroundColor: '#fff', padding: 10, width: '100%' }}>
-
               <ModalButton
                 style={{ backgroundColor: '#7b2bfc', padding: 8, width: '100%', borderRadius: 30 }}
                 textStyle={{color: '#fff', fontWeight: 'bold'}}
                 text='OK'
-                onPress={() => { this.setState({ swipeableModal: false }) }} />
+                key='button-1'
+                onPress={this.props.onPressOK} />
             </ModalFooter>
           }
         >

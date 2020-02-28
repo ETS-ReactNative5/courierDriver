@@ -34,33 +34,35 @@ class CourierGoToAdressScreen extends Component {
 
     // AirBnB's Office, and Apple Park
     this.state = {
-      pickup_location: '',
-      drop_location: '',
-      bill_amount: '',
       total_distance: '',
-      phone_number: null,
       customerName: '',
+      bill_amount: '',
+      order_notifications: '',
+      location_tracking: '',
+      drop_location: '',
+      pickup_location: '',
       orderId: '',
       total_duration: null,
       // order_notifications: '',
       // location_tracking: '',
+
       driverCoordinate: {
         latitude: 40.409264,
         longitude: 49.867092
       },
       coordinates: [
         {
-          latitude: 49.84381139999999,
-          longitude: 40.3897426
+          latitude: 40.409264,
+          longitude: 49.867092
         },
         {
-          latitude: 49.846126,
-          longitude: 40.41348199999999
+          latitude: 40.409264,
+          longitude: 49.867092
         }
       ],
       region: {
-        latitude: 40.4093,
-        longitude: 49.8671,
+        latitude: 40.409264,
+        longitude: 49.867092,
         latitudeDelta: 0.0922,
         longitudeDelta: 0.0421
       },
@@ -68,19 +70,55 @@ class CourierGoToAdressScreen extends Component {
       endLocation: 'Azadliq Prospekti 74',
       driverStatus: 'arrived'
     }
+
+    this.mapView = null
   }
 
   componentDidMount = async () => {
-    console.log(this.props.order.id)
-    console.log(this.props.order.pickup_location)
-    console.log(this.props.order.drop_location)
-    console.log(this.props.order.bill_amount)
-    console.log(this.props.order.total_distance)
-    console.log(this.props.order.customer.phone_number)
-    console.log(this.props.order.drop_ltd,'drop_ltd')
-    console.log(this.props.order.drop_lng,'drop_lng')
-    console.log(this.props.order.pickup_ltd,'pickup_ltd')
-    console.log(this.props.order.pickup_lng,'pickup_lng')
+    this.setState({
+      pickup_location: this.props.order.pickup_location,
+      drop_location: this.props.order.drop_location,
+      bill_amount: this.props.order.bill_amount,
+      total_distance: this.props.order.total_distance,
+      phone_number: this.props.order.customer.phone_number,
+      customerName: this.props.order.customer.first_name,
+      orderId: this.props.order.id,
+      coordinates: [
+        {
+          latitude: Number(this.props.order.pickup_ltd),
+          longitude: Number(this.props.order.pickup_lng)
+        },
+        {
+          latitude: Number(this.props.order.drop_ltd),
+          longitude: Number(this.props.order.drop_lng)
+        }
+      ]
+    })
+
+    console.log(this.state)
+    console.log(this.props)
+
+    // this.setState({
+    //
+    //
+    //   first_name: this.props.order.custemer.first_name,
+    //
+    //
+    //   phone_number: this.props.order.customer.phone_number,
+    //   orderId: this.props.order.id,
+    //   coordinates: [
+    //     {
+    //       latitude: Number(this.props.order.pickup_ltd),
+    //       longitude: Number(this.props.order.pickup_lng)
+    //     },
+    //     {
+    //       latitude: Number(this.props.order.drop_ltd),
+    //       longitude: Number(this.props.order.drop_lng)
+    //     }
+    //   ],
+    // });
+    console.log('------')
+    console.log(this.state)
     console.log('------')
     await navigator.geolocation.getCurrentPosition(
       position => {
@@ -93,6 +131,7 @@ class CourierGoToAdressScreen extends Component {
           phone_number: this.props.order.customer.phone_number,
           customerName: this.props.order.customer.first_name,
           orderId: this.props.order.id,
+
           region: {
             latitude: position.coords.latitude,
             longitude: position.coords.longitude,
@@ -103,17 +142,6 @@ class CourierGoToAdressScreen extends Component {
             latitude: position.coords.latitude,
             longitude: position.coords.longitude
           },
-          coordinates: [
-            {
-              latitude: Number(this.props.order.drop_ltd),
-              longitude: Number(this.props.order.drop_lng)
-            },
-            {
-              latitude: Number(this.props.order.pickup_ltd),
-              longitude: Number(this.props.order.pickup_lng)
-
-            }
-          ],
           error: null
         })
       },
@@ -125,20 +153,20 @@ class CourierGoToAdressScreen extends Component {
         this.token = 'Bearer ' + token
         console.log(token)
       })
-    console.log(this.state.coordinates)
-    // const location_tracking = await AsyncStorage.getItem('@location_tracking')
-    //   .then((location_tracking) => {
-    //     this.setState({
-    //       location_tracking
-    //     })
-    //   })
-    // const order_notifications = await AsyncStorage.getItem('@order_notifications')
-    //   .then((order_notifications) => {
-    //     this.setState({
-    //       order_notifications
-    //     })
-    //   })
-    // this.watchLocation()
+
+    const location_tracking = await AsyncStorage.getItem('@location_tracking')
+      .then((location_tracking) => {
+        this.setState({
+          location_tracking
+        })
+      })
+    const order_notifications = await AsyncStorage.getItem('@order_notifications')
+      .then((order_notifications) => {
+        this.setState({
+          order_notifications
+        })
+      })
+    this.watchLocation()
   }
 
   watchLocation = () => {
@@ -162,17 +190,17 @@ class CourierGoToAdressScreen extends Component {
         }
 
         this.setState({
-          // coordinates: [
-          //   {
-          //     latitude: Number(this.props.order.drop_ltd),
-          //     longitude: Number(this.props.order.drop_lng)
-          //   },
-          //   {
-          //     latitude: latitude,
-          //     longitude: longitude
-          //
-          //   }
-          // ],
+          coordinates: [
+            {
+              latitude: Number(this.props.order.drop_ltd),
+              longitude: Number(this.props.order.drop_lng)
+            },
+            {
+              latitude: latitude,
+              longitude: longitude
+
+            }
+          ],
           driverCoordinate: {
             latitude: position.coords.latitude,
             longitude: position.coords.longitude
@@ -216,7 +244,6 @@ class CourierGoToAdressScreen extends Component {
       .then(status)
       .then(function (data) {
         self.props.attemptOrder(data)
-
         self.props.navigation.replace('OrderScreen')
       })
       .catch(function (error) {
@@ -241,7 +268,7 @@ class CourierGoToAdressScreen extends Component {
   }
 
   render () {
-
+    console.log(this.props.order)
     const SwipeIcon = () => (
       <Icon name='chevron-double-right' color='#fff' size={40} />
     )

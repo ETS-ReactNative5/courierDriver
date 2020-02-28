@@ -18,6 +18,7 @@ export default class DriverNewOrderBody extends Component {
   // static defaultProps = {
   //   someSetting: false
   // }
+
   render () {
     const SwipeIcon = () => (
       <Icon name='chevron-double-right' color='#fff' size={40} />
@@ -28,10 +29,12 @@ export default class DriverNewOrderBody extends Component {
           <View style={styles.profileHeader}>
             <View style={styles.profileHeaderBody}>
               <Text style={styles.profileHeaderBodyText}>{this.props.customerName}</Text>
+
               {/*<Text style={styles.profileHeaderBodyTextY}>Kia optima  10-TE-010</Text>*/}
             </View>
             <View style={styles.profileHeaderLeft}>
               <Image style={styles.newsImage} source={Images.profilImg} />
+
             </View>
           </View>
           <View style={styles.cashBox}>
@@ -45,6 +48,7 @@ export default class DriverNewOrderBody extends Component {
           </View>
           <View style={styles.cashBox}>
             <View>
+
               <Text style={styles.sectionTitle}>Məsafə</Text>
             </View>
             <View>
@@ -63,14 +67,6 @@ export default class DriverNewOrderBody extends Component {
           <View style={styles.sectionTitleBox}><Text style={styles.sectionTitle}>Daşınacaq Yükün fotosu</Text></View>
           <View style={styles.imgScroll}>
             <ScrollView horizontal>
-              <ZoomImage
-                source={{uri: 'https://ooo.0o0.ooo/2017/03/31/58de0e9b287f6.jpg'}}
-                imgStyle={{width: 110, height: 110, borderRadius: 15}}
-                style={styles.img}
-                duration={200}
-                enableScaling={false}
-                easingFunc={Easing.ease}
-              />
               <ZoomImage
                 source={{uri: 'https://ooo.0o0.ooo/2017/03/31/58de0e9b287f6.jpg'}}
                 imgStyle={{width: 110, height: 110, borderRadius: 15}}

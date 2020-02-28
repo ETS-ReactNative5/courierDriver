@@ -138,7 +138,6 @@ class RegisterScreen extends Component {
           </View>
           <View style={styles.buttonContainer}>
             <MyButton onPress={this.onPressRegister}
-              // onPress={() => this.props.navigation.navigate('TabScreen')}
               color='#fff'
               backgroundColor='#7B2BFC'
               borderColor='#7B2BFC'

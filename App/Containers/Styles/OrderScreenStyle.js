@@ -59,5 +59,6 @@ export default StyleSheet.create({
   },
   btnBox: {
     marginHorizontal: 20
+
   }
 })

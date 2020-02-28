@@ -23,6 +23,7 @@ class OrderScreen extends Component {
             <TouchableOpacity onPress={this.onPress}>
               <Icon style={styles.closeIcon} size={30} name='window-close' />
             </TouchableOpacity>
+
           </View>
           <View style={styles.price}>
             <View style={styles.paymetnMethod}>
@@ -53,17 +54,22 @@ class OrderScreen extends Component {
             </View>
           </View>
           <View style={styles.btnBox}>
+
             <MyButton onPress={this.onPres}
+
               color='#fff'
               backgroundColor='#7B2BFC'
               borderColor='#7B2BFC'
               borderRadius={30}
               text='OK'
               />
+
           </View>
           <View style={{ flex: 1 }} />
         </View>
+
       </KeyboardAvoidingView>
+
     )
   }
 }

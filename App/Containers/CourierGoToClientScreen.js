@@ -72,14 +72,16 @@ class CourierGoToClientScreen extends Component {
   //   })
   //   console.log(this.state.coordinates)
   // }
-  componentDidMount (): void {
-    AsyncStorage.getItem('@token')
-      .then((token) => {
-        this.token = 'Bearer ' + token
-        console.log(token)
-      })
-    this.watchLocation()
-    navigator.geolocation.getCurrentPosition(
+  componentDidMount = async () => {
+    this.setState({
+      pickup_location: this.props.order.pickup_location,
+      drop_location: this.props.order.drop_location,
+      phone_number: this.props.order.customer.phone_number,
+      orderId: this.props.order.id
+
+    })
+
+    const location = await navigator.geolocation.getCurrentPosition(
       position => {
         this.setState({
           coordinates: [
@@ -119,6 +121,25 @@ class CourierGoToClientScreen extends Component {
       error => this.setState({error: error.message}),
       {enableHighAccuracy: true, timeout: 20000}
     )
+    const token = await AsyncStorage.getItem('@token')
+      .then((token) => {
+        this.token = 'Bearer ' + token
+        console.log(token)
+      })
+
+    const location_tracking = await AsyncStorage.getItem('@location_tracking')
+      .then((location_tracking) => {
+        this.setState({
+          location_tracking
+        })
+      })
+    const order_notifications = await AsyncStorage.getItem('@order_notifications')
+      .then((order_notifications) => {
+        this.setState({
+          order_notifications
+        })
+      })
+    this.watchLocation()
   }
   componentDidUpdate (prevProps, prevState) {
     if (this.props.latitude !== prevState.latitude) {
@@ -130,12 +151,12 @@ class CourierGoToClientScreen extends Component {
     navigator.geolocation.clearWatch(this.watchID)
   }
   watchLocation = () => {
-    const { coordinate } = this.state
+    const {driverCoordinate} = this.state
 
     this.watchID = navigator.geolocation.watchPosition(
       position => {
-        const { latitude, longitude } = position.coords
-
+        const {latitude, longitude} = position.coords
+        console.log(position)
         const newCoordinate = {
           latitude,
           longitude
@@ -143,16 +164,23 @@ class CourierGoToClientScreen extends Component {
 
         if (Platform.OS === 'android') {
           if (this.marker) {
-            this.marker._component.animateMarkerToCoordinate(
-              newCoordinate,
-              500 // 500 is the duration to animate the marker
-            )
+            this.marker._component.animateMarkerToCoordinate(newCoordinate, 500) // 500 is the duration to animate the marker
           }
         } else {
-          coordinate.timing(newCoordinate).start()
+          driverCoordinate.timing(newCoordinate).start()
         }
 
         this.setState({
+          coordinates: [
+            {
+              latitude: latitude,
+              longitude: longitude
+            },
+            {
+              latitude: Number(this.props.order.pickup_ltd),
+              longitude: Number(this.props.order.pickup_lng)
+            }
+          ],
           latitude,
           longitude
         })
@@ -166,10 +194,13 @@ class CourierGoToClientScreen extends Component {
       }
     )
   };
+
+
   onPressCancel = () => {
     let param = {
       status: 'rejected'
     }
+
     this.putOrder(param)
   }
   onSwipeAccept = () => {
@@ -184,6 +215,7 @@ class CourierGoToClientScreen extends Component {
     this.token = 'Bearer ' + token
     const api = API.create()
     let headers = {
+
       headers: {
         'Content-type': 'application/json; charset=UTF-8',
         'Access-Control-Allow-Origin': '*',
@@ -226,6 +258,7 @@ class CourierGoToClientScreen extends Component {
           ref={c => this.mapView = c}
           // onPress={this.onMapPress}
         >
+
           {this.state.coordinates.map((coordinate, index) =>
             <MapView.Marker key={`coordinate_${index}`} image={Images.marker} coordinate={coordinate} />
           )}
@@ -259,6 +292,7 @@ class CourierGoToClientScreen extends Component {
             />
           )}
         </MapView>
+
         <View>
           <SlidingPanel
             // onDrag={this.ondraq}
@@ -282,6 +316,7 @@ class CourierGoToClientScreen extends Component {
             onPress={() => Linking.openURL('https://waze.com/ul?ll=' + this.props.order.pickup_ltd + ',' + this.props.order.pickup_lng + '&navigate=yes')}>
             <Image source={Images.waze} />
           </TouchableOpacity>
+
         </View>
       </View>
     )

@@ -167,7 +167,6 @@ class MapScreen extends Component {
       console.log('-------')
       console.log(response.status)
       console.log('-------')
-      self.setState({loading: false})
       if (response.id != null) {
         return Promise.resolve(response)
       } else {
