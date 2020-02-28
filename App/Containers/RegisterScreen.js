@@ -105,21 +105,20 @@ class RegisterScreen extends Component {
   render () {
     return (
       <ScrollView>
-
         <KeyboardAvoidingView behavior='position' style={styles.container}>
           <View>
             <MyInput onChangeText={(text) => {
               this.setState({
                 first_name: text
               })
-            }} text={I18n.t('Name').toUpperCase()} />
+            }} text={I18n.t('Ad').toUpperCase()} />
             <MyInput
               onChangeText={(text) => {
                 this.setState({
                   last_name: text
                 })
               }}
-              text={I18n.t('Surname')} />
+              text={I18n.t('Soyad')} />
 
             <MyInput
               onChangeText={(text) => {
@@ -134,7 +133,7 @@ class RegisterScreen extends Component {
                   password: text
                 })
               }}
-              secureTextEntry text={I18n.t('password')} />
+              secureTextEntry text={I18n.t('Şifrə')} />
 
           </View>
           <View style={styles.buttonContainer}>
@@ -144,7 +143,7 @@ class RegisterScreen extends Component {
               backgroundColor='#7B2BFC'
               borderColor='#7B2BFC'
               borderRadius={30}
-              text={I18n.t('next')}
+              text={I18n.t('DAVAM ET')}
             />
           </View>
         </KeyboardAvoidingView>

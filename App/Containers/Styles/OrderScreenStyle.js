@@ -7,91 +7,57 @@ export default StyleSheet.create({
   container: {
     flex: 1
   },
-  userLikesContainer: {
-    flex: 3,
-    paddingHorizontal: width * 0.04
+  close: {
+    paddingHorizontal: width * 0.05
   },
-  orderFinishedBox: {
-    flex: 1,
-    paddingHorizontal: width * 0.07,
+  price: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    marginHorizontal: width * 0.05,
+    paddingTop: height * 0.05,
+    paddingBottom: height * 0.02,
+    borderBottomWidth: 1
+
+  },
+  paymetnMethod: {
+    flexDirection: 'row',
+    alignItems: 'center'
+  },
+  cashIcon: {
+    marginRight: width * 0.05
+  },
+  ratingBox: {
     justifyContent: 'center',
-    backgroundColor: '#451E5D'
+    alignItems: 'center',
+    padding: width * 0.05,
   },
-  orderPriceBox: {
-    justifyContent: 'space-between',
-    flexDirection: 'row'
+  textPrimary: {
+    color: '#000',
+    fontSize: width * 0.08,
+    padding: width * 0.05
   },
-  orderTextContent: {
-    color: '#fff',
-    fontSize: 33,
-    textAlign: 'center',
-    fontWeight: 'bold'
+  textHint: {
+    color: '#000',
+    fontSize: width * 0.04
   },
-  orderRoadTime: {
-    color: '#FFCC32',
-    fontSize: 17,
-    textAlign: 'center',
-    marginTop: 20,
-    fontWeight: 'bold'
-  },
-  orderTextFealds: {
-    color: '#fff',
-    fontSize: 16,
-    textAlign: 'center'
-  },
-  adressBox: {
+  textAreaBox: {
     flexDirection: 'row',
-    height: 100,
-    paddingVertical: 15,
+    alignItems: 'center',
+    marginHorizontal: width * 0.05,
+    paddingTop: height * 0.15,
+    paddingBottom: height * 0.005,
     borderBottomWidth: 1,
-    borderBottomColor: '#353535'
   },
-  textBox: {
-    justifyContent: 'space-between',
-    marginVertical: 3
+  textArea: {
+    width: '100%'
   },
-  iconBox: {
-    alignItems: 'center',
-    width: width * 0.1,
-  },
-  orderDash: {
-    height: 30,
-    flexDirection: 'column' ,
-  },
-  text: {
-    fontSize: 18
-  },
-  infoBox: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'center',
-    paddingVertical: 13,
-
-  },
-  nameBox: {
-    flexDirection: 'row',
-    alignItems: 'center',
-
-  },
-  nameBoxText : {
-    fontSize: 17,
-    color: '#27093D',
-
-  },
-  nameBoxIcon: {
-    fontSize: 35,
-    color: '#606060',
-    fontWeight: '200',
-    marginRight: 20
-  },
-  infoText: {
-    fontSize: 19,
-    fontWeight : 'bold',
-    color: '#27093D'
+  inner: {
+    paddingVertical: 24,
+    flex: 1,
+    justifyContent: 'flex-end'
   },
   btnBox: {
-    width,
-    position: 'absolute',
-    bottom: height * 0.1
+    marginHorizontal: 20
   }
 })

@@ -1,20 +1,22 @@
 import React, {Component} from 'react'
-import {Linking, Text, Dimensions, View, StyleSheet, TouchableOpacity, Platform} from 'react-native'
+import {Linking, Text, Dimensions, View, Image, TouchableOpacity, Platform} from 'react-native'
 import {connect} from 'react-redux'
 // Add Actions - replace 'Your' with whatever your reducer is called :)
 // import YourActions from '../Redux/YourRedux'
 
 // Styles
 import styles from './Styles/CourierGoToClientScreenStyle'
-import MyButton from '../Components/MyButton'
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons'
-import SwipeButton from 'rn-swipe-button'
 import MapView from 'react-native-maps'
 import {Images} from '../Themes'
 import MapViewDirections from 'react-native-maps-directions'
 import {orders} from '../Config/API'
 import OrderAction from '../Redux/OrderRedux'
 import AsyncStorage from '@react-native-community/async-storage'
+import SlidingPanel from 'react-native-sliding-up-down-panels'
+import CourierOrderTop from '../Components/CourierOrderTop'
+import CourierOrderBody from '../Components/CourierOrderBody'
+import API from '../Services/Api'
 const {width, height} = Dimensions.get('window')
 const ASPECT_RATIO = width / height
 const GOOGLE_MAPS_APIKEY = 'AIzaSyCMfIpRhn8QaGkYQ0I5KPWvFT1kLbA-DAM'
@@ -50,10 +52,17 @@ class CourierGoToClientScreen extends Component {
         latitudeDelta: 0.0922,
         longitudeDelta: 0.0421
       },
-      startLocation: 'Goturulecek unvan',
+      startLocation: 'Götürüləcək ünvan',
       endLocation: 'Azadliq Prospekti 74',
       driverStatus: 'arrived',
-      customerPhone: ''
+      customerPhone: '',
+      customer: {
+        first_name: '',
+        last_name: ''
+      },
+      total_distance: 0,
+      total_duration: 0,
+      bill_amount: 0
     }
     this.mapView = null
   }
@@ -79,8 +88,8 @@ class CourierGoToClientScreen extends Component {
               longitude: position.coords.longitude
             },
             {
-              latitude: Number(this.props.order.drop_lng),
-              longitude: Number(this.props.order.drop_ltd)
+              latitude: Number(this.props.order.pickup_ltd),
+              longitude: Number(this.props.order.pickup_lng)
             }
           ],
           region: {
@@ -94,7 +103,17 @@ class CourierGoToClientScreen extends Component {
             longitude: position.coords.longitude
           },
           error: null,
-          customerPhone: this.props.order.customer.phone_number
+          customerPhone: this.props.order.customer.phone_number,
+          startLocation: this.props.order.pickup_location,
+          endLocation: this.props.order.drop_location,
+          total_distance: this.props.order.total_distance,
+          bill_amount: this.props.order.bill_amount,
+          total_duration: this.props.order.total_duration,
+          orderId: this.props.order.id,
+          customer: {
+            first_name: this.props.order.customer.first_name,
+            last_name: this.props.order.customer.last_name
+          }
         })
       },
       error => this.setState({error: error.message}),
@@ -147,77 +166,55 @@ class CourierGoToClientScreen extends Component {
       }
     )
   };
-
-  onSwipe = () => {
-    this.props.navigation.navigate('CourierGoToAdressScreen')
-  }
   onPressCancel = () => {
-    let body = {
+    let param = {
       status: 'rejected'
     }
-
-    // this.setState({loading: true})
-    const self = this
-    const ordersUrl = orders + this.props.orderId
-    // console.log(body, login)
-    console.log(body)
-
-    fetch(ordersUrl, {
-      body: JSON.stringify(body),
-      method: 'PUT',
+    this.putOrder(param)
+  }
+  onSwipeAccept = () => {
+    let param = {
+      status: 'ongoing'
+    }
+    this.putOrder(param)
+  }
+  putOrder = async (param) => {
+    const orderID = this.state.orderId
+    const token = await AsyncStorage.getItem('@token')
+    this.token = 'Bearer ' + token
+    const api = API.create()
+    let headers = {
       headers: {
         'Content-type': 'application/json; charset=UTF-8',
         'Access-Control-Allow-Origin': '*',
         'Authorization': this.token
-
-        // 'X-localization': currentLang
-        //   'Accept': 'application/json',
-        // 'Content-Type': 'application/json'
-      }
-
-    })
-      .then(json)
-      .then(status)
-      .then(function (data) {
-        console.log('Request succeeded with JSON response', data)
-        console.log(data)
-        self.props.attemptOrder(data)
-        self.props.navigation.navigate('MenuScreen')
-      })
-      .catch(function (error) {
-        console.log(error)
-        console.log('err')
-      })
-
-    function status (response) {
-      console.log(response)
-      console.log('status')
-      console.log('-------')
-      console.log(response.status)
-      console.log('-------')
-      self.setState({loading: false})
-      if (response.id != null) {
-        return Promise.resolve(response)
-      } else {
-        return Promise.reject(response)
-
-        // return Promise.reject(new Error(response.statusText))
       }
     }
+    const order = await api.putOrder(headers, orderID, param)
+    console.log(order)
+    if (order.status == 200) {
+      if (order.data) {
+        this.props.attemptOrder(order.data)
+        this.props.navigation.replace('CourierGoToAdressScreen')
+      } else {
+        this.setState({orderId: ''})
+        this.props.navigation.replace('MenuScreen')
+      }
+    } else {
+      this.setState({
+        error: order.data.msg
 
-    function json (response) {
-      console.log(response)
-      console.log('json')
-      return response.json()
+      })
     }
   }
+
   render () {
-    console.log(this.props.order)
+    console.log(this.props.order,'this props order')
     const SwipeIcon = () => (
       <Icon name='chevron-double-right' color='#fff' size={40} />
     )
     return (
-      <View style={styles.container}>
+      <View style={{flex: 1}}>
         <MapView
           initialRegion={{
             latitude: this.state.region.latitude,
@@ -229,7 +226,6 @@ class CourierGoToClientScreen extends Component {
           ref={c => this.mapView = c}
           // onPress={this.onMapPress}
         >
-
           {this.state.coordinates.map((coordinate, index) =>
             <MapView.Marker key={`coordinate_${index}`} image={Images.marker} coordinate={coordinate} />
           )}
@@ -248,7 +244,6 @@ class CourierGoToClientScreen extends Component {
               onReady={result => {
                 console.log(`Distance: ${result.distance} km`)
                 console.log(`Duration: ${result.duration} min.`)
-
                 this.mapView.fitToCoordinates(result.coordinates, {
                   edgePadding: {
                     right: (width / 20),
@@ -264,46 +259,29 @@ class CourierGoToClientScreen extends Component {
             />
           )}
         </MapView>
-        <View style={styles.orderContainer}>
-          <View style={styles.addressContainer}>
-            <View style={styles.inputButton}>
-              <Text style={styles.inputText}>{this.state.startLocation}</Text>
-              <Text style={styles.inputText}>{this.props.order.pickup_location}</Text>
-            </View>
-          </View>
-          <View style={styles.line} />
-          <View style={styles.actionBox}>
-            <TouchableOpacity style={{alignItems: 'center'}} onPress={this.onPressCancel}>
-              <Icon name='cancel' color='#C71585' size={25} />
-              <Text style={styles.adressTitle}>Cancel </Text>
-            </TouchableOpacity>
-            <TouchableOpacity style={{alignItems: 'center'}}>
-              <Icon name='message-text-outline' color='#C71585' size={25} />
-              <Text style={styles.adressTitle}>Message</Text>
-            </TouchableOpacity>
-            <TouchableOpacity style={{alignItems: 'center'}}>
-              <Icon name='phone' color='#C71585' size={25} />
-              <Text style={styles.adressTitle} onPress={() => {
-                Linking.openURL('tel:' + this.state.customerPhone)
-              }}>Call</Text>
-            </TouchableOpacity>
-          </View>
-
-          <View style={styles.line} />
-          <View style={styles.swipeBox}>
-            <SwipeButton
-              disabled={false}
-              title='Catdim '
-              titleColor='#FFFFFF'
-              railBackgroundColor='#7B2BFC'
-              railBorderColor='#7B2BFC'
-              thumbIconBackgroundColor='#7B2BFC'
-              thumbIconBorderColor='#7B2BFC'
-              thumbIconComponent={SwipeIcon}
-              railFillBackgroundColor='#000'
-              railFillBorderColor='#fff'
-              onSwipeSuccess={this.onSwipe} />
-          </View>
+        <View>
+          <SlidingPanel
+            // onDrag={this.ondraq}
+            headerLayoutHeight={280}
+            headerLayout={() => <CourierOrderTop pickup_location={this.state.startLocation}
+              onPressCancel={this.onPressCancel}
+              total_duration={this.state.total_duration}
+              drop_location={this.state.endLocation}
+              phone_number={this.state.customerPhone}
+              navigation={this.props.navigation} />}
+            slidingPanelLayout={() => <CourierOrderBody navigation={this.props.navigation}
+              customerName={this.state.customer.first_name}
+              bill_amount={this.state.bill_amount}
+              onSwipeDone={this.onSwipeAccept}
+              total_distance={this.state.total_distance}
+            />}
+          />
+        </View>
+        <View style={styles.waze}>
+          <TouchableOpacity
+            onPress={() => Linking.openURL('https://waze.com/ul?ll=' + this.props.order.pickup_ltd + ',' + this.props.order.pickup_lng + '&navigate=yes')}>
+            <Image source={Images.waze} />
+          </TouchableOpacity>
         </View>
       </View>
     )

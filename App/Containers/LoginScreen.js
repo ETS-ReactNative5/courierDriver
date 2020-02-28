@@ -130,19 +130,14 @@ class LoginScreen extends Component {
             <Text style={{
               fontSize: width * 0.05,
               color: '#7B2BFC',
-              marginBottom: width * 0.06
-            }}>Phone Number</Text>
-            <PhoneInput onChangePhoneNumber={this.onPhoneNumberChange} initialCountry='az' value={mobile} style={{
-              fontSize: width * 0.037,
-              borderBottomWidth: 1,
-              borderColor: '#353535',
-              width: '100%',
-              marginBottom: width * 0.1296
-            }} ref={ref => {
+              marginBottom: width * 0.06,
+
+            }}>Mobil Nömrə</Text>
+            <PhoneInput onChangePhoneNumber={this.onPhoneNumberChange} initialCountry='az' value={mobile} style={styles.phoneInput} ref={ref => {
               this.phone = ref
             }} />
           </View>
-          <MyInput value={password} onChangeText={this.onPasswordChange} secureTextEntry text='Password' />
+          <MyInput value={password} onChangeText={this.onPasswordChange} secureTextEntry text='Şifrə' />
           {errorMsg}
         </View>
         <View style={styles.buttonContainer}>

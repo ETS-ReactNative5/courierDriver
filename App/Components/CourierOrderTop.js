@@ -1,10 +1,11 @@
 import React, { Component } from 'react'
 // import PropTypes from 'prop-types';
 import { View, Text, TouchableOpacity, Linking } from 'react-native'
-import styles from './Styles/DriverNewOrderTopStyle'
+import styles from './Styles/CourierOrderTopStyle'
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons'
 import Dash from 'react-native-dash'
-export default class DriverNewOrderTop extends Component {
+
+export default class CourierOrderTop extends Component {
   // // Prop type warnings
   // static propTypes = {
   //   someProperty: PropTypes.object,
@@ -43,7 +44,8 @@ export default class DriverNewOrderTop extends Component {
           </View>
         </View>
         <View style={styles.actionBox}>
-          <TouchableOpacity style={{ alignItems: 'center' }}>
+          <TouchableOpacity style={{ alignItems: 'center' }}
+            onPress={this.props.onPressCancel}>
             <Icon name='cancel' color='#C71585' size={25} />
             <Text style={styles.adressTitle}>Cancel </Text>
           </TouchableOpacity>
@@ -53,7 +55,8 @@ export default class DriverNewOrderTop extends Component {
           </TouchableOpacity>
           <TouchableOpacity style={{ alignItems: 'center' }}
             onPress={() => {
-              Linking.openURL('tel:' + this.state.customerPhone)
+              Linking.openURL('tel:' + this.props.phone_number)
+              console.log(this.props.phone_number)
             }}>
             <Icon name='phone' color='#C71585' size={25} />
             <Text style={styles.adressTitle}>Call</Text>

@@ -18,5 +18,13 @@ export default StyleSheet.create({
     fontSize: 20,
     color: 'red',
     alignSelf: 'center'
+  },
+  phoneInput: {
+    fontSize: width * 0.037,
+    borderBottomWidth: 1,
+    borderColor: '#353535',
+    width: '100%',
+    marginBottom: width * 0.1296,
+    paddingBottom: 10
   }
 })

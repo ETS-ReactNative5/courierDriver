@@ -3,17 +3,19 @@ import {View, TouchableOpacity, Text, KeyboardAvoidingView, Dimensions, Platform
 import {connect} from 'react-redux'
 import MapView, {AnimatedRegion, Marker} from 'react-native-maps'
 import I18n from '../I18n'
-import MyButton from '../Components/MyButton'
 // Add Actions - replace 'Your' with whatever your reducer is called :)
 // import YourActions from '../Redux/YourRedux'
-import NewOrderModal from '../Components/NewOrderModal'
 import io from 'socket.io-client'
+import API from '../Services/Api'
 // Styles
 import styles from './Styles/MapScreenStyle'
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons'
 import {orders} from '../Config/API'
 import OrderAction from '../Redux/OrderRedux'
 import AsyncStorage from '@react-native-community/async-storage'
+import SlidingPanel from 'react-native-sliding-up-down-panels'
+import CourierNewOrderTop from '../Components/CourierNewOrderTop'
+import CourierNewOrderBody from '../Components/CourierNewOrderBody'
 const {width, height} = Dimensions.get('window')
 const ASPECT_RATIO = width / height
 const LATITUDE = 37.78825
@@ -31,8 +33,6 @@ class MapScreen extends Component {
       latitude: 40.3942544,
       longitude: 49.5747749
     },
-    drop_location: '',
-    pickup_location: '',
     coordinate: new AnimatedRegion({
       latitude: LATITUDE,
       longitude: LONGITUDE,
@@ -45,10 +45,20 @@ class MapScreen extends Component {
     longitude: 49.8671,
     orderId: '',
     error: null,
-    scaleAnimationModal: false
+    scaleAnimationModal: false,
+    drop_location: '',
+    pickup_location: '',
+    customer: {
+      first_name: '',
+      last_name: ''
+    },
+    total_distance: 0,
+    total_duration: 0,
+    bill_amount: 0
   }
 
   componentDidMount () {
+    console.disableYellowBox = true
     AsyncStorage.getItem('@token')
       .then((token) => {
         this.token = 'Bearer ' + token
@@ -68,7 +78,6 @@ class MapScreen extends Component {
         })
       })
     // this.watchLocation()
-
 
     navigator.geolocation.getCurrentPosition(
       position => {
@@ -92,81 +101,24 @@ class MapScreen extends Component {
   updateState = result => {
     const orderId = result.order_id
     this.setState({
-      orderId,
-      scaleAnimationModal: true
+      orderId
+      // scaleAnimationModal: true
     })
     console.log(result.order_id, 'soket-result')
     console.log(this.state.orderId, 'state-result')
     this.subscribeToPubNub()
   }
-  getMapRegion = () => ({
-    latitude: this.state.latitude,
-    longitude: this.state.longitude,
-    latitudeDelta: LATITUDE_DELTA,
-    longitudeDelta: LONGITUDE_DELTA
-  });
   onPressCancel = () => {
-    this.setState({scaleAnimationModal: false})
+    let param = {
+      status: 'rejected'
+    }
+    this.putOrder(param)
   }
-  onPressAccept = () => {
-    let body = {
+  onSwipeAccept = () => {
+    let param = {
       status: 'accepted'
     }
-    // this.setState({loading: true})
-    const self = this
-    // const ordersUrl = orders + '67cad33c-236a-4a75-a46e-0bedd35f142f'
-    const ordersUrl = orders + this.state.orderId
-    // console.log(body, login)
-
-
-    console.log(body)
-    fetch(ordersUrl, {
-      body: JSON.stringify(body),
-      method: 'PUT',
-      headers: {
-        'Content-type': 'application/json; charset=UTF-8',
-        'Access-Control-Allow-Origin': '*',
-        'Authorization': this.token
-        // 'X-localization': currentLang
-        //   'Accept': 'application/json',
-        // 'Content-Type': 'application/json'
-      }
-    })
-      .then(json)
-      .then(status)
-      .then(function (data) {
-        console.log('Request succeeded with JSON response', data)
-        console.log(data)
-        self.props.attemptOrder(data)
-        self.setState({scaleAnimationModal: false})
-        self.props.navigation.replace('CourierGoToClientScreen')
-      })
-      .catch(function (error) {
-        console.log(error)
-        console.log('err')
-      })
-
-    function status (response) {
-      console.log(response)
-      console.log('status')
-      console.log('-------')
-      console.log(response.status)
-      console.log('-------')
-      self.setState({loading: false})
-      if (response.id != null) {
-        return Promise.resolve(response)
-      } else {
-        return Promise.reject(response)
-
-        // return Promise.reject(new Error(response.statusText))
-      }
-    }
-
-    function json (response) {
-      console.log(response)
-      console.log('json')
-      return response.json()
-    }
+    this.putOrder(param)
   }
   subscribeToPubNub = () => {
     const self = this
@@ -178,9 +130,6 @@ class MapScreen extends Component {
         'Content-type': 'application/json; charset=UTF-8',
         'Access-Control-Allow-Origin': '*',
         'Authorization': this.token
-          // 'X-localization': currentLang
-          //   'Accept': 'application/json',
-          // 'Content-Type': 'application/json'
       }
     })
         .then(json)
@@ -189,15 +138,23 @@ class MapScreen extends Component {
           console.log('Request succeeded with JSON response', data)
           console.log(data)
           self.props.attemptOrder(data)
-
           self.setState({
-            scaleAnimationModal: true,
+            // scaleAnimationModal: true,
             pickup_location: data.pickup_location,
+            drop_location: data.drop_location,
+            total_distance: data.total_distance,
+            bill_amount: data.bill_amount,
+            total_duration: data.total_duration,
             pickup: {
               latitude: Number(data.drop_lng),
               longitude: Number(data.drop_ltd)
+            },
+            customer: {
+              first_name: data.customer.first_name,
+              last_name: data.customer.last_name
             }
           })
+          console.log(self.state.customer.first_name)
         })
         .catch(function (error) {
           console.log(error)
@@ -226,6 +183,34 @@ class MapScreen extends Component {
       return response.json()
     }
   }
+  putOrder = async (param) => {
+    const orderID = this.state.orderId
+    const token = await AsyncStorage.getItem('@token')
+    this.token = 'Bearer ' + token
+    const api = API.create()
+    let headers = {
+      headers: {
+        'Content-type': 'application/json; charset=UTF-8',
+        'Access-Control-Allow-Origin': '*',
+        'Authorization': this.token
+      }
+    }
+    const order = await api.putOrder(headers, orderID, param)
+    console.log(order)
+    if (order.status == 200) {
+      if (order.data) {
+        this.props.attemptOrder(order.data)
+        this.props.navigation.replace('CourierGoToClientScreen')
+      } else {
+        this.setState({orderId: ''})
+      }
+    } else {
+      this.setState({
+        error: order.data.msg
+
+      })
+    }
+  }
 
   render () {
     return (
@@ -240,7 +225,6 @@ class MapScreen extends Component {
             latitudeDelta: 0.0922,
             longitudeDelta: 0.0922 * ASPECT_RATIO
           }}
-
         >
           {/* <Marker coordinate={this.state}/> */}
         </MapView>
@@ -251,15 +235,22 @@ class MapScreen extends Component {
             <Icon style={styles.nameBoxIcon} size={30} name='menu' />
           </TouchableOpacity>
         </View>
-        <NewOrderModal
-          pickup_location={this.state.pickup_location}
-          coordinate={this.state.pickup}
-          latitude={this.state.latitude}
-          longitude={this.state.longitude}
-          scaleAnimationModal={this.state.scaleAnimationModal}
-          onPressAccept={this.onPressAccept}
-          onPressCancel={this.onPressCancel}
-          navigation={this.props.navigation} />
+        {this.state.orderId !== '' ? <SlidingPanel
+          headerLayoutHeight={200}
+          headerLayout={() => <CourierNewOrderTop pickup_location={this.state.pickup_location}
+            onPressCancel={this.onPressCancel}
+            total_duration={this.state.total_duration}
+            drop_location={this.state.drop_location}
+            phone_number={this.state.phone_number}
+            navigation={this.props.navigation} />}
+          slidingPanelLayout={() => <CourierNewOrderBody navigation={this.props.navigation}
+            first_name={this.state.customer.first_name}
+            bill_amount={this.state.bill_amount}
+            onSwipeAccept={this.onSwipeAccept}
+            total_distance={this.state.total_distance}
+          />}
+        /> : null }
+
       </View>
     )
   }

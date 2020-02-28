@@ -50,7 +50,7 @@ class FirstScreen extends Component {
             onPress={() => this.props.navigation.navigate('LoginScreen')}
             backgroundColor='#7B2BFC'
             borderColor='#7B2BFC'
-            text='Login'
+            text='Daxil Ol'
             borderRadius={30}
             width='50%' />
           <MyButton width='50%'
@@ -59,7 +59,7 @@ class FirstScreen extends Component {
             color='#7B2BFC'
             borderColor='#7B2BFC'
             borderRadius={30}
-            text='Register' />
+            text='Qeydiyyat' />
         </View>
       </ImageBackground>
     )

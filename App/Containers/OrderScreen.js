@@ -1,94 +1,76 @@
 import React, { Component } from 'react'
-import { View, Text } from 'react-native'
+import { View, Text, TouchableOpacity, TextInput, KeyboardAvoidingView, Platform, SafeAreaView, TouchableWithoutFeedback, Keyboard } from 'react-native'
 import { connect } from 'react-redux'
 // Add Actions - replace 'Your' with whatever your reducer is called :)
 // import YourActions from '../Redux/YourRedux'
 
 // Styles
 import styles from './Styles/OrderScreenStyle'
-
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons'
-import Dash from 'react-native-dash'
+import UserAvatar from 'react-native-user-avatar'
 import MyButton from '../Components/MyButton'
-
+import { AirbnbRating, Rating } from 'react-native-ratings'
 class OrderScreen extends Component {
+  onPress = () => {
+    this.props.navigation.navigate('MenuScreen')
+  }
+
   render () {
     return (
-      <View style={styles.container}>
-        <View style={styles.orderFinishedBox}>
-          <View style={styles.orderPriceBox}>
-            <View>
-              <Text style={styles.orderTextContent}>6.8 km</Text>
-              <Text style={styles.orderTextFealds}>MƏSAFƏ</Text>
-            </View>
-            <View>
-              <Text style={styles.orderTextContent}>5.95 AZN</Text>
-              <Text style={styles.orderTextFealds}>GEDİŞ HAQQI</Text>
-            </View>
+      <KeyboardAvoidingView behavior={Platform.OS === 'ios' ? 'padding' : null} style={{ flex: 1 }} >
+        <View style={styles.inner}>
+          <View style={styles.close}>
+            <TouchableOpacity onPress={this.onPress}>
+              <Icon style={styles.closeIcon} size={30} name='window-close' />
+            </TouchableOpacity>
           </View>
-          <View>
-            <Text style={styles.orderRoadTime}>12 dəq 50 san</Text>
+          <View style={styles.price}>
+            <View style={styles.paymetnMethod}>
+              <Icon style={styles.cashIcon} size={30} name='cash' />
+              <Text>Nəğd</Text>
+            </View>
+            <Text> AZN</Text>
           </View>
-        </View>
-        <View style={styles.userLikesContainer}>
-          <View style={styles.adressBox}>
-            <View style={styles.iconBox}>
-              <Icon name="circle-outline" size={21} color="#27093D" />
-              <Dash style={styles.orderDash} />
-              <Icon name="map-marker-outline" size={25} color="#27093D" />
-            </View>
-            <View style={styles.textBox}>
-              <Text style={styles.text}>Füzuli küçəsi 14</Text>
-              <Text style={styles.text}>Dilarə Əliyeva 23A</Text>
-            </View>
-          </View>
-          <View style={styles.infoBox}>
-            <View style={styles.nameBox}>
-              <Text style={styles.nameBoxText}>GEDİŞ HAQQI:</Text>
-            </View>
-            <View>
-              <Text style={styles.infoText}>4.60 AZN</Text>
-            </View>
-          </View>
-          <View style={styles.infoBox}>
-            <View style={styles.nameBox}>
-              <Text style={styles.nameBoxText}>GÖZLƏMƏ:</Text>
-            </View>
-            <View>
-              <Text style={styles.infoText}>1.15 AZN</Text>
-            </View>
-          </View>
-          <View style={styles.infoBox}>
-            <View style={styles.nameBox}>
-              <Text style={styles.nameBoxText}>ENDİRİM:</Text>
-            </View>
-            <View>
-              <Text style={styles.infoText}>0.00 AZN</Text>
-            </View>
-          </View>
-          <View style={styles.infoBox}>
-            <View style={styles.nameBox}>
-              <Text style={styles.infoText}>CƏM:</Text>
-            </View>
-            <View>
-              <Text style={styles.infoText}>5.95 AZN</Text>
+          <View style={styles.ratingBox}>
+            <UserAvatar size='100' name='Avishay Bar' />
+            <Text style={styles.textPrimary}>Gedişiniz necə idi?</Text>
+            <Text style={styles.textHint}>Sizin rəyiniz məxfidir.</Text>
+            <AirbnbRating
+              count={5}
+              reviews={[]}
+              defaultRating={5}
+              size={50}
+              />
+            <View style={styles.textAreaBox}>
+              <Icon style={styles.cashIcon} size={30} name='comment-text-outline' />
+              <TextInput
+                style={styles.textArea}
+                placeholder='Şərh verin'
+                multiline
+                numberOfLines={1}
+                onChangeText={(text) => this.setState({text})}
+              />
             </View>
           </View>
           <View style={styles.btnBox}>
-            <MyButton
-              text="SİFARİŞ TAMAMLANDI"
-              color="#fff"
-              backgroundColor="#451E5D"/>
+            <MyButton onPress={this.onPres}
+              color='#fff'
+              backgroundColor='#7B2BFC'
+              borderColor='#7B2BFC'
+              borderRadius={30}
+              text='OK'
+              />
           </View>
+          <View style={{ flex: 1 }} />
         </View>
-
-      </View>
+      </KeyboardAvoidingView>
     )
   }
 }
 
 const mapStateToProps = (state) => {
   return {
+    order: state.order.payload
   }
 }
 

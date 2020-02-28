@@ -94,7 +94,7 @@ const PrimaryNav = createStackNavigator({
   SupportScreen: {
     screen: SupportScreen,
     navigationOptions: {
-      title: I18n.t('SupportScreen'),
+      title: I18n.t('Dəstək'),
       headerTintColor: '#000',
       headerStyle: {
         backgroundColor: '#fff'
@@ -124,7 +124,7 @@ const PrimaryNav = createStackNavigator({
   AccountScreen: {
     screen: AccountScreen,
     navigationOptions: {
-      title: I18n.t('Profilim'),
+      title: I18n.t('Hesab'),
       headerTintColor: '#000',
       headerStyle: {
         backgroundColor: '#fff'
@@ -140,7 +140,7 @@ const PrimaryNav = createStackNavigator({
   GainScreen: {
     screen: GainScreen,
     navigationOptions: {
-      title: I18n.t('qazanc'),
+      title: I18n.t('Qazanc'),
       headerTintColor: '#000',
       headerStyle: {
         backgroundColor: '#fff'
@@ -159,13 +159,18 @@ const PrimaryNav = createStackNavigator({
   },
   AllOrderScreen: {screen: AllOrderScreen,
     navigationOptions: {
-      title: I18n.t('sifarişler'),
+      title: I18n.t('Sifarişlər'),
       headerTintColor: '#000',
       headerStyle: {
         backgroundColor: '#fff'
       }
     }},
-  OrderScreen: {screen: OrderScreen},
+  OrderScreen: {
+    screen: OrderScreen,
+    navigationOptions: {
+      header: null
+    }
+  },
   RatingsScreen: {screen: RatingsScreen},
   ProfileScreen: {screen: ProfileScreen},
   MapScreen: {screen: MapScreen},
@@ -180,7 +185,7 @@ const PrimaryNav = createStackNavigator({
     }},
   PhoneValidateInputScreen: {screen: PhoneValidateInputScreen,
     navigationOptions: {
-      // title: I18n.t('register'),
+      title: I18n.t('Qeydiyyat'),
       headerTintColor: '#000',
       headerStyle: {
         backgroundColor: '#fff'
@@ -188,7 +193,7 @@ const PrimaryNav = createStackNavigator({
     }},
   LoginScreen: {screen: LoginScreen,
     navigationOptions: {
-      title: I18n.t('login'),
+      title: I18n.t('Daxil ol'),
       headerTintColor: '#000',
       headerStyle: {
         backgroundColor: '#fff'
@@ -216,7 +221,7 @@ const PrimaryNav = createStackNavigator({
 }, {
   // Default config for all screens
 
-  initialRouteName: 'FirstScreen',
+  initialRouteName: 'OrderScreen',
   navigationOptions: {
     headerStyle: styles.header
   }
