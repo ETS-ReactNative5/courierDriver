@@ -51,7 +51,7 @@ class PaymentMethodScreen extends Component {
           </ListItem>
           <NextButton
             onPress={() => this.props.navigation.navigate('AddCrediCardScreen')}
-            text='Add new card'
+            text='Yeni kart əlavə et'
             color='#000'
             iconBackground='#FED427'
             // borderRadius={10}
@@ -64,7 +64,7 @@ class PaymentMethodScreen extends Component {
             backgroundColor='#7B2BFC'
             borderColor='#7B2BFC'
             borderRadius={30}
-            text='Next' />
+            text='Davam et' />
         </View>
       </Container>
     )

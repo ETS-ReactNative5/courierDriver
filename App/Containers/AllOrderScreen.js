@@ -1,43 +1,74 @@
 import React, { Component } from 'react'
 import { Text, View, FlatList } from 'react-native'
 import { connect } from 'react-redux'
-import DATA from '../Fixtures/DATA'
-import MyButton from '../Components/MyButton'
 import Dash from 'react-native-dash'
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons'
-
+import API from '../Services/Api'
 // import I18n from '../I18n'
 // Add Actions - replace 'Your' with whatever your reducer is called :)
 // import YourActions from '../Redux/YourRedux'
 
 // Styles
 import styles from './Styles/AllOrderScreenStyle'
-
-// const orders = require('../Fixtures/orders.json')
+import AsyncStorage from '@react-native-community/async-storage'
 
 class AllOrderScreen extends Component {
+  constructor (props) {
+    super(props)
+    this.state = {
+      data: [],
+      error: null
+    }
+    this.getOrderHistory()
+  }
+
+  getOrderHistory = async () => {
+    const token = await AsyncStorage.getItem('@token')
+    this.token = 'Bearer ' + token
+    const api = API.create()
+    let headers = {
+      headers: {
+        'Content-type': 'application/json; charset=UTF-8',
+        'Access-Control-Allow-Origin': '*',
+        'Authorization': this.token
+      }
+    }
+    const orderHistory = await api.getOrderHistory(headers)
+
+    if (orderHistory.status == 200) {
+      this.setState({
+        data: orderHistory.data.data
+      })
+    } else {
+      console.log(orderHistory)
+      this.setState({
+        error: orderHistory.data.msg
+      })
+    }
+  }
   renderOrdersItem = ({item}) => {
+    item.created = new Date(item.created)
     return (
       <View style={styles.orderContainer}>
         <View style={styles.orderBox}>
           <Icon name='chevron-right' size={30} color='#451E5D' />
-          {/* <Image style={styles.orderImg} source={item.picture} /> */}
-          <Text style={styles.orderText}>{item.type} | {item.date} </Text>
+          {/* <Image style={styles.orderImg} source={item.picture}/> */}
+          <Text style={styles.orderText}>Piyada | {item.created.toLocaleDateString()} </Text>
         </View>
         <View style={styles.orderBox}>
           <View>
             <View style={styles.orderAdressBox}>
               <Icon style={{paddingLeft: 3}} name='circle-outline' size={16} color='#606060' />
-              <Text style={styles.orderAdress}>{item.startPlace}</Text>
+              <Text style={styles.orderAdress}>{item.pickup_location}</Text>
             </View>
             <Dash style={styles.orderDash} />
             <View style={styles.orderAdressBox}>
               <Icon name='map-marker-outline' size={21} color='#606060' />
-              <Text style={styles.orderAdress}>{item.endPlace}</Text>
+              <Text style={styles.orderAdress}>{item.drop_location}</Text>
             </View>
           </View>
           <View style={styles.orderPriceBox}>
-            <Text style={styles.orderPrice}>{item.price} </Text>
+            <Text style={styles.orderPrice}>{item.bill_amount} AZN</Text>
           </View>
         </View>
       </View>
@@ -51,20 +82,18 @@ class AllOrderScreen extends Component {
           <FlatList
             renderItem={this.renderOrdersItem}
             keyExtractor={(item) => item.id}
-            data={DATA} />
+            data={this.state.data} />
         </View>
-        <View style={{ flex: 1 }}>
-          <MyButton
-            text='TƏQVİMDƏN SEÇ'
-            color='#fff'
-            backgroundColor='#7b2bfc'
-            borderColor='#7b2bfc' />
-        </View>
+        {/* <View style={{flex: 1 }}> */}
+        {/*  <MyButton */}
+        {/*    text="TƏQVİMDƏN SEÇ" */}
+        {/*    color="#fff" */}
+        {/*    backgroundColor="#451E5D" /> */}
+        {/* </View> */}
       </View>
     )
   }
 }
-
 const mapStateToProps = (state) => {
   return {
   }

@@ -1,5 +1,12 @@
 import React, {Component} from 'react'
-import {View, Dimensions, KeyboardAvoidingView, Button, Platform} from 'react-native'
+import {
+  View,
+  Dimensions,
+  Platform,
+  TouchableOpacity,
+  Linking,
+  Image
+} from 'react-native'
 import {connect} from 'react-redux'
 // Add Actions - replace 'Your' with whatever your reducer is called :)
 // import YourActions from '../Redux/YourRedux'
@@ -35,7 +42,10 @@ class CourierGoToAdressScreen extends Component {
       drop_location: '',
       pickup_location: '',
       orderId: '',
-      phone_number: null,
+      total_duration: null,
+      // order_notifications: '',
+      // location_tracking: '',
+
       driverCoordinate: {
         latitude: 40.409264,
         longitude: 49.867092
@@ -113,6 +123,15 @@ class CourierGoToAdressScreen extends Component {
     await navigator.geolocation.getCurrentPosition(
       position => {
         this.setState({
+          pickup_location: this.props.order.pickup_location,
+          drop_location: this.props.order.drop_location,
+          bill_amount: this.props.order.bill_amount,
+          total_distance: this.props.order.total_distance,
+          total_duration: this.props.order.total_duration,
+          phone_number: this.props.order.customer.phone_number,
+          customerName: this.props.order.customer.first_name,
+          orderId: this.props.order.id,
+
           region: {
             latitude: position.coords.latitude,
             longitude: position.coords.longitude,
@@ -310,18 +329,24 @@ class CourierGoToAdressScreen extends Component {
           <SlidingPanel
             // onDrag={this.ondraq}
             headerLayoutHeight={280}
-            headerLayout={() => <DriverNewOrderTop
-              pickup_location={this.state.pickup_location}
+            headerLayout={() => <DriverNewOrderTop pickup_location={this.state.pickup_location}
+              total_duration={this.state.total_duration}
               drop_location={this.state.drop_location}
-               />}
-            slidingPanelLayout={() => <DriverNewOrderBody
-              navigation={this.props.navigation}
-              onSwipeDone={this.onSwipeDone}
+              phone_number={this.state.phone_number}
+              navigation={this.props.navigation} />}
+            slidingPanelLayout={() => <DriverNewOrderBody navigation={this.props.navigation}
               customerName={this.state.customerName}
               bill_amount={this.state.bill_amount}
+              onSwipeDone={this.onSwipeDone}
               total_distance={this.state.total_distance}
             />}
           />
+        </View>
+        <View style={styles.waze}>
+          <TouchableOpacity
+            onPress={() => Linking.openURL('https://waze.com/ul?ll=' + this.props.order.drop_ltd + ',' + this.props.order.drop_lng + '&navigate=yes')}>
+            <Image source={Images.waze} />
+          </TouchableOpacity>
         </View>
       </View>
     )

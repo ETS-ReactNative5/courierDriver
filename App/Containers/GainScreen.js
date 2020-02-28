@@ -24,7 +24,7 @@ class GainScreen extends Component {
           <Text style={styles.gainHint}>57 rides in 21 hr 18 min</Text>
           <View style={styles.btnBox}>
             <MyButton
-              onPress={() => this.props.navigation.navigate('AddCrediCardScreen')}
+              onPress={() => this.props.navigation.navigate('BalansScreen')}
               text='BALANSI ARTIR'
               color='#fff'
               borderColor='#7B2BFC'

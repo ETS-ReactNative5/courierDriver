@@ -23,7 +23,7 @@ class BalansScreen extends Component {
         <KeyboardAvoidingView behavior='position'>
           <NextButton
             onPress={() => this.props.navigation.navigate('PaymentMethodScreen')}
-            text='Bank karti'
+            text='Bank kartı ile'
             color='#000'
             iconBackground='#FED427'
             // borderRadius={10}

@@ -23,6 +23,7 @@ const images = {
   closeButton: require('../Images/Icons/close-button.png'),
   marker: require('../Images/marker.png'),
   profilImg: require('../Images/user-default-img.png'),
+  waze: require('../Images/wazd.png'),
 }
 
 export default images

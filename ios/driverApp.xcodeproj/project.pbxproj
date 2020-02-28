@@ -49,6 +49,7 @@
 		50BFAB06B243843A05488870 /* libPods-driverApp.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 06A063AF7EF65069B0CEEF90 /* libPods-driverApp.a */; };
 		5E8278660B2645A8B689121D /* MaterialIcons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 73A7D6D4F3924AACA865D4D5 /* MaterialIcons.ttf */; };
 		5F469E9D8E9C41B6A6C4AD31 /* FontAwesome5_Brands.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 1284F7EB22B54B37B6D48F5F /* FontAwesome5_Brands.ttf */; };
+		6318A1D823FC23F2005E3294 /* libRNCAsyncStorage.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6318A1D723FC23F2005E3294 /* libRNCAsyncStorage.a */; };
 		6385BCE423B8A3C700769E06 /* libreact-native-config.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6385BCE323B8A3C700769E06 /* libreact-native-config.a */; };
 		74C6681134F642A1953052FF /* FontAwesome.ttf in Resources */ = {isa = PBXBuildFile; fileRef = C750F284E3C146E2B08ACF06 /* FontAwesome.ttf */; };
 		757A0D739F40468597E5D741 /* AntDesign.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 6A8A44B7F26943508F18EF63 /* AntDesign.ttf */; };
@@ -292,6 +293,13 @@
 			remoteGlobalIDString = 2D2A28201D9B03D100D4039D;
 			remoteInfo = "RCTAnimation-tvOS";
 		};
+		639A968123FBEF5D00A06BD0 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 639A965623FBEF5D00A06BD0 /* RNCAsyncStorage.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 134814201AA4EA6300B7C361;
+			remoteInfo = RNCAsyncStorage;
+		};
 		63EAB2BA239C515500CC2746 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 146833FF1AC3E56700842450 /* React.xcodeproj */;
@@ -435,8 +443,10 @@
 		568AAC14DA34408A9A6D48AF /* RNVectorIcons.xcodeproj */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "wrapper.pb-project"; name = RNVectorIcons.xcodeproj; path = "../node_modules/react-native-vector-icons/RNVectorIcons.xcodeproj"; sourceTree = "<group>"; };
 		5E91572D1DD0AC6500FF2AA8 /* RCTAnimation.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTAnimation.xcodeproj; path = "../node_modules/react-native/Libraries/NativeAnimation/RCTAnimation.xcodeproj"; sourceTree = "<group>"; };
 		60BB8D3090CE4C719A9BE89B /* FontAwesome5_Solid.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = FontAwesome5_Solid.ttf; path = "../node_modules/react-native-vector-icons/Fonts/FontAwesome5_Solid.ttf"; sourceTree = "<group>"; };
+		6318A1D723FC23F2005E3294 /* libRNCAsyncStorage.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = libRNCAsyncStorage.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		6385BCE323B8A3C700769E06 /* libreact-native-config.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = "libreact-native-config.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		6385BD1323B8B44E00769E06 /* Config.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Config.xcconfig; sourceTree = "<group>"; };
+		639A965623FBEF5D00A06BD0 /* RNCAsyncStorage.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RNCAsyncStorage.xcodeproj; path = "../node_modules/@react-native-community/async-storage/ios/RNCAsyncStorage.xcodeproj"; sourceTree = "<group>"; };
 		6A8A44B7F26943508F18EF63 /* AntDesign.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = AntDesign.ttf; path = "../node_modules/react-native-vector-icons/Fonts/AntDesign.ttf"; sourceTree = "<group>"; };
 		73A7D6D4F3924AACA865D4D5 /* MaterialIcons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = MaterialIcons.ttf; path = "../node_modules/react-native-vector-icons/Fonts/MaterialIcons.ttf"; sourceTree = "<group>"; };
 		78C398B01ACF4ADC00677621 /* RCTLinking.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTLinking.xcodeproj; path = "../node_modules/react-native/Libraries/LinkingIOS/RCTLinking.xcodeproj"; sourceTree = "<group>"; };
@@ -475,6 +485,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6318A1D823FC23F2005E3294 /* libRNCAsyncStorage.a in Frameworks */,
 				6385BCE423B8A3C700769E06 /* libreact-native-config.a in Frameworks */,
 				ED297163215061F000B7C4FE /* JavaScriptCore.framework in Frameworks */,
 				ADBDB9381DFEBF1600ED6528 /* libRCTBlob.a in Frameworks */,
@@ -647,6 +658,7 @@
 		2D16E6871FA4F8E400B85C8A /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				6318A1D723FC23F2005E3294 /* libRNCAsyncStorage.a */,
 				6385BCE323B8A3C700769E06 /* libreact-native-config.a */,
 				ED297162215061F000B7C4FE /* JavaScriptCore.framework */,
 				ED2971642150620600B7C4FE /* JavaScriptCore.framework */,
@@ -661,6 +673,14 @@
 			children = (
 				5E9157331DD0AC6500FF2AA8 /* libRCTAnimation.a */,
 				5E9157351DD0AC6500FF2AA8 /* libRCTAnimation.a */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		639A965723FBEF5D00A06BD0 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				639A968223FBEF5D00A06BD0 /* libRNCAsyncStorage.a */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -737,6 +757,7 @@
 		832341AE1AAA6A7D00B99B32 /* Libraries */ = {
 			isa = PBXGroup;
 			children = (
+				639A965623FBEF5D00A06BD0 /* RNCAsyncStorage.xcodeproj */,
 				5E91572D1DD0AC6500FF2AA8 /* RCTAnimation.xcodeproj */,
 				146833FF1AC3E56700842450 /* React.xcodeproj */,
 				00C302A71ABCB8CE00DB3ED1 /* RCTActionSheet.xcodeproj */,
@@ -989,6 +1010,10 @@
 					ProjectRef = 146833FF1AC3E56700842450 /* React.xcodeproj */;
 				},
 				{
+					ProductGroup = 639A965723FBEF5D00A06BD0 /* Products */;
+					ProjectRef = 639A965623FBEF5D00A06BD0 /* RNCAsyncStorage.xcodeproj */;
+				},
+				{
 					ProductGroup = 63EAB2C2239C515500CC2746 /* Products */;
 					ProjectRef = D5C4C9F9EFBA41B7ADB14ED6 /* RNDeviceInfo.xcodeproj */;
 				},
@@ -1224,6 +1249,13 @@
 			fileType = archive.ar;
 			path = libRCTAnimation.a;
 			remoteRef = 5E9157341DD0AC6500FF2AA8 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		639A968223FBEF5D00A06BD0 /* libRNCAsyncStorage.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libRNCAsyncStorage.a;
+			remoteRef = 639A968123FBEF5D00A06BD0 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
 		63EAB2BB239C515500CC2746 /* libjsi.a */ = {

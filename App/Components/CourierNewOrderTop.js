@@ -1,10 +1,10 @@
 import React, { Component } from 'react'
 // import PropTypes from 'prop-types';
-import { View, Text, TouchableOpacity, Linking } from 'react-native'
-import styles from './Styles/DriverNewOrderTopStyle'
+import { View, Text, TouchableOpacity } from 'react-native'
+import styles from './Styles/CourierNewOrderTopStyle'
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons'
 import Dash from 'react-native-dash'
-export default class DriverNewOrderTop extends Component {
+export default class CourierNewOrderTop extends Component {
   // // Prop type warnings
   // static propTypes = {
   //   someProperty: PropTypes.object,
@@ -22,7 +22,7 @@ export default class DriverNewOrderTop extends Component {
       <View style={styles.container}>
         <View style={styles.minusBox}>
           <Icon style={styles.minusIcon} name='color-helper' color='#ddd' size={30} />
-          <Text style={styles.minusText}>Kuryer {total_duration} dəqiqə ərzində çatacaq.
+          <Text style={styles.minusText}>{total_duration} dəqiqə uzaqliqda.
           </Text>
         </View>
         <View style={styles.adressContainer}>
@@ -41,23 +41,11 @@ export default class DriverNewOrderTop extends Component {
               <Text style={styles.adressText}>{drop_location}</Text>
             </View>
           </View>
-        </View>
-        <View style={styles.actionBox}>
-          <TouchableOpacity style={{ alignItems: 'center' }}>
-            <Icon name='cancel' color='#C71585' size={25} />
-            <Text style={styles.adressTitle}>Cancel </Text>
-          </TouchableOpacity>
-          <TouchableOpacity style={{ alignItems: 'center' }}>
-            <Icon name='message-text-outline' color='#C71585' size={25} />
-            <Text style={styles.adressTitle}>Message</Text>
-          </TouchableOpacity>
-          <TouchableOpacity style={{ alignItems: 'center' }}
-            onPress={() => {
-              Linking.openURL('tel:' + this.state.customerPhone)
-            }}>
-            <Icon name='phone' color='#C71585' size={25} />
-            <Text style={styles.adressTitle}>Call</Text>
-          </TouchableOpacity>
+          <View style={styles.cancel}>
+            <TouchableOpacity onPress={this.props.onPressCancel}>
+              <Icon style={styles.nameBoxIcon} size={40} name='window-close' />
+            </TouchableOpacity>
+          </View>
         </View>
       </View>
     )

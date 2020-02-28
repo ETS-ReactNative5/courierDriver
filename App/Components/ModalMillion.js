@@ -39,7 +39,7 @@ export default class ModalMillion extends Component {
               swipeableModal: true
             })
           }}
-          text='Million'
+          text='Milliön ile'
           color='#000'
           iconBackground='#FED427'
           // borderRadius={10}
@@ -62,9 +62,7 @@ export default class ModalMillion extends Component {
           swipeDirection={['down', 'up']}
           modalAnimation={new SlideAnimation({ slideFrom: 'bottom' })}
           modalTitle={
-            <ModalTitle
-              title='Million'
-            />
+            <ModalTitle title='Milliön' />
           }
           footer={
             <ModalFooter style={{ backgroundColor: '#fff', padding: 10, width: '100%' }}>

@@ -98,7 +98,9 @@ class PhoneValidateInputScreen extends Component {
             console.log(data.id)
             self.props.attemptRegister(number, verification_id)
             console.log(number)
-            if (data.status === 'approved') { self.props.navigation.navigate('RegisterScreen') } else if (data.status === 'pending') {
+            if (data.status === 'approved') {
+              self.props.navigation.navigate('RegisterScreen')
+            } else if (data.status === 'pending') {
               console.log('PhoneValidateScreen')
               self.props.navigation.navigate('PhoneValidateScreen')
             }
@@ -124,7 +126,7 @@ class PhoneValidateInputScreen extends Component {
         backgroundColor='#7B2BFC'
         borderColor='#7B2BFC'
         borderRadius={30}
-        text={I18n.t('next')}
+        text={I18n.t('Irəli')}
       />
     }
     return <Spiner size='small' />
@@ -141,7 +143,7 @@ class PhoneValidateInputScreen extends Component {
               fontSize: width * 0.05,
               color: '#7B2BFC',
               marginBottom: width * 0.2
-            }}>Enter your phone number</Text>
+            }}>Mobil nömrənizi daxil edin</Text>
             <PhoneInput
               onChangePhoneNumber={this.onPhoneNumberChange}
               initialCountry='az'
@@ -150,7 +152,8 @@ class PhoneValidateInputScreen extends Component {
                 borderBottomWidth: 1,
                 borderColor: '#353535',
                 width: '100%',
-                marginBottom: width * 0.1
+                marginBottom: width * 0.1,
+                paddingBottom: 10
               }} ref={ref => {
                 this.phone = ref
               }} />
