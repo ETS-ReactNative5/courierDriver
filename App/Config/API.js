@@ -1,4 +1,5 @@
-export const mainUrl = 'http://api.delhero.com/'
+export const mainUrl = 'https://www.delhero.com/'
+// export const mainUrl = 'https://0f097aa3.ngrok.io/'
 export const driverRegistration = mainUrl + 'driver/api/drivers'
 export const driverLogin = mainUrl + 'driver/api/drivers/token'
 export const orders = mainUrl + 'driver/api/orders/'

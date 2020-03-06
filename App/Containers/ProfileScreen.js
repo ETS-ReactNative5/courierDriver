@@ -78,7 +78,7 @@ class ProfileScreen extends Component {
   //     .catch((error) => console.log(error))
   // }
   render () {
-    console.log(this.props.navigation)
+    // console.log(this.props.navigation)
     return (
       <View style={styles.profile}>
         <View style={styles.profileHeader}>

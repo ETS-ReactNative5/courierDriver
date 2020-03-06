@@ -39,7 +39,7 @@ export default StyleSheet.create({
     paddingHorizontal: 35,
     paddingVertical: 10,
     flexDirection: 'row',
-    justifyContent: 'space-between',
+    justifyContent: 'space-between'
 
   },
   receiverFields: {
@@ -49,7 +49,7 @@ export default StyleSheet.create({
     paddingBottom: 5,
     alignItems: 'center',
     borderBottomWidth: 1,
-    borderColor: '#D3D3D3',
+    borderColor: '#D3D3D3'
   },
   minusIcon: {
     marginTop: -15
@@ -58,5 +58,12 @@ export default StyleSheet.create({
     paddingVertical: 5,
     fontSize: 18,
     fontWeight: 'bold'
+  },
+  iconBox: {
+    alignItems: 'center',
+    padding: 10,
+    borderWidth: 1,
+    borderRadius: 60,
+    borderColor: '#00000055'
   }
 })

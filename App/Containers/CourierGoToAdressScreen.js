@@ -42,6 +42,7 @@ class CourierGoToAdressScreen extends Component {
       drop_location: '',
       pickup_location: '',
       orderId: '',
+      photos: [],
       total_duration: null,
       // order_notifications: '',
       // location_tracking: '',
@@ -83,6 +84,10 @@ class CourierGoToAdressScreen extends Component {
       phone_number: this.props.order.customer.phone_number,
       customerName: this.props.order.customer.first_name,
       orderId: this.props.order.id,
+      message: this.props.order.message,
+      photos: this.props.order.files,
+      receiverName: this.props.order.receiver_name,
+      receiverPhone: this.props.order.receiver_phone,
       coordinates: [
         {
           latitude: Number(this.props.order.pickup_ltd),
@@ -97,26 +102,6 @@ class CourierGoToAdressScreen extends Component {
 
     console.log(this.state)
     console.log(this.props)
-
-    // this.setState({
-    //
-    //
-    //   first_name: this.props.order.custemer.first_name,
-    //
-    //
-    //   phone_number: this.props.order.customer.phone_number,
-    //   orderId: this.props.order.id,
-    //   coordinates: [
-    //     {
-    //       latitude: Number(this.props.order.pickup_ltd),
-    //       longitude: Number(this.props.order.pickup_lng)
-    //     },
-    //     {
-    //       latitude: Number(this.props.order.drop_ltd),
-    //       longitude: Number(this.props.order.drop_lng)
-    //     }
-    //   ],
-    // });
     console.log('------')
     console.log(this.state)
     console.log('------')
@@ -130,8 +115,7 @@ class CourierGoToAdressScreen extends Component {
           total_duration: this.props.order.total_duration,
           phone_number: this.props.order.customer.phone_number,
           customerName: this.props.order.customer.first_name,
-          orderId: this.props.order.id,
-
+          // orderId: this.props.order.id,
           region: {
             latitude: position.coords.latitude,
             longitude: position.coords.longitude,
@@ -339,6 +323,10 @@ class CourierGoToAdressScreen extends Component {
               bill_amount={this.state.bill_amount}
               onSwipeDone={this.onSwipeDone}
               total_distance={this.state.total_distance}
+              message={this.state.message}
+              photos={this.state.photos}
+              receiverName={this.state.receiverName}
+              receiverPhone={this.state.receiverPhone}
             />}
           />
         </View>

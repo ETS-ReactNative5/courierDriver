@@ -221,7 +221,7 @@ const PrimaryNav = createStackNavigator({
 }, {
   // Default config for all screens
 
-  initialRouteName: 'OrderScreen',
+  initialRouteName: 'FirstScreen',
   navigationOptions: {
     headerStyle: styles.header
   }

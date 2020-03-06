@@ -2,7 +2,7 @@
 import apisauce from 'apisauce'
 
 // our "constructor"
-const create = (baseURL = 'http://api.delhero.com/') => {
+const create = (baseURL = 'https://www.delhero.com/') => {
   // ------
   // STEP 1
   // ------
@@ -37,8 +37,10 @@ const create = (baseURL = 'http://api.delhero.com/') => {
   const getOrderHistory = (header) => api.get('driver/api/orders', {}, header)
   const getProfileData = (header) => api.get('driver/api/drivers', {}, header)
   const putOrder = (header, orderID, param) => api.put('driver/api/orders/' + orderID, JSON.stringify(param), header)
-  // const getRate = () => api.get('rate_limit')
-  // const getUser = (username) => api.get('search/users', {q: username})
+  const getRoot = () => api.get('')
+  const getRate = () => api.get('rate_limit')
+  const getUser = (username) => api.get('search/users', {q: username})
+  const postRating = (param) => api.post('driver/api/ratings', JSON.stringify(param))
 
   // ------
   // STEP 3
@@ -56,7 +58,11 @@ const create = (baseURL = 'http://api.delhero.com/') => {
     // a list of the API functions from step 2
     getOrderHistory,
     getProfileData,
-    putOrder
+    putOrder,
+    getRoot,
+    getRate,
+    getUser,
+    postRating
   }
 }
 

@@ -29,7 +29,7 @@ export default class CourierNewOrderBody extends Component {
           <View style={styles.profileHeader}>
             <View style={styles.profileHeaderBody}>
               <Text style={styles.profileHeaderBodyText}>{this.props.first_name}</Text>
-              {/*<Text style={styles.profileHeaderBodyTextY}>Kia optima  10-TE-010</Text>*/}
+              {/* <Text style={styles.profileHeaderBodyTextY}>Kia optima  10-TE-010</Text> */}
             </View>
             <View style={styles.profileHeaderLeft}>
               <Image style={styles.newsImage} source={Images.profilImg} />
@@ -52,55 +52,37 @@ export default class CourierNewOrderBody extends Component {
               <Text style={styles.sectionTitle}>{this.props.total_distance} KM</Text>
             </View>
           </View>
-          <View style={styles.cashBox}>
-            <View>
-              <Text style={styles.sectionTitle}>Catdirilma</Text>
-            </View>
-            <View>
-              <Text style={styles.sectionTitle}>10/10/2019</Text>
-              <Text style={styles.sectionTitle}>14:00</Text>
-            </View>
-          </View>
+          {/* <View style={styles.cashBox}> */}
+          {/*  <View> */}
+          {/*    <Text style={styles.sectionTitle}>Catdirilma</Text> */}
+          {/*  </View> */}
+          {/*  <View> */}
+          {/*    <Text style={styles.sectionTitle}>10/10/2019</Text> */}
+          {/*    <Text style={styles.sectionTitle}>14:00</Text> */}
+          {/*  </View> */}
+          {/* </View> */}
           <View style={styles.sectionTitleBox}><Text style={styles.sectionTitle}>Daşınacaq Yükün fotosu</Text></View>
           <View style={styles.imgScroll}>
             <ScrollView horizontal>
-              <ZoomImage
-                source={{uri: 'https://ooo.0o0.ooo/2017/03/31/58de0e9b287f6.jpg'}}
-                imgStyle={{width: 110, height: 110, borderRadius: 15}}
-                style={styles.img}
-                duration={200}
-                enableScaling={false}
-                easingFunc={Easing.ease}
-              />
-              <ZoomImage
-                source={{uri: 'https://ooo.0o0.ooo/2017/03/31/58de0e9b287f6.jpg'}}
-                imgStyle={{width: 110, height: 110, borderRadius: 15}}
-                style={styles.img}
-                duration={200}
-                enableScaling={false}
-                easingFunc={Easing.ease}
-              />
-              <ZoomImage
-                source={{uri: 'https://ooo.0o0.ooo/2017/03/31/58de0e9b287f6.jpg'}}
-                imgStyle={{width: 110, height: 110, borderRadius: 15}}
-                style={styles.img}
-                duration={200}
-                enableScaling={false}
-                easingFunc={Easing.ease}
-              />
-              <ZoomImage
-                source={{uri: 'https://ooo.0o0.ooo/2017/03/31/58de0e9b287f6.jpg'}}
-                imgStyle={{width: 110, height: 110, borderRadius: 15}}
-                style={styles.img}
-                duration={200}
-                enableScaling={false}
-                easingFunc={Easing.ease}
-              />
+              {
+                this.props.photos.map((item, key) =>
+                  (
+                    <ZoomImage
+                      key={key}
+                      source={{uri: item.url}}
+                      imgStyle={{width: 110, height: 110, borderRadius: 15}}
+                      style={styles.img}
+                      duration={200}
+                      enableScaling={false}
+                      easingFunc={Easing.ease}
+                      />
+                  ))
+              }
             </ScrollView>
           </View>
           <View style={styles.sectionTitleBox}><Text style={styles.sectionTitle}>Qeydlər</Text></View>
-          <View style={styles.orderDescriptionBox}><Text style={styles.orderDescription}>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Alias architecto corporis cupiditate deserunt distinctio ea et explicabo harum id, laborum laudantium natus nostrum qui quo quod unde velit voluptate. Fugiat.</Text></View>
-          <View style={styles.receiverInfoBox}/>
+          <View style={styles.orderDescriptionBox}><Text style={styles.orderDescription}>{this.props.message}</Text></View>
+          <View style={styles.receiverInfoBox} />
         </ScrollView>
         <View style={styles.swipeBox}>
           <SwipeButton

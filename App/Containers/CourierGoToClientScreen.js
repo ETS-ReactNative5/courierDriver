@@ -32,6 +32,7 @@ class CourierGoToClientScreen extends Component {
       pickup_location: '',
       orderId: '',
       phone_number: null,
+      photos: [],
       driverCoordinate: {
         latitude: 40.409264,
         longitude: 49.867092
@@ -54,7 +55,7 @@ class CourierGoToClientScreen extends Component {
       },
       startLocation: 'Götürüləcək ünvan',
       endLocation: 'Azadliq Prospekti 74',
-      driverStatus: 'arrived',
+      driverStatus: 'accepted',
       customerPhone: '',
       customer: {
         first_name: '',
@@ -112,6 +113,8 @@ class CourierGoToClientScreen extends Component {
           bill_amount: this.props.order.bill_amount,
           total_duration: this.props.order.total_duration,
           orderId: this.props.order.id,
+          photos: this.props.order.files,
+          message: this.props.order.message,
           customer: {
             first_name: this.props.order.customer.first_name,
             last_name: this.props.order.customer.last_name
@@ -203,7 +206,13 @@ class CourierGoToClientScreen extends Component {
 
     this.putOrder(param)
   }
-  onSwipeAccept = () => {
+  onSwipeArrived = () => {
+    let param = {
+      status: 'arrived'
+    }
+    this.putOrder(param)
+  }
+  onSwipeOngoing = () => {
     let param = {
       status: 'ongoing'
     }
@@ -222,22 +231,35 @@ class CourierGoToClientScreen extends Component {
         'Authorization': this.token
       }
     }
-    const order = await api.putOrder(headers, orderID, param)
-    console.log(order)
-    if (order.status == 200) {
-      if (order.data) {
-        this.props.attemptOrder(order.data)
-        this.props.navigation.replace('CourierGoToAdressScreen')
-      } else {
-        this.setState({orderId: ''})
+    const order = await api.putOrder(headers, orderID, param).then((order) => {
+      if (param.status === 'rejected') {
         this.props.navigation.replace('MenuScreen')
+        console.log(order.status)
       }
-    } else {
-      this.setState({
-        error: order.data.msg
+      if (order.status === 200) {
+        if (order.data.status === 'arrived') {
+          this.props.attemptOrder(order.data)
+          console.log(order.data.status)
+          this.setState({
+            driverStatus: order.data.status
+          })
+        } else if (order.data.status === 'ongoing') {
+          this.props.attemptOrder(order.data)
+          console.log(order.data.status)
+          this.props.navigation.replace('CourierGoToAdressScreen')
+        } else {
+          // this.setState({orderId: ''})
+          this.props.navigation.replace('MenuScreen')
+          console.log(order.data.status)
+        }
+      } else {
+        this.setState({
+          error: order.data.msg
 
-      })
-    }
+        })
+      }
+    })
+    console.log(order)
   }
 
   render () {
@@ -292,7 +314,6 @@ class CourierGoToClientScreen extends Component {
             />
           )}
         </MapView>
-
         <View>
           <SlidingPanel
             // onDrag={this.ondraq}
@@ -306,8 +327,12 @@ class CourierGoToClientScreen extends Component {
             slidingPanelLayout={() => <CourierOrderBody navigation={this.props.navigation}
               customerName={this.state.customer.first_name}
               bill_amount={this.state.bill_amount}
-              onSwipeDone={this.onSwipeAccept}
+              onSwipeDone={this.onSwipeArrived}
+              onSwipeOngoing={this.onSwipeOngoing}
+              driverStatus={this.state.driverStatus}
               total_distance={this.state.total_distance}
+              photos={this.state.photos}
+              message={this.state.message}
             />}
           />
         </View>

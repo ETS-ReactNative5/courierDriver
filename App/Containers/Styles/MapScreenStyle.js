@@ -33,4 +33,9 @@ export default StyleSheet.create({
     shadowRadius: 3.84,
     elevation: 5,
   },
+  switchBox: {
+    position: 'absolute',
+    top: '8%',
+    right: '10%'
+  },
 })

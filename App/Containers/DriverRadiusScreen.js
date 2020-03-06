@@ -21,8 +21,6 @@ const {width, height} = Dimensions.get('window')
 const ASPECT_RATIO = width / height
 class DriverRadiusScreen extends Component {
   state = {
-    isOnDefaultToggleSwitch: false,
-
     region: {
       latitude: 40.4050531,
       longitude: 49.8346519,
@@ -159,18 +157,6 @@ class DriverRadiusScreen extends Component {
           {/*  <AnimatedMarker />*/}
           {/*</Marker>*/}
         </MapView>
-        {/*<View style={styles.switchBox}>*/}
-        {/*  <ToggleSwitch*/}
-        {/*    size='large'*/}
-        {/*    onColor='#7B2BFC'*/}
-        {/*    offColor='#ecf0f1'*/}
-        {/*    isOn={this.state.isOnDefaultToggleSwitch}*/}
-        {/*    onToggle={isOnDefaultToggleSwitch => {*/}
-        {/*      this.setState({ isOnDefaultToggleSwitch })*/}
-        {/*      this.onToggle(isOnDefaultToggleSwitch)*/}
-        {/*    }}*/}
-        {/*  />*/}
-        {/*</View>*/}
         <View style={styles.infoBox}>
           <Text style={styles.infoText}>Sifariş qəbul etmək istədiyiniz radiusu seçin</Text>
         </View>

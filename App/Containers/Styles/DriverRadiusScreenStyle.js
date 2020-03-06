@@ -9,11 +9,6 @@ export default StyleSheet.create({
   map: {
     flex: 1,
   },
-  switchBox: {
-    position: 'absolute',
-    top: '10%',
-    right: '10%'
-  },
   countBox: {
     position: 'absolute',
     bottom: '20%',

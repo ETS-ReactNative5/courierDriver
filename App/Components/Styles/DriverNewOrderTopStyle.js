@@ -58,5 +58,12 @@ export default StyleSheet.create({
     paddingVertical: 5,
     fontSize: 18,
     fontWeight: 'bold'
+  },
+  iconBox: {
+    alignItems: 'center',
+    padding: 10,
+    borderWidth: 1,
+    borderRadius: 60,
+    borderColor: '#00000055'
   }
 })

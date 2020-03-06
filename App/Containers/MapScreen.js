@@ -16,6 +16,7 @@ import AsyncStorage from '@react-native-community/async-storage'
 import SlidingPanel from 'react-native-sliding-up-down-panels'
 import CourierNewOrderTop from '../Components/CourierNewOrderTop'
 import CourierNewOrderBody from '../Components/CourierNewOrderBody'
+import ToggleSwitch from 'toggle-switch-react-native'
 const {width, height} = Dimensions.get('window')
 const ASPECT_RATIO = width / height
 const LATITUDE = 37.78825
@@ -25,6 +26,7 @@ const LONGITUDE_DELTA = LATITUDE_DELTA * ASPECT_RATIO
 
 class MapScreen extends Component {
   state = {
+    isOnDefaultToggleSwitch: true,
     pickup: {
       latitude: 40.3942544,
       longitude: 49.5747749
@@ -54,9 +56,13 @@ class MapScreen extends Component {
     },
     total_distance: 0,
     total_duration: 0,
-    bill_amount: 0
+    bill_amount: 0,
+    photos: []
   }
 
+  onToggle (isOn) {
+    console.log('Changed to ' + isOn)
+  }
   componentDidMount () {
     console.disableYellowBox = true
     AsyncStorage.getItem('@token')
@@ -145,6 +151,8 @@ class MapScreen extends Component {
             total_distance: data.total_distance,
             bill_amount: data.bill_amount,
             total_duration: data.total_duration,
+            photos: data.files,
+            message: data.message,
             pickup: {
               latitude: Number(data.drop_lng),
               longitude: Number(data.drop_ltd)
@@ -154,7 +162,7 @@ class MapScreen extends Component {
               last_name: data.customer.last_name
             }
           })
-          console.log(self.state.customer.first_name)
+          console.log(self.state.photos)
         })
         .catch(function (error) {
           console.log(error)
@@ -164,9 +172,7 @@ class MapScreen extends Component {
     function status (response) {
       console.log(response)
       console.log('status')
-      console.log('-------')
       console.log(response.status)
-      console.log('-------')
       if (response.id != null) {
         return Promise.resolve(response)
       } else {
@@ -227,7 +233,18 @@ class MapScreen extends Component {
         >
           {/* <Marker coordinate={this.state}/> */}
         </MapView>
-
+        <View style={styles.switchBox}>
+          <ToggleSwitch
+            size='large'
+            onColor='#7B2BFC'
+            offColor='#ecf0f1'
+            isOn={this.state.isOnDefaultToggleSwitch}
+            onToggle={isOnDefaultToggleSwitch => {
+              this.setState({ isOnDefaultToggleSwitch })
+              this.onToggle(isOnDefaultToggleSwitch)
+            }}
+          />
+        </View>
         <View style={styles.buttonContainer} />
         <View style={[styles.gumburger]}>
           <TouchableOpacity onPress={this.props.open}>
@@ -245,8 +262,10 @@ class MapScreen extends Component {
           slidingPanelLayout={() => <CourierNewOrderBody navigation={this.props.navigation}
             first_name={this.state.customer.first_name}
             bill_amount={this.state.bill_amount}
+            photos={this.state.photos}
             onSwipeAccept={this.onSwipeAccept}
             total_distance={this.state.total_distance}
+            message={this.state.message}
           />}
         /> : null }
 

@@ -44,19 +44,25 @@ export default class DriverNewOrderTop extends Component {
         </View>
         <View style={styles.actionBox}>
           <TouchableOpacity style={{ alignItems: 'center' }}>
-            <Icon name='cancel' color='#C71585' size={25} />
-            <Text style={styles.adressTitle}>Cancel </Text>
+            <View style={styles.iconBox}>
+              <Icon name='window-close' color='#000' size={20} />
+            </View>
+            <Text style={styles.adressTitle}>Ləğv et</Text>
           </TouchableOpacity>
           <TouchableOpacity style={{ alignItems: 'center' }}>
-            <Icon name='message-text-outline' color='#C71585' size={25} />
-            <Text style={styles.adressTitle}>Message</Text>
+            <View style={styles.iconBox}>
+              <Icon name='message-text-outline' color='#000' size={20} />
+            </View>
+            <Text style={styles.adressTitle}>Mesaj</Text>
           </TouchableOpacity>
           <TouchableOpacity style={{ alignItems: 'center' }}
             onPress={() => {
               Linking.openURL('tel:' + this.state.customerPhone)
             }}>
-            <Icon name='phone' color='#C71585' size={25} />
-            <Text style={styles.adressTitle}>Call</Text>
+            <View style={styles.iconBox}>
+              <Icon name='phone' color='#000' size={20} />
+            </View>
+            <Text style={styles.adressTitle}>Əlaqə</Text>
           </TouchableOpacity>
         </View>
       </View>

@@ -5,7 +5,8 @@ export default StyleSheet.create({
     flex: 1,
     backgroundColor: '#fff',
     height: height - 200,
-    paddingVertical: 20
+    paddingVertical: 20,
+    width
   },
   dashBox: {
     alignItems: 'center'
