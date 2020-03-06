@@ -12,7 +12,7 @@
 		00C302E81ABCBA2D00DB3ED1 /* libRCTImage.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 00C302C01ABCB91800DB3ED1 /* libRCTImage.a */; };
 		00C302E91ABCBA2D00DB3ED1 /* libRCTNetwork.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 00C302DC1ABCB9D200DB3ED1 /* libRCTNetwork.a */; };
 		00C302EA1ABCBA2D00DB3ED1 /* libRCTVibration.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 00C302E41ABCB9EE00DB3ED1 /* libRCTVibration.a */; };
-		00E356F31AD99517003FC87E /* driverAppTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 00E356F21AD99517003FC87E /* driverAppTests.m */; };
+		00E356F31AD99517003FC87E /* DelheroCourierTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 00E356F21AD99517003FC87E /* DelheroCourierTests.m */; };
 		0A97B8C71E904366B065D670 /* FontAwesome5_Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 145191D0C2BF477A921CDA1E /* FontAwesome5_Regular.ttf */; };
 		11D1A2F320CAFA9E000508D9 /* libRCTAnimation.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 5E9157331DD0AC6500FF2AA8 /* libRCTAnimation.a */; };
 		133E29F31AD74F7200F7D852 /* libRCTLinking.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 78C398B91ACF4ADC00677621 /* libRCTLinking.a */; };
@@ -37,7 +37,7 @@
 		2D02E4C71E0B4AEC006451C7 /* libRCTText-tvOS.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3DAD3E941DF850E9000B6D8A /* libRCTText-tvOS.a */; };
 		2D02E4C81E0B4AEC006451C7 /* libRCTWebSocket-tvOS.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3DAD3E991DF850E9000B6D8A /* libRCTWebSocket-tvOS.a */; };
 		2D16E6881FA4F8E400B85C8A /* libReact.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2D16E6891FA4F8E400B85C8A /* libReact.a */; };
-		2DCD954D1E0B4F2C00145EB5 /* driverAppTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 00E356F21AD99517003FC87E /* driverAppTests.m */; };
+		2DCD954D1E0B4F2C00145EB5 /* DelheroCourierTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 00E356F21AD99517003FC87E /* DelheroCourierTests.m */; };
 		2DF0FFEE2056DD460020B375 /* libReact.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3DAD3EA31DF850E9000B6D8A /* libReact.a */; };
 		348A053761FB42A2A86567A7 /* FontAwesome5_Solid.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 60BB8D3090CE4C719A9BE89B /* FontAwesome5_Solid.ttf */; };
 		37FA38AB3FFD4DE7BE49D5ED /* Ionicons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = E9347663E7B74B42A778224E /* Ionicons.ttf */; };
@@ -46,7 +46,7 @@
 		3E1675DD15A14227882644EF /* libRNDeviceInfo.a in Frameworks */ = {isa = PBXBuildFile; fileRef = FD1307B5399A4631824AC7D0 /* libRNDeviceInfo.a */; };
 		4CA93830194F4C339DA0CDC9 /* MaterialCommunityIcons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = D13BD8210AC542CE868A412D /* MaterialCommunityIcons.ttf */; };
 		4CC4104676884EE4986857DC /* libRNGestureHandler.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A5AD35BA6F48482EBF961923 /* libRNGestureHandler.a */; };
-		50BFAB06B243843A05488870 /* libPods-driverApp.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 06A063AF7EF65069B0CEEF90 /* libPods-driverApp.a */; };
+		50BFAB06B243843A05488870 /* libPods-DelheroCourier.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 06A063AF7EF65069B0CEEF90 /* libPods-DelheroCourier.a */; };
 		5E8278660B2645A8B689121D /* MaterialIcons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 73A7D6D4F3924AACA865D4D5 /* MaterialIcons.ttf */; };
 		5F469E9D8E9C41B6A6C4AD31 /* FontAwesome5_Brands.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 1284F7EB22B54B37B6D48F5F /* FontAwesome5_Brands.ttf */; };
 		6318A1D823FC23F2005E3294 /* libRNCAsyncStorage.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6318A1D723FC23F2005E3294 /* libRNCAsyncStorage.a */; };
@@ -109,7 +109,7 @@
 			containerPortal = 83CBB9F71A601CBA00E9B192 /* Project object */;
 			proxyType = 1;
 			remoteGlobalIDString = 13B07F861A680F5B00A75B9A;
-			remoteInfo = driverApp;
+			remoteInfo = DelheroCourier;
 		};
 		139105C01AF99BAD00B5F7CC /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -137,7 +137,7 @@
 			containerPortal = 83CBB9F71A601CBA00E9B192 /* Project object */;
 			proxyType = 1;
 			remoteGlobalIDString = 2D02E47A1E0B4A5D006451C7;
-			remoteInfo = "driverApp-tvOS";
+			remoteInfo = "DelheroCourier-tvOS";
 		};
 		2D16E6711FA4F8DC00B85C8A /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -414,29 +414,29 @@
 		00C302BB1ABCB91800DB3ED1 /* RCTImage.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTImage.xcodeproj; path = "../node_modules/react-native/Libraries/Image/RCTImage.xcodeproj"; sourceTree = "<group>"; };
 		00C302D31ABCB9D200DB3ED1 /* RCTNetwork.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTNetwork.xcodeproj; path = "../node_modules/react-native/Libraries/Network/RCTNetwork.xcodeproj"; sourceTree = "<group>"; };
 		00C302DF1ABCB9EE00DB3ED1 /* RCTVibration.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTVibration.xcodeproj; path = "../node_modules/react-native/Libraries/Vibration/RCTVibration.xcodeproj"; sourceTree = "<group>"; };
-		00E356EE1AD99517003FC87E /* driverAppTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = driverAppTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		00E356EE1AD99517003FC87E /* DelheroCourierTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = DelheroCourierTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		00E356F11AD99517003FC87E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		00E356F21AD99517003FC87E /* driverAppTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = driverAppTests.m; sourceTree = "<group>"; };
-		06A063AF7EF65069B0CEEF90 /* libPods-driverApp.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-driverApp.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		00E356F21AD99517003FC87E /* DelheroCourierTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DelheroCourierTests.m; sourceTree = "<group>"; };
+		06A063AF7EF65069B0CEEF90 /* libPods-DelheroCourier.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-DelheroCourier.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		1284F7EB22B54B37B6D48F5F /* FontAwesome5_Brands.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = FontAwesome5_Brands.ttf; path = "../node_modules/react-native-vector-icons/Fonts/FontAwesome5_Brands.ttf"; sourceTree = "<group>"; };
 		139105B61AF99BAD00B5F7CC /* RCTSettings.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTSettings.xcodeproj; path = "../node_modules/react-native/Libraries/Settings/RCTSettings.xcodeproj"; sourceTree = "<group>"; };
 		139FDEE61B06529A00C62182 /* RCTWebSocket.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTWebSocket.xcodeproj; path = "../node_modules/react-native/Libraries/WebSocket/RCTWebSocket.xcodeproj"; sourceTree = "<group>"; };
-		13B07F961A680F5B00A75B9A /* driverApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = driverApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		13B07FAF1A68108700A75B9A /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AppDelegate.h; path = driverApp/AppDelegate.h; sourceTree = "<group>"; };
-		13B07FB01A68108700A75B9A /* AppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AppDelegate.m; path = driverApp/AppDelegate.m; sourceTree = "<group>"; };
+		13B07F961A680F5B00A75B9A /* DelheroCourier.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DelheroCourier.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		13B07FAF1A68108700A75B9A /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AppDelegate.h; path = DelheroCourier/AppDelegate.h; sourceTree = "<group>"; };
+		13B07FB01A68108700A75B9A /* AppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AppDelegate.m; path = DelheroCourier/AppDelegate.m; sourceTree = "<group>"; };
 		13B07FB21A68108700A75B9A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
-		13B07FB51A68108700A75B9A /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Images.xcassets; path = driverApp/Images.xcassets; sourceTree = "<group>"; };
-		13B07FB61A68108700A75B9A /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Info.plist; path = driverApp/Info.plist; sourceTree = "<group>"; };
-		13B07FB71A68108700A75B9A /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = main.m; path = driverApp/main.m; sourceTree = "<group>"; };
+		13B07FB51A68108700A75B9A /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Images.xcassets; path = DelheroCourier/Images.xcassets; sourceTree = "<group>"; };
+		13B07FB61A68108700A75B9A /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Info.plist; path = DelheroCourier/Info.plist; sourceTree = "<group>"; };
+		13B07FB71A68108700A75B9A /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = main.m; path = DelheroCourier/main.m; sourceTree = "<group>"; };
 		145191D0C2BF477A921CDA1E /* FontAwesome5_Regular.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = FontAwesome5_Regular.ttf; path = "../node_modules/react-native-vector-icons/Fonts/FontAwesome5_Regular.ttf"; sourceTree = "<group>"; };
 		146833FF1AC3E56700842450 /* React.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = React.xcodeproj; path = "../node_modules/react-native/React/React.xcodeproj"; sourceTree = "<group>"; };
 		1510F22DB0DF4915A8952AAD /* libRNGestureHandler-tvOS.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = "libRNGestureHandler-tvOS.a"; sourceTree = "<group>"; };
-		2D02E47B1E0B4A5D006451C7 /* driverApp-tvOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "driverApp-tvOS.app"; sourceTree = BUILT_PRODUCTS_DIR; };
-		2D02E4901E0B4A5D006451C7 /* driverApp-tvOSTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "driverApp-tvOSTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		2D02E47B1E0B4A5D006451C7 /* DelheroCourier-tvOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "DelheroCourier-tvOS.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		2D02E4901E0B4A5D006451C7 /* DelheroCourier-tvOSTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "DelheroCourier-tvOSTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		2D16E6891FA4F8E400B85C8A /* libReact.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = libReact.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		2F33AA61D0F54FC6B4F4F686 /* libRNI18n-tvOS.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = "libRNI18n-tvOS.a"; sourceTree = "<group>"; };
-		361DD4B742ED5E0D524E741F /* Pods-driverApp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-driverApp.debug.xcconfig"; path = "Target Support Files/Pods-driverApp/Pods-driverApp.debug.xcconfig"; sourceTree = "<group>"; };
-		3B1C989066932159B518EF74 /* Pods-driverApp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-driverApp.release.xcconfig"; path = "Target Support Files/Pods-driverApp/Pods-driverApp.release.xcconfig"; sourceTree = "<group>"; };
+		361DD4B742ED5E0D524E741F /* Pods-DelheroCourier.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DelheroCourier.debug.xcconfig"; path = "Target Support Files/Pods-DelheroCourier/Pods-DelheroCourier.debug.xcconfig"; sourceTree = "<group>"; };
+		3B1C989066932159B518EF74 /* Pods-DelheroCourier.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DelheroCourier.release.xcconfig"; path = "Target Support Files/Pods-DelheroCourier/Pods-DelheroCourier.release.xcconfig"; sourceTree = "<group>"; };
 		418562FFF03A46ADAEDD1ED1 /* libRNDeviceInfo-tvOS.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = "libRNDeviceInfo-tvOS.a"; sourceTree = "<group>"; };
 		4D82AB483A444938B7C9B629 /* libRNVectorIcons-tvOS.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = "libRNVectorIcons-tvOS.a"; sourceTree = "<group>"; };
 		5261EBFAB8C047BDA2704282 /* Foundation.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Foundation.ttf; path = "../node_modules/react-native-vector-icons/Fonts/Foundation.ttf"; sourceTree = "<group>"; };
@@ -504,7 +504,7 @@
 				AAE474A92C7446CD80AE22DD /* libRNVectorIcons.a in Frameworks */,
 				EEA6109B9D0D448EA0DC2247 /* libRNI18n.a in Frameworks */,
 				3E1675DD15A14227882644EF /* libRNDeviceInfo.a in Frameworks */,
-				50BFAB06B243843A05488870 /* libPods-driverApp.a in Frameworks */,
+				50BFAB06B243843A05488870 /* libPods-DelheroCourier.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -581,13 +581,13 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
-		00E356EF1AD99517003FC87E /* driverAppTests */ = {
+		00E356EF1AD99517003FC87E /* DelheroCourierTests */ = {
 			isa = PBXGroup;
 			children = (
-				00E356F21AD99517003FC87E /* driverAppTests.m */,
+				00E356F21AD99517003FC87E /* DelheroCourierTests.m */,
 				00E356F01AD99517003FC87E /* Supporting Files */,
 			);
-			path = driverAppTests;
+			path = DelheroCourierTests;
 			sourceTree = "<group>";
 		};
 		00E356F01AD99517003FC87E /* Supporting Files */ = {
@@ -618,7 +618,7 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
-		13B07FAE1A68108700A75B9A /* driverApp */ = {
+		13B07FAE1A68108700A75B9A /* DelheroCourier */ = {
 			isa = PBXGroup;
 			children = (
 				008F07F21AC5B25A0029DE68 /* main.jsbundle */,
@@ -629,7 +629,7 @@
 				13B07FB11A68108700A75B9A /* LaunchScreen.xib */,
 				13B07FB71A68108700A75B9A /* main.m */,
 			);
-			name = driverApp;
+			name = DelheroCourier;
 			sourceTree = "<group>";
 		};
 		146834001AC3E56700842450 /* Products */ = {
@@ -663,7 +663,7 @@
 				ED297162215061F000B7C4FE /* JavaScriptCore.framework */,
 				ED2971642150620600B7C4FE /* JavaScriptCore.framework */,
 				2D16E6891FA4F8E400B85C8A /* libReact.a */,
-				06A063AF7EF65069B0CEEF90 /* libPods-driverApp.a */,
+				06A063AF7EF65069B0CEEF90 /* libPods-DelheroCourier.a */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -748,8 +748,8 @@
 		79FC8C13C56BCEF5B8FAA40B /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				361DD4B742ED5E0D524E741F /* Pods-driverApp.debug.xcconfig */,
-				3B1C989066932159B518EF74 /* Pods-driverApp.release.xcconfig */,
+				361DD4B742ED5E0D524E741F /* Pods-DelheroCourier.debug.xcconfig */,
+				3B1C989066932159B518EF74 /* Pods-DelheroCourier.release.xcconfig */,
 			);
 			path = Pods;
 			sourceTree = "<group>";
@@ -791,9 +791,9 @@
 			isa = PBXGroup;
 			children = (
 				6385BD1323B8B44E00769E06 /* Config.xcconfig */,
-				13B07FAE1A68108700A75B9A /* driverApp */,
+				13B07FAE1A68108700A75B9A /* DelheroCourier */,
 				832341AE1AAA6A7D00B99B32 /* Libraries */,
-				00E356EF1AD99517003FC87E /* driverAppTests */,
+				00E356EF1AD99517003FC87E /* DelheroCourierTests */,
 				83CBBA001A601CBA00E9B192 /* Products */,
 				2D16E6871FA4F8E400B85C8A /* Frameworks */,
 				BB6201D1F21644CB82D8F538 /* Resources */,
@@ -808,10 +808,10 @@
 		83CBBA001A601CBA00E9B192 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				13B07F961A680F5B00A75B9A /* driverApp.app */,
-				00E356EE1AD99517003FC87E /* driverAppTests.xctest */,
-				2D02E47B1E0B4A5D006451C7 /* driverApp-tvOS.app */,
-				2D02E4901E0B4A5D006451C7 /* driverApp-tvOSTests.xctest */,
+				13B07F961A680F5B00A75B9A /* DelheroCourier.app */,
+				00E356EE1AD99517003FC87E /* DelheroCourierTests.xctest */,
+				2D02E47B1E0B4A5D006451C7 /* DelheroCourier-tvOS.app */,
+				2D02E4901E0B4A5D006451C7 /* DelheroCourier-tvOSTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -850,9 +850,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		00E356ED1AD99517003FC87E /* driverAppTests */ = {
+		00E356ED1AD99517003FC87E /* DelheroCourierTests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 00E357021AD99517003FC87E /* Build configuration list for PBXNativeTarget "driverAppTests" */;
+			buildConfigurationList = 00E357021AD99517003FC87E /* Build configuration list for PBXNativeTarget "DelheroCourierTests" */;
 			buildPhases = (
 				00E356EA1AD99517003FC87E /* Sources */,
 				00E356EB1AD99517003FC87E /* Frameworks */,
@@ -863,14 +863,14 @@
 			dependencies = (
 				00E356F51AD99517003FC87E /* PBXTargetDependency */,
 			);
-			name = driverAppTests;
-			productName = driverAppTests;
-			productReference = 00E356EE1AD99517003FC87E /* driverAppTests.xctest */;
+			name = DelheroCourierTests;
+			productName = DelheroCourierTests;
+			productReference = 00E356EE1AD99517003FC87E /* DelheroCourierTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
-		13B07F861A680F5B00A75B9A /* driverApp */ = {
+		13B07F861A680F5B00A75B9A /* DelheroCourier */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 13B07F931A680F5B00A75B9A /* Build configuration list for PBXNativeTarget "driverApp" */;
+			buildConfigurationList = 13B07F931A680F5B00A75B9A /* Build configuration list for PBXNativeTarget "DelheroCourier" */;
 			buildPhases = (
 				D7EA0A853294557D0DD10013 /* [CP] Check Pods Manifest.lock */,
 				13B07F871A680F5B00A75B9A /* Sources */,
@@ -883,14 +883,14 @@
 			);
 			dependencies = (
 			);
-			name = driverApp;
+			name = DelheroCourier;
 			productName = "Hello World";
-			productReference = 13B07F961A680F5B00A75B9A /* driverApp.app */;
+			productReference = 13B07F961A680F5B00A75B9A /* DelheroCourier.app */;
 			productType = "com.apple.product-type.application";
 		};
-		2D02E47A1E0B4A5D006451C7 /* driverApp-tvOS */ = {
+		2D02E47A1E0B4A5D006451C7 /* DelheroCourier-tvOS */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 2D02E4BA1E0B4A5E006451C7 /* Build configuration list for PBXNativeTarget "driverApp-tvOS" */;
+			buildConfigurationList = 2D02E4BA1E0B4A5E006451C7 /* Build configuration list for PBXNativeTarget "DelheroCourier-tvOS" */;
 			buildPhases = (
 				2D02E4771E0B4A5D006451C7 /* Sources */,
 				2D02E4781E0B4A5D006451C7 /* Frameworks */,
@@ -901,14 +901,14 @@
 			);
 			dependencies = (
 			);
-			name = "driverApp-tvOS";
-			productName = "driverApp-tvOS";
-			productReference = 2D02E47B1E0B4A5D006451C7 /* driverApp-tvOS.app */;
+			name = "DelheroCourier-tvOS";
+			productName = "DelheroCourier-tvOS";
+			productReference = 2D02E47B1E0B4A5D006451C7 /* DelheroCourier-tvOS.app */;
 			productType = "com.apple.product-type.application";
 		};
-		2D02E48F1E0B4A5D006451C7 /* driverApp-tvOSTests */ = {
+		2D02E48F1E0B4A5D006451C7 /* DelheroCourier-tvOSTests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 2D02E4BB1E0B4A5E006451C7 /* Build configuration list for PBXNativeTarget "driverApp-tvOSTests" */;
+			buildConfigurationList = 2D02E4BB1E0B4A5E006451C7 /* Build configuration list for PBXNativeTarget "DelheroCourier-tvOSTests" */;
 			buildPhases = (
 				2D02E48C1E0B4A5D006451C7 /* Sources */,
 				2D02E48D1E0B4A5D006451C7 /* Frameworks */,
@@ -919,9 +919,9 @@
 			dependencies = (
 				2D02E4921E0B4A5D006451C7 /* PBXTargetDependency */,
 			);
-			name = "driverApp-tvOSTests";
-			productName = "driverApp-tvOSTests";
-			productReference = 2D02E4901E0B4A5D006451C7 /* driverApp-tvOSTests.xctest */;
+			name = "DelheroCourier-tvOSTests";
+			productName = "DelheroCourier-tvOSTests";
+			productReference = 2D02E4901E0B4A5D006451C7 /* DelheroCourier-tvOSTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
 /* End PBXNativeTarget section */
@@ -948,7 +948,7 @@
 					};
 				};
 			};
-			buildConfigurationList = 83CBB9FA1A601CBA00E9B192 /* Build configuration list for PBXProject "driverApp" */;
+			buildConfigurationList = 83CBB9FA1A601CBA00E9B192 /* Build configuration list for PBXProject "DelheroCourier" */;
 			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
@@ -1032,10 +1032,10 @@
 			);
 			projectRoot = "";
 			targets = (
-				13B07F861A680F5B00A75B9A /* driverApp */,
-				00E356ED1AD99517003FC87E /* driverAppTests */,
-				2D02E47A1E0B4A5D006451C7 /* driverApp-tvOS */,
-				2D02E48F1E0B4A5D006451C7 /* driverApp-tvOSTests */,
+				13B07F861A680F5B00A75B9A /* DelheroCourier */,
+				00E356ED1AD99517003FC87E /* DelheroCourierTests */,
+				2D02E47A1E0B4A5D006451C7 /* DelheroCourier-tvOS */,
+				2D02E48F1E0B4A5D006451C7 /* DelheroCourier-tvOSTests */,
 			);
 		};
 /* End PBXProject section */
@@ -1449,7 +1449,7 @@
 			files = (
 			);
 			inputPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-driverApp/Pods-driverApp-resources.sh",
+				"${PODS_ROOT}/Target Support Files/Pods-DelheroCourier/Pods-DelheroCourier-resources.sh",
 				"${PODS_ROOT}/GoogleMaps/Maps/Frameworks/GoogleMaps.framework/Resources/GoogleMaps.bundle",
 				"${PODS_ROOT}/GooglePlaces/Frameworks/GooglePlaces.framework/Resources/GooglePlaces.bundle",
 			);
@@ -1460,7 +1460,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-driverApp/Pods-driverApp-resources.sh\"\n";
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-DelheroCourier/Pods-DelheroCourier-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		D7EA0A853294557D0DD10013 /* [CP] Check Pods Manifest.lock */ = {
@@ -1478,7 +1478,7 @@
 			outputFileListPaths = (
 			);
 			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-driverApp-checkManifestLockResult.txt",
+				"$(DERIVED_FILE_DIR)/Pods-DelheroCourier-checkManifestLockResult.txt",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -1492,7 +1492,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				00E356F31AD99517003FC87E /* driverAppTests.m in Sources */,
+				00E356F31AD99517003FC87E /* DelheroCourierTests.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1518,7 +1518,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				2DCD954D1E0B4F2C00145EB5 /* driverAppTests.m in Sources */,
+				2DCD954D1E0B4F2C00145EB5 /* DelheroCourierTests.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1527,12 +1527,12 @@
 /* Begin PBXTargetDependency section */
 		00E356F51AD99517003FC87E /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 13B07F861A680F5B00A75B9A /* driverApp */;
+			target = 13B07F861A680F5B00A75B9A /* DelheroCourier */;
 			targetProxy = 00E356F41AD99517003FC87E /* PBXContainerItemProxy */;
 		};
 		2D02E4921E0B4A5D006451C7 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 2D02E47A1E0B4A5D006451C7 /* driverApp-tvOS */;
+			target = 2D02E47A1E0B4A5D006451C7 /* DelheroCourier-tvOS */;
 			targetProxy = 2D02E4911E0B4A5D006451C7 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
@@ -1544,7 +1544,7 @@
 				13B07FB21A68108700A75B9A /* Base */,
 			);
 			name = LaunchScreen.xib;
-			path = driverApp;
+			path = DelheroCourier;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
@@ -1565,7 +1565,7 @@
 					"$(SRCROOT)/../node_modules/react-native-i18n/ios",
 					"$(SRCROOT)/../node_modules/react-native-device-info/ios/RNDeviceInfo",
 				);
-				INFOPLIST_FILE = driverAppTests/Info.plist;
+				INFOPLIST_FILE = DelheroCourierTests/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
@@ -1585,7 +1585,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "org.reactjs.native.example.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/driverApp.app/driverApp";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/DelheroCourier.app/DelheroCourier";
 			};
 			name = Debug;
 		};
@@ -1601,7 +1601,7 @@
 					"$(SRCROOT)/../node_modules/react-native-i18n/ios",
 					"$(SRCROOT)/../node_modules/react-native-device-info/ios/RNDeviceInfo",
 				);
-				INFOPLIST_FILE = driverAppTests/Info.plist;
+				INFOPLIST_FILE = DelheroCourierTests/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
@@ -1621,13 +1621,13 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "org.reactjs.native.example.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/driverApp.app/driverApp";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/DelheroCourier.app/DelheroCourier";
 			};
 			name = Release;
 		};
 		13B07F941A680F5B00A75B9A /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 361DD4B742ED5E0D524E741F /* Pods-driverApp.debug.xcconfig */;
+			baseConfigurationReference = 361DD4B742ED5E0D524E741F /* Pods-DelheroCourier.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CURRENT_PROJECT_VERSION = 1;
@@ -1639,7 +1639,7 @@
 					"$(SRCROOT)/../node_modules/react-native-i18n/ios",
 					"$(SRCROOT)/../node_modules/react-native-device-info/ios/RNDeviceInfo",
 				);
-				INFOPLIST_FILE = driverApp/Info.plist;
+				INFOPLIST_FILE = DelheroCourier/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				OTHER_LDFLAGS = (
 					"$(inherited)",
@@ -1647,14 +1647,14 @@
 					"-lc++",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "org.reactjs.native.example.$(PRODUCT_NAME:rfc1034identifier)";
-				PRODUCT_NAME = driverApp;
+				PRODUCT_NAME = DelheroCourier;
 				VERSIONING_SYSTEM = "apple-generic";
 			};
 			name = Debug;
 		};
 		13B07F951A680F5B00A75B9A /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 3B1C989066932159B518EF74 /* Pods-driverApp.release.xcconfig */;
+			baseConfigurationReference = 3B1C989066932159B518EF74 /* Pods-DelheroCourier.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CURRENT_PROJECT_VERSION = 1;
@@ -1665,7 +1665,7 @@
 					"$(SRCROOT)/../node_modules/react-native-i18n/ios",
 					"$(SRCROOT)/../node_modules/react-native-device-info/ios/RNDeviceInfo",
 				);
-				INFOPLIST_FILE = driverApp/Info.plist;
+				INFOPLIST_FILE = DelheroCourier/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				OTHER_LDFLAGS = (
 					"$(inherited)",
@@ -1673,7 +1673,7 @@
 					"-lc++",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "org.reactjs.native.example.$(PRODUCT_NAME:rfc1034identifier)";
-				PRODUCT_NAME = driverApp;
+				PRODUCT_NAME = DelheroCourier;
 				VERSIONING_SYSTEM = "apple-generic";
 			};
 			name = Release;
@@ -1697,7 +1697,7 @@
 					"$(SRCROOT)/../node_modules/react-native-i18n/ios",
 					"$(SRCROOT)/../node_modules/react-native-device-info/ios/RNDeviceInfo",
 				);
-				INFOPLIST_FILE = "driverApp-tvOS/Info.plist";
+				INFOPLIST_FILE = "DelheroCourier-tvOS/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1714,7 +1714,7 @@
 					"-ObjC",
 					"-lc++",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "com.facebook.REACT.driverApp-tvOS";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.facebook.REACT.DelheroCourier-tvOS";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = appletvos;
 				TARGETED_DEVICE_FAMILY = 3;
@@ -1741,7 +1741,7 @@
 					"$(SRCROOT)/../node_modules/react-native-i18n/ios",
 					"$(SRCROOT)/../node_modules/react-native-device-info/ios/RNDeviceInfo",
 				);
-				INFOPLIST_FILE = "driverApp-tvOS/Info.plist";
+				INFOPLIST_FILE = "DelheroCourier-tvOS/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1758,7 +1758,7 @@
 					"-ObjC",
 					"-lc++",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "com.facebook.REACT.driverApp-tvOS";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.facebook.REACT.DelheroCourier-tvOS";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = appletvos;
 				TARGETED_DEVICE_FAMILY = 3;
@@ -1784,7 +1784,7 @@
 					"$(SRCROOT)/../node_modules/react-native-i18n/ios",
 					"$(SRCROOT)/../node_modules/react-native-device-info/ios/RNDeviceInfo",
 				);
-				INFOPLIST_FILE = "driverApp-tvOSTests/Info.plist";
+				INFOPLIST_FILE = "DelheroCourier-tvOSTests/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1801,10 +1801,10 @@
 					"-ObjC",
 					"-lc++",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "com.facebook.REACT.driverApp-tvOSTests";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.facebook.REACT.DelheroCourier-tvOSTests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = appletvos;
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/driverApp-tvOS.app/driverApp-tvOS";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/DelheroCourier-tvOS.app/DelheroCourier-tvOS";
 				TVOS_DEPLOYMENT_TARGET = 10.1;
 			};
 			name = Debug;
@@ -1827,7 +1827,7 @@
 					"$(SRCROOT)/../node_modules/react-native-i18n/ios",
 					"$(SRCROOT)/../node_modules/react-native-device-info/ios/RNDeviceInfo",
 				);
-				INFOPLIST_FILE = "driverApp-tvOSTests/Info.plist";
+				INFOPLIST_FILE = "DelheroCourier-tvOSTests/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1844,10 +1844,10 @@
 					"-ObjC",
 					"-lc++",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "com.facebook.REACT.driverApp-tvOSTests";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.facebook.REACT.DelheroCourier-tvOSTests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = appletvos;
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/driverApp-tvOS.app/driverApp-tvOS";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/DelheroCourier-tvOS.app/DelheroCourier-tvOS";
 				TVOS_DEPLOYMENT_TARGET = 10.1;
 			};
 			name = Release;
@@ -1956,7 +1956,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		00E357021AD99517003FC87E /* Build configuration list for PBXNativeTarget "driverAppTests" */ = {
+		00E357021AD99517003FC87E /* Build configuration list for PBXNativeTarget "DelheroCourierTests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				00E356F61AD99517003FC87E /* Debug */,
@@ -1965,7 +1965,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		13B07F931A680F5B00A75B9A /* Build configuration list for PBXNativeTarget "driverApp" */ = {
+		13B07F931A680F5B00A75B9A /* Build configuration list for PBXNativeTarget "DelheroCourier" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				13B07F941A680F5B00A75B9A /* Debug */,
@@ -1974,7 +1974,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		2D02E4BA1E0B4A5E006451C7 /* Build configuration list for PBXNativeTarget "driverApp-tvOS" */ = {
+		2D02E4BA1E0B4A5E006451C7 /* Build configuration list for PBXNativeTarget "DelheroCourier-tvOS" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				2D02E4971E0B4A5E006451C7 /* Debug */,
@@ -1983,7 +1983,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		2D02E4BB1E0B4A5E006451C7 /* Build configuration list for PBXNativeTarget "driverApp-tvOSTests" */ = {
+		2D02E4BB1E0B4A5E006451C7 /* Build configuration list for PBXNativeTarget "DelheroCourier-tvOSTests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				2D02E4991E0B4A5E006451C7 /* Debug */,
@@ -1992,7 +1992,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		83CBB9FA1A601CBA00E9B192 /* Build configuration list for PBXProject "driverApp" */ = {
+		83CBB9FA1A601CBA00E9B192 /* Build configuration list for PBXProject "DelheroCourier" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				83CBBA201A601CBA00E9B192 /* Debug */,
