@@ -9,12 +9,20 @@ export default StyleSheet.create({
     fontSize: 19
   },
   orderContainer: {
-    // height: 120,
-    borderBottomWidth: 1,
-    borderBottomColor: Colors.orderLine,
     paddingBottom: 20,
     marginHorizontal: width * 0.03,
-    marginBottom: 10
+    marginVertical: 5,
+    borderRadius: 20,
+    marginBottom: 10,
+    padding: 10,
+    shadowColor: '#000',
+    shadowOffset: {
+      width: 0,
+      height: 0
+    },
+    shadowOpacity: 0.18,
+    shadowRadius: 1.00,
+    elevation: 1
   },
   orderBox: {
     flex: 1,

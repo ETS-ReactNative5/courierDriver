@@ -192,6 +192,7 @@ class CourierGoToAdressScreen extends Component {
           latitude,
           longitude
         })
+        console.log(this.state.driverCoordinate)
       },
       error => console.log(error),
       {

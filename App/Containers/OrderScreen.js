@@ -39,10 +39,12 @@ class OrderScreen extends Component {
     let customerId = this.state.customerId
     let orderId = this.state.orderId
     let rating = this.state.rating
+    let message = this.state.message
     let body = {
       customer_id: customerId,
       order_id: orderId,
-      rating: rating
+      rating: rating,
+      message: message
     }
     console.log(body)
 
@@ -111,7 +113,7 @@ class OrderScreen extends Component {
                 placeholder='Şərh verin'
                 multiline
                 numberOfLines={1}
-                onChangeText={(text) => this.setState({text})}
+                onChangeText={(message) => this.setState({message})}
               />
             </View>
           </View>

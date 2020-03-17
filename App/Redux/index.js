@@ -12,8 +12,8 @@ export const reducers = combineReducers({
   search: require('./SearchRedux').reducer,
   register: require('./RegisterRedux').reducer,
   destinationAddress: require('./DestinationAddressRedux').reducer,
-  order: require('./OrderRedux').reducer
-
+  order: require('./OrderRedux').reducer,
+  orderInner: require('./OrderInnerRedux').reducer
 })
 
 export default () => {

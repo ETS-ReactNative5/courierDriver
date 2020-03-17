@@ -19,8 +19,8 @@ import CourierNewOrderBody from '../Components/CourierNewOrderBody'
 import ToggleSwitch from 'toggle-switch-react-native'
 const {width, height} = Dimensions.get('window')
 const ASPECT_RATIO = width / height
-const LATITUDE = 37.78825
-const LONGITUDE = -122.4324
+const LATITUDE = 40.4093
+const LONGITUDE = 49.8671
 const LATITUDE_DELTA = 0.0922
 const LONGITUDE_DELTA = LATITUDE_DELTA * ASPECT_RATIO
 
@@ -57,7 +57,11 @@ class MapScreen extends Component {
     total_distance: 0,
     total_duration: 0,
     bill_amount: 0,
-    photos: []
+    photos: [],
+    driverCoordinate: {
+      latitude: 40.4093,
+      longitude: 49.8671,
+    }
   }
 
   onToggle (isOn) {
@@ -76,6 +80,7 @@ class MapScreen extends Component {
         this.setState({
           location_tracking
         })
+        console.log(location_tracking)
       })
     AsyncStorage.getItem('@order_notifications')
       .then((order_notifications) => {
@@ -103,6 +108,9 @@ class MapScreen extends Component {
     })
     socket.on('connect', () => console.log('Connection'))
     socket.on('active_orders', this.updateState)
+    // socket.emit('location_tracking', {
+    //   driverCoordinate: this.state.driverCoordinate
+    // })
   }
   updateState = result => {
     const orderId = result.order_id
@@ -143,26 +151,28 @@ class MapScreen extends Component {
         .then(function (data) {
           console.log('Request succeeded with JSON response', data)
           console.log(data)
-          self.props.attemptOrder(data)
-          self.setState({
-            // scaleAnimationModal: true,
-            pickup_location: data.pickup_location,
-            drop_location: data.drop_location,
-            total_distance: data.total_distance,
-            bill_amount: data.bill_amount,
-            total_duration: data.total_duration,
-            photos: data.files,
-            message: data.message,
-            pickup: {
-              latitude: Number(data.drop_lng),
-              longitude: Number(data.drop_ltd)
-            },
-            customer: {
-              first_name: data.customer.first_name,
-              last_name: data.customer.last_name
-            }
-          })
-          console.log(self.state.photos)
+          if (data.status === 'pending') {
+            self.props.attemptOrder(data)
+            self.setState({
+              // scaleAnimationModal: true,
+              pickup_location: data.pickup_location,
+              drop_location: data.drop_location,
+              total_distance: data.total_distance,
+              bill_amount: data.bill_amount,
+              total_duration: data.total_duration,
+              photos: data.files,
+              message: data.message,
+              pickup: {
+                latitude: Number(data.drop_lng),
+                longitude: Number(data.drop_ltd)
+              },
+              customer: {
+                first_name: data.customer.first_name,
+                last_name: data.customer.last_name
+              }
+            })
+            console.log(self.state.photos)
+          }
         })
         .catch(function (error) {
           console.log(error)
@@ -202,8 +212,8 @@ class MapScreen extends Component {
     }
     const order = await api.putOrder(headers, orderID, param)
     console.log(order)
-    if (order.status == 200) {
-      if (order.data) {
+    if (order.status === 200) {
+      if (order.data.status === 'accepted') {
         this.props.attemptOrder(order.data)
         this.props.navigation.replace('CourierGoToClientScreen')
       } else {

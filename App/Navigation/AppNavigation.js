@@ -27,12 +27,23 @@ import CourierGoToClientScreen from '../Containers/CourierGoToClientScreen'
 import CourierGoToAdressScreen from '../Containers/CourierGoToAdressScreen'
 import BalansScreen from '../Containers/BalansScreen'
 import PaymentAmountScreen from '../Containers/PaymentAmountScreen'
+import OrderHistoryInnerScreen from '../Containers/OrderHistoryInnerScreen'
 
 import I18n from '../I18n'
 import styles from './Styles/NavigationStyles'
 
 // Manifest of possible screens
 const PrimaryNav = createStackNavigator({
+  OrderHistoryInnerScreen: {
+    screen: OrderHistoryInnerScreen,
+    navigationOptions: {
+      // title: I18n.t('Balansi artir'),
+      headerTintColor: '#000',
+      headerStyle: {
+        backgroundColor: '#fff'
+      }
+    }
+  },
   PaymentAmountScreen: {
     screen: PaymentAmountScreen,
     navigationOptions: {

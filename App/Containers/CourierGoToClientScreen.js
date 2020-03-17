@@ -7,7 +7,7 @@ import {connect} from 'react-redux'
 // Styles
 import styles from './Styles/CourierGoToClientScreenStyle'
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons'
-import MapView from 'react-native-maps'
+import MapView, { Marker } from 'react-native-maps'
 import {Images} from '../Themes'
 import MapViewDirections from 'react-native-maps-directions'
 import {orders} from '../Config/API'
@@ -17,6 +17,7 @@ import SlidingPanel from 'react-native-sliding-up-down-panels'
 import CourierOrderTop from '../Components/CourierOrderTop'
 import CourierOrderBody from '../Components/CourierOrderBody'
 import API from '../Services/Api'
+import io from 'socket.io-client'
 const {width, height} = Dimensions.get('window')
 const ASPECT_RATIO = width / height
 const GOOGLE_MAPS_APIKEY = 'AIzaSyCMfIpRhn8QaGkYQ0I5KPWvFT1kLbA-DAM'
@@ -66,20 +67,22 @@ class CourierGoToClientScreen extends Component {
       bill_amount: 0
     }
     this.mapView = null
+    // this.socket.on('location_tracking', function (location_tracking) {
+    //   this.socket.join(location_tracking)
+    // })
+    // this.socket.to('location_tracking').emit(this.state.driverCoordinate)
+    // this.socket.on('room', function (room) {
+    //   this.socket.join(room)
+    // })
+
   }
-  // componentDidMount (): void {
-  //   this.setState({
-  //     coordinates: [this.props.order.drop_location, this.props.order.pickup_location]
-  //   })
-  //   console.log(this.state.coordinates)
-  // }
+
   componentDidMount = async () => {
     this.setState({
       pickup_location: this.props.order.pickup_location,
       drop_location: this.props.order.drop_location,
       phone_number: this.props.order.customer.phone_number,
       orderId: this.props.order.id
-
     })
 
     const location = await navigator.geolocation.getCurrentPosition(
@@ -135,19 +138,51 @@ class CourierGoToClientScreen extends Component {
         this.setState({
           location_tracking
         })
+
+        // socket.on('location_tracking', function (location_tracking) {
+        //   socket.join(location_tracking)
+        //   console.log('join to locTracking')
+        // })
+        // console.log(location_tracking)
       })
+
+    // socket.on('connect', (socket) => {
+    //   console.log('connect start')
+    //   console.log(location_tracking, 'location_tracking')
+    //   socket.join(location_tracking)
+    //   console.log('join to locTracking')
+    // })
+
     const order_notifications = await AsyncStorage.getItem('@order_notifications')
       .then((order_notifications) => {
         this.setState({
           order_notifications
         })
       })
+
     this.watchLocation()
   }
   componentDidUpdate (prevProps, prevState) {
     if (this.props.latitude !== prevState.latitude) {
       console.log(this.state.latitude, 'markerltd')
       console.log(this.state.longitude, 'markerlgd')
+      console.log(this.state.location_tracking)
+      console.log(this.state.driverCoordinate, 'driverCoordinate')
+      let position = this.state.driverCoordinate
+      // this.socket.on('active_orders', this.updateState)
+      let room = this.state.location_tracking
+      const socket = io('http://worker.delhero.com', {
+        forceNew: true,
+        transports: ['websocket']
+      })
+
+      socket.on('connect', function () {
+        // Connected, let's sign-up for to receive messages for this room
+        socket.emit(room, {
+          position
+        })
+        console.log('driverCoordinate - emit')
+      })
     }
   }
   componentWillUnmount () {
@@ -185,7 +220,11 @@ class CourierGoToClientScreen extends Component {
             }
           ],
           latitude,
-          longitude
+          longitude,
+          driverCoordinate: {
+            latitude,
+            longitude
+          },
         })
       },
       error => console.log(error),
@@ -197,7 +236,6 @@ class CourierGoToClientScreen extends Component {
       }
     )
   };
-
 
   onPressCancel = () => {
     let param = {
@@ -263,7 +301,7 @@ class CourierGoToClientScreen extends Component {
   }
 
   render () {
-    console.log(this.props.order,'this props order')
+    // console.log(this.props.order, 'this props order')
     const SwipeIcon = () => (
       <Icon name='chevron-double-right' color='#fff' size={40} />
     )
@@ -280,7 +318,12 @@ class CourierGoToClientScreen extends Component {
           ref={c => this.mapView = c}
           // onPress={this.onMapPress}
         >
-
+          <Marker.Animated
+            ref={marker => {
+              this.marker = marker
+            }}
+            coordinate={this.state.driverCoordinate}
+          />
           {this.state.coordinates.map((coordinate, index) =>
             <MapView.Marker key={`coordinate_${index}`} image={Images.marker} coordinate={coordinate} />
           )}

@@ -61,25 +61,27 @@ export default class CourierOrderBody extends Component {
           {/*    <Text style={styles.sectionTitle}>14:00</Text> */}
           {/*  </View> */}
           {/* </View> */}
-          <View style={styles.sectionTitleBox}><Text style={styles.sectionTitle}>Daşınacaq Yükün fotosu</Text></View>
-          <View style={styles.imgScroll}>
-            <ScrollView horizontal>
-              {
-                this.props.photos.map((item, key) =>
-                  (
-                    <ZoomImage
-                      key={key}
-                      source={{uri: item.url}}
-                      imgStyle={{width: 110, height: 110, borderRadius: 15}}
-                      style={styles.img}
-                      duration={200}
-                      enableScaling={false}
-                      easingFunc={Easing.ease}
-                    />
-                  ))
-              }
-            </ScrollView>
-          </View>
+          {this.props.photos.length === 0 ? null : <View>
+            <View style={styles.sectionTitleBox}><Text style={styles.sectionTitle}>Daşınacaq Yükün fotosu</Text></View>
+            <View style={styles.imgScroll}>
+              <ScrollView horizontal>
+                {
+                  this.props.photos.map((item, key) =>
+                    (
+                      <ZoomImage
+                        key={key}
+                        source={{uri: item.url}}
+                        imgStyle={{width: 110, height: 110, borderRadius: 15}}
+                        style={styles.img}
+                        duration={200}
+                        enableScaling={false}
+                        easingFunc={Easing.ease}
+                      />
+                    ))
+                }
+              </ScrollView>
+            </View>
+          </View>}
           <View style={styles.sectionTitleBox}><Text style={styles.sectionTitle}>Qeydlər</Text></View>
           <View style={styles.orderDescriptionBox}><Text style={styles.orderDescription}>{this.props.message}</Text></View>
           <View style={styles.receiverInfoBox} />

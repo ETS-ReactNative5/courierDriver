@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Text, View, FlatList } from 'react-native'
+import { Text, View, FlatList, TouchableOpacity } from 'react-native'
 import { connect } from 'react-redux'
 import Dash from 'react-native-dash'
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons'
@@ -11,6 +11,7 @@ import API from '../Services/Api'
 // Styles
 import styles from './Styles/AllOrderScreenStyle'
 import AsyncStorage from '@react-native-community/async-storage'
+import OrderInnerAction from '../Redux/OrderInnerRedux'
 
 class AllOrderScreen extends Component {
   constructor (props) {
@@ -25,6 +26,9 @@ class AllOrderScreen extends Component {
   getOrderHistory = async () => {
     const token = await AsyncStorage.getItem('@token')
     this.token = 'Bearer ' + token
+    this.setState({
+      token: this.token
+    })
     const api = API.create()
     let headers = {
       headers: {
@@ -35,9 +39,10 @@ class AllOrderScreen extends Component {
     }
     const orderHistory = await api.getOrderHistory(headers)
 
-    if (orderHistory.status == 200) {
+    if (orderHistory.status === 200) {
       this.setState({
-        data: orderHistory.data.data
+        data: orderHistory.data.data,
+        getOrders: orderHistory.config.url
       })
     } else {
       console.log(orderHistory)
@@ -48,8 +53,52 @@ class AllOrderScreen extends Component {
   }
   renderOrdersItem = ({item}) => {
     item.created = new Date(item.created)
+    let onPress = async () => {
+      let orderId = await item.id
+      this.setState({
+        orderId
+      })
+      console.log(this.state.orderId)
+      let url = this.state.getOrders + '/' + orderId
+      console.log(url)
+      const self = this
+      console.log(self.state.token)
+      fetch(url, {
+        method: 'GET',
+        headers: {
+          'Content-type': 'application/json; charset=UTF-8',
+          'Access-Control-Allow-Origin': '*',
+          'Authorization': self.state.token
+        }
+      })
+        .then(json)
+        .then(function (data) {
+          console.log('Request succeeded with JSON response', data)
+          console.log(data)
+          self.props.attemptOrderInnerSuccess(data)
+          self.setState({
+            orderInner: data
+          })
+          self.props.navigation.navigate('OrderHistoryInnerScreen')
+        })
+        .catch(function (error) {
+          console.log(error)
+          console.log('err')
+          self.setState({
+            error: error.detail,
+            loading: false
+          })
+        })
+      function json (response) {
+        console.log(response)
+        console.log('json')
+        return response.json()
+      }
+    }
     return (
-      <View style={styles.orderContainer}>
+      <TouchableOpacity style={styles.orderContainer}
+        orderId={item.id}
+        onPress={onPress}>
         <View style={styles.orderBox}>
           <Icon name='chevron-right' size={30} color='#451E5D' />
           {/* <Image style={styles.orderImg} source={item.picture}/> */}
@@ -71,7 +120,7 @@ class AllOrderScreen extends Component {
             <Text style={styles.orderPrice}>{item.bill_amount} AZN</Text>
           </View>
         </View>
-      </View>
+      </TouchableOpacity>
     )
   };
 
@@ -96,11 +145,13 @@ class AllOrderScreen extends Component {
 }
 const mapStateToProps = (state) => {
   return {
+    orderInner: state.orderInner.payload
   }
 }
 
 const mapDispatchToProps = (dispatch) => {
   return {
+    attemptOrderInnerSuccess: (payload) => dispatch(OrderInnerAction.orderInnerSuccess(payload))
   }
 }
 
