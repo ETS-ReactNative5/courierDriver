@@ -28,12 +28,19 @@ import CourierGoToAdressScreen from '../Containers/CourierGoToAdressScreen'
 import BalansScreen from '../Containers/BalansScreen'
 import PaymentAmountScreen from '../Containers/PaymentAmountScreen'
 import OrderHistoryInnerScreen from '../Containers/OrderHistoryInnerScreen'
+import AppIntroSliderScreen from '../Containers/AppIntroSliderScreen'
 
 import I18n from '../I18n'
 import styles from './Styles/NavigationStyles'
 
 // Manifest of possible screens
 const PrimaryNav = createStackNavigator({
+  AppIntroSliderScreen: {
+    screen: AppIntroSliderScreen,
+    navigationOptions: {
+      header: null
+    }
+  },
   OrderHistoryInnerScreen: {
     screen: OrderHistoryInnerScreen,
     navigationOptions: {
@@ -232,7 +239,7 @@ const PrimaryNav = createStackNavigator({
 }, {
   // Default config for all screens
 
-  initialRouteName: 'FirstScreen',
+  initialRouteName: 'AppIntroSliderScreen',
   navigationOptions: {
     headerStyle: styles.header
   }

@@ -175,11 +175,9 @@ class CourierGoToClientScreen extends Component {
         forceNew: true,
         transports: ['websocket']
       })
-
-      socket.on('connect', function () {
-        // Connected, let's sign-up for to receive messages for this room
-        socket.emit(room, {
-          position
+      socket.on('connect', () => {
+        socket.emit('track_location', {
+          driverCoordinate: this.state.driverCoordinate
         })
         console.log('driverCoordinate - emit')
       })

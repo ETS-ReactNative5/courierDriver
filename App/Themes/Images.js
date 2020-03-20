@@ -17,13 +17,16 @@ const images = {
   home: require('../Images/Icons/icon-home.png'),
   theme: require('../Images/Icons/icon-theme.png'),
   usageExamples: require('../Images/Icons/icon-usage-examples.png'),
-  chevronRight: require('../Images/Icons/chevron-right.png'),
-  hamburger: require('../Images/Icons/hamburger.png'),
+  // chevronRight: require('../Images/Icons/chevron-right.png'),
+  // hamburger: require('../Images/Icons/hamburger.png'),
   backButton: require('../Images/Icons/back-button.png'),
   closeButton: require('../Images/Icons/close-button.png'),
   marker: require('../Images/marker.png'),
   profilImg: require('../Images/user-default-img.png'),
   waze: require('../Images/wazd.png'),
+  AppIntroSlide1: require('../Images/splash-screen-1.png'),
+  AppIntroSlide2: require('../Images/splash-screen-2.png'),
+  AppIntroSlide3: require('../Images/splash-screen-3.png'),
 }
 
 export default images

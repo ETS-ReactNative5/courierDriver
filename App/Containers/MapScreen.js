@@ -108,9 +108,6 @@ class MapScreen extends Component {
     })
     socket.on('connect', () => console.log('Connection'))
     socket.on('active_orders', this.updateState)
-    // socket.emit('location_tracking', {
-    //   driverCoordinate: this.state.driverCoordinate
-    // })
   }
   updateState = result => {
     const orderId = result.order_id
