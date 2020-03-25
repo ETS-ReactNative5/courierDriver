@@ -74,8 +74,14 @@ export default StyleSheet.create({
     height: 60
   },
   container: {
-
     flex: 1
-
+  },
+  zeroOrderBox: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center'
+  },
+  zeroOrder: {
+    fontSize: width * 0.06
   }
 })

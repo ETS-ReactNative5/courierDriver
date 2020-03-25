@@ -4,7 +4,8 @@ let {width} = Dimensions.get('window')
 export default StyleSheet.create({
   ...ApplicationStyles.screen,
   container: {
-    flex: 1
+    flex: 1,
+
   },
   image: {
     width: '100%',

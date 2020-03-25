@@ -10,13 +10,14 @@ import AsyncStorage from '@react-native-community/async-storage'
 
 // Styles
 import styles from './Styles/AppIntroSliderScreenStyle'
+import API from '../Services/Api'
+import Spiner from '../Components/Spiner'
 const slides = [
   {
     key: 'somethun',
     title: 'Coverage around the country',
     text: 'Receive orders hundreds of cutomers.',
-    image: Images.AppIntroSlide1,
-
+    image: Images.AppIntroSlide1
   },
   {
     key: 'somethun-dos',
@@ -34,17 +35,41 @@ const slides = [
   }
 ]
 class AppIntroSliderScreen extends Component {
-  state = {
-    showRealApp: false
+  constructor (props) {
+    super(props)
+    this.state = {
+      showRealApp: false,
+      error: null,
+      loading: true
+    }
+    this.getToken()
   }
-  componentDidMount () {
-    // AsyncStorage.removeItem('@token');
-    AsyncStorage.getItem('@token')
-      .then((token) => {
-        console.log(token)
-        if (token) this.props.navigation.navigate('MenuScreen')
+
+  getToken = async () => {
+    const token = await AsyncStorage.getItem('@token')
+    this.setState({
+      token: this.token
+    })
+    console.log(token)
+    if (token) {
+      this.setState({
+        loading: false
       })
+      this.props.navigation.replace('MenuScreen')
+    } else {
+      if (this.state.showRealApp === true) {
+        this.setState({
+          loading: false
+        })
+        this.props.navigation.replace('FirstScreen')
+      } else {
+        this.setState({
+          loading: false
+        })
+      }
+    }
   }
+
 
 
   _renderNextButton = () => {
@@ -72,18 +97,20 @@ class AppIntroSliderScreen extends Component {
   _onDone = () => {
     // User finished the introduction. Show real app through
     // navigation or simply by controlling state
-    this.props.navigation.replace('FirstScreen')
     this.setState({ showRealApp: true })
+    this.props.navigation.replace('FirstScreen')
   }
   render () {
     return (
       <View style={styles.container}>
-        <AppIntroSlider
-          slides={slides}
-          renderItem={this._renderItem}
-          renderDoneButton={this._renderDoneButton}
-          renderNextButton={this._renderNextButton}
-        />
+        {
+          this.state.loading === true ? <Spiner size='large' /> : <AppIntroSlider
+            slides={slides}
+            renderItem={this._renderItem}
+            renderDoneButton={this._renderDoneButton}
+            renderNextButton={this._renderNextButton}
+          />
+        }
       </View>
     )
   }
